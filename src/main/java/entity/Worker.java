@@ -1,0 +1,20 @@
+package entity;
+
+import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+
+public class Worker {
+  private Long id;
+  private String firstName;
+  private String lastName;
+  private String login;
+  private String password;
+
+  private WorkerPosition workerPosition;
+  private List<Hall> halls = new ArrayList<Hall>();
+  private List<Excursion> excursions = new ArrayList<Excursion>();
+}
