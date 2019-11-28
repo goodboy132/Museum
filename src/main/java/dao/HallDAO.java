@@ -2,9 +2,6 @@ package dao;
 
 import entity.Hall;
 
-public class HallDAO extends ElementDAOImpl<Hall> {
+public interface HallDAO extends GenericDAO<Hall> {
 
-  public HallDAO() {
-    super(Hall.class);
-  }
 }

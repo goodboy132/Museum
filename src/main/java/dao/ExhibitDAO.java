@@ -2,9 +2,6 @@ package dao;
 
 import entity.Exhibit;
 
-public class ExhibitDAO extends ElementDAOImpl<Exhibit> {
+public interface ExhibitDAO extends GenericDAO<Exhibit> {
 
-  public ExhibitDAO() {
-    super(Exhibit.class);
-  }
 }

@@ -2,9 +2,6 @@ package dao;
 
 import entity.Material;
 
-public class MaterialDAO extends ElementDAOImpl<Material> {
+public interface MaterialDAO extends GenericDAO<Material> {
 
-  public MaterialDAO() {
-    super(Material.class);
-  }
 }
