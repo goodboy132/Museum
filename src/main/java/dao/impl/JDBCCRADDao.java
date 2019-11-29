@@ -1,10 +1,9 @@
 package dao.impl;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Types;
+import dao.mapper.ObjectMapper;
+
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,14 +29,20 @@ public class JDBCCRADDao {
 
   }
 
-  public static<T> Optional<T> getOneById(Connection connection,String query, Long elementId) {
+  public static<T> Optional<T> getOneById(Connection connection, String query, Long elementId, ObjectMapper<T> mapper) {
     try {
       PreparedStatement preparedStatement = connection.prepareStatement(query);
       addParametersToPreparedStatement(preparedStatement,elementId);
-      return preparedStatement.getResultSet();
+      ResultSet resultSet = preparedStatement.executeQuery();
+      if (resultSet.next()){
+        return Optional.of(mapper.extractFromResultSet(resultSet));
+      }
+      else {
+        return Optional.empty();
+      }
     } catch (SQLException e) {
       e.printStackTrace();
-      return null;
+      throw new RuntimeException();
     }
   }
 

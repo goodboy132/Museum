@@ -1105,7 +1105,7 @@
     <view id="292" parent="2" name="VIEWS">
       <System>1</System>
     </view>
-    <table id="293" parent="3" name="autor"/>
+    <table id="293" parent="3" name="author"/>
     <table id="294" parent="3" name="excursion"/>
     <table id="295" parent="3" name="excursion_time"/>
     <table id="296" parent="3" name="exibit"/>
@@ -4118,7 +4118,7 @@
     <foreign-key id="941" parent="296" name="exibit_autor">
       <ColNames>author</ColNames>
       <RefSchemaName>museum</RefSchemaName>
-      <RefTableName>autor</RefTableName>
+      <RefTableName>author</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
     <foreign-key id="942" parent="296" name="exibit_hall">
