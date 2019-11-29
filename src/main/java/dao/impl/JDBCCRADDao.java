@@ -4,6 +4,8 @@ package dao.impl;
 import dao.mapper.ObjectMapper;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +65,9 @@ public class JDBCCRADDao {
         else if (parameters[i] instanceof Long) {
           preparedStatement.setLong(i + 1, (Long) parameters[i]);
         }
+         else if (parameters[i] instanceof LocalDateTime) {
+           preparedStatement.setTimestamp(i + 1, new Timestamp(((Date) parameters[i]).getTime()));
+         }
         else if (parameters[i] == null) {
           preparedStatement.setNull(i + 1, Types.NULL);
         } else {
