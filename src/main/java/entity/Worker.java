@@ -15,6 +15,6 @@ public class Worker {
   private String password;
 
   private WorkerPosition workerPosition;
-  private List<Hall> halls = new ArrayList<Hall>();
-  private List<Excursion> excursions = new ArrayList<Excursion>();
+  private List<Hall> halls;
+  private List<Excursion> excursions;
 }

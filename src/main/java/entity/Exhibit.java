@@ -17,5 +17,5 @@ public class Exhibit {
 
   private Author author;
   private Hall hall;
-  private List<Material> materials = new ArrayList<Material>();
+  private List<Material> materials;
 }
