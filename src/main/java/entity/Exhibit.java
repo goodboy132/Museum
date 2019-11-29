@@ -3,6 +3,7 @@ package entity;
 import lombok.Data;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public class Exhibit {
   private Long id;
   private String name;
-  private Date receiptDate;
+  private LocalDateTime receiptDate;
   private String technique;
   private String description;
 
