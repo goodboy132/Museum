@@ -7,7 +7,7 @@ public class Program {
 //    author.setFirstName("toha");
 //    author.setLastName("vasa");
 //    ServiceFactory.getInstance().getAuthorService().save(author);
-    long a = 4;
-    ServiceFactory.getInstance().getAuthorService().getById(a);
+//    long a = 4;
+//    ServiceFactory.getInstance().getAuthorService().getById(a);
   }
 }
