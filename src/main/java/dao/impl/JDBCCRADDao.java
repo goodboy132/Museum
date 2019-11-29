@@ -1,6 +1,5 @@
 package dao.impl;
 
-
 import dao.mapper.ObjectMapper;
 
 import java.sql.*;
@@ -63,9 +62,14 @@ public class JDBCCRADDao {
         else if (parameters[i] instanceof Long) {
           preparedStatement.setLong(i + 1, (Long) parameters[i]);
         }
+         else if (parameters[i] instanceof Date) {
+           preparedStatement.setTimestamp(i + 1, new Timestamp(((Date) parameters[i]).getTime()));
+         }
         else if (parameters[i] == null) {
           preparedStatement.setNull(i + 1, Types.NULL);
-        } else {
+        }
+
+        else {
           throw new IllegalArgumentException("Not mapped type of " + parameters[i].getClass());
         }
       }

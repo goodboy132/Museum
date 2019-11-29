@@ -8,6 +8,6 @@ public class Program {
 //    author.setLastName("vasa");
 //    ServiceFactory.getInstance().getAuthorService().save(author);
     long a = 4;
-    ServiceFactory.getInstance().getAuthorService().getById(a);
+    System.out.println(ServiceFactory.getInstance().getAuthorService().getById(a).get());
   }
 }
