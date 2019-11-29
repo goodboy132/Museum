@@ -1,9 +1,6 @@
 package dao.mapper;
 
-import entity.Hall;
-import entity.HallStyle;
-import entity.Worker;
-import entity.WorkerPosition;
+import entity.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +14,9 @@ public class WorkerMapper implements ObjectMapper<Worker> {
     WorkerPosition workerPosition = new WorkerPosition();
     Hall hall = new Hall();
     HallStyle hallStyle = new HallStyle();
+    Excursion excursion = new Excursion();
     List<Hall> halls = new ArrayList<>();
+    List<Excursion> excursions = new ArrayList<>();
 
     worker.setId(resultSet.getLong("worker.id"));
     worker.setFirstName(resultSet.getString("worker.name"));
@@ -41,9 +40,24 @@ public class WorkerMapper implements ObjectMapper<Worker> {
       halls.add(hall);
     }
 
+    while(resultSet.next()) {
+      ExcursionTime excursionDate = new ExcursionTime();
+      excursion.setId(resultSet.getLong("id"));
+      excursion.setTimeTable(resultSet.getString("time_table"));
+      excursion.setName(resultSet.getString("excursion_name"));
+      excursion.setProgram(resultSet.getString("excursion_program"));
+      excursionDate.setId(resultSet.getLong("id"));
+      excursionDate.setStartTime(resultSet.getTime("start_time"));
+      excursionDate.setEndTime(resultSet.getTime("end_time"));
+      excursion.setExcursionDate(excursionDate);
+
+      excursions.add(excursion);
+    }
+
     worker.setHalls(halls);
 
     worker.setWorkerPosition(workerPosition);
+    worker.setExcursions(excursions);
 
     return worker;
   }
