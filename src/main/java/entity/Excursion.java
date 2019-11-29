@@ -11,5 +11,5 @@ public class Excursion {
   private String timeTable;
 
   private Worker worker;
-  private ExcursionDate excursionDate;
+  private ExcursionTime excursionDate;
 }

@@ -6,7 +6,7 @@ import java.sql.Time;
 
 @Data
 
-public class ExcursionDate {
+public class ExcursionTime {
   private Long id;
   private Time startTime;
   private Time endTime;

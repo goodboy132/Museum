@@ -1,8 +1,7 @@
 package dao;
 
-import entity.Excursion;
-import entity.ExcursionDate;
+import entity.ExcursionTime;
 
-public interface ExcursionDateDAO extends GenericDAO<ExcursionDate>{
+public interface ExcursionDateDAO extends GenericDAO<ExcursionTime>{
 
 }
