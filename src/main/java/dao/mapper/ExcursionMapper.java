@@ -11,15 +11,15 @@ public class ExcursionMapper implements ObjectMapper<Excursion> {
   @Override
   public Excursion extractFromResultSet(ResultSet resultSet) throws SQLException {
     Excursion excursion = new Excursion();
-    ExcursionTime excursionDate = new ExcursionTime();
+    ExcursionTime excursionTime = new ExcursionTime();
     excursion.setId(resultSet.getLong("id"));
     excursion.setTimeTable(resultSet.getString("time_table"));
     excursion.setName(resultSet.getString("excursion_name"));
     excursion.setProgram(resultSet.getString("excursion_program"));
-    excursionDate.setId(resultSet.getLong("id"));
-    excursionDate.setStartTime(resultSet.getTime("start_time"));
-    excursionDate.setEndTime(resultSet.getTime("end_time"));
-    excursion.setExcursionDate(excursionDate);
+    excursionTime.setId(resultSet.getLong("id"));
+    excursionTime.setStartTime(resultSet.getTime("start_time"));
+    excursionTime.setEndTime(resultSet.getTime("end_time"));
+    excursion.setExcursionDate(excursionTime);
     return excursion;
 
   }
