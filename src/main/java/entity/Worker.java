@@ -13,7 +13,6 @@ public class Worker {
   private String lastName;
   private String login;
   private String password;
-
   private WorkerPosition workerPosition;
   private List<Hall> halls;
   private List<Excursion> excursions;

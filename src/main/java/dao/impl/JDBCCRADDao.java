@@ -1,7 +1,5 @@
 package dao.impl;
 
-import dao.GenericDAO;
-import entity.Author;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +11,7 @@ import java.util.Optional;
 public class JDBCCRADDao {
 
 
-  public static <T> Integer save(Connection connection, String query,Object... parameters) {
+  public static Integer save(Connection connection, String query,Object... parameters) {
     try {
       PreparedStatement preparedStatement = connection.prepareStatement(query);
       addParametersToPreparedStatement(preparedStatement,parameters);
@@ -32,8 +30,15 @@ public class JDBCCRADDao {
 
   }
 
-  public static Optional getOneById(Long elementId) {
-    return Optional.empty();
+  public static<T> Optional<T> getOneById(Connection connection,String query, Long elementId) {
+    try {
+      PreparedStatement preparedStatement = connection.prepareStatement(query);
+      addParametersToPreparedStatement(preparedStatement,elementId);
+      return preparedStatement.getResultSet();
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
   public static List getAll() {
@@ -58,7 +63,6 @@ public class JDBCCRADDao {
         } else {
           throw new IllegalArgumentException("Not mapped type of " + parameters[i].getClass());
         }
-
       }
     }
     catch (SQLException e){
