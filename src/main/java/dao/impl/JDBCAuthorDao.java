@@ -12,7 +12,7 @@ public class JDBCAuthorDao implements AuthorDAO {
   private final Connection connection;
 
 
-  public JDBCAuthorDao(Connection connection) {
+  private JDBCAuthorDao(Connection connection) {
     this.connection = connection;
   }
 

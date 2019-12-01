@@ -12,7 +12,7 @@ import java.util.Optional;
 public class AuthorServiceImpl implements AuthorService {
   private AuthorDAO authorDAO;
 
-  public AuthorServiceImpl() {
+  AuthorServiceImpl() {
     authorDAO = JDBCAuthorDao.getInstance(Database.getConnection());
   }
 

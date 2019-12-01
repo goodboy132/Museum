@@ -3,6 +3,8 @@ package dao.impl;
 import dao.mapper.ObjectMapper;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,8 +47,20 @@ public class JDBCCRADDao {
     }
   }
 
-  public static List getAll() {
-    return null;
+  public static<T> List<T> getAll(Connection connection,String query,ObjectMapper<T> mapper) {
+    ArrayList<T> list = new ArrayList<>();
+    try {
+      Statement statement = connection.createStatement();
+      ResultSet resultSet = statement.executeQuery(query);
+      while (resultSet.next()) {
+        list.add(mapper.extractFromResultSet(resultSet));
+      }
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+      throw new RuntimeException();
+    }
+    return list;
   }
 
 
@@ -62,8 +76,8 @@ public class JDBCCRADDao {
         else if (parameters[i] instanceof Long) {
           preparedStatement.setLong(i + 1, (Long) parameters[i]);
         }
-         else if (parameters[i] instanceof Date) {
-           preparedStatement.setTimestamp(i + 1, new Timestamp(((Date) parameters[i]).getTime()));
+         else if (parameters[i] instanceof LocalDateTime) {
+           preparedStatement.setTimestamp(i + 1, Timestamp.valueOf((LocalDateTime) parameters[i]));
          }
         else if (parameters[i] == null) {
           preparedStatement.setNull(i + 1, Types.NULL);

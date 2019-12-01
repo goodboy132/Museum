@@ -1,5 +1,6 @@
 package dao.databace;
 
+import java.awt.print.Pageable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,8 +14,12 @@ public class Database {
   public static synchronized Connection getConnection(){
     if (connection == null){
       try {
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
         connection = DriverManager.getConnection(URL,USER,PASSWORD);
       } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      catch (Exception e){
         e.printStackTrace();
       }
     }
