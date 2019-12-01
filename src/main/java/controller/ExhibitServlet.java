@@ -16,19 +16,21 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@WebServlet("/")
+@WebServlet("/exhibits")
 public class ExhibitServlet extends HttpServlet {
   private ExhibitService exhibitService;
+  private AuthorService authorService;
 
   @Override
   public void init() {
     exhibitService = ServiceFactory.getInstance().getExhibitService();
+    authorService = ServiceFactory.getInstance().getAuthorService();
   }
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    List<Exhibit> exhibits = exhibitService.getAll();
-    req.setAttribute("exhibits",exhibits);
+    List<Exhibit> exhibits1 = exhibitService.getAllByAuthor(4);
+    req.setAttribute("exhibits",exhibits1);
     req.getRequestDispatcher("exhibits.jsp").forward(req,resp);
   }
 }

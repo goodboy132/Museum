@@ -4126,7 +4126,7 @@ material_id</ColNames>
       <DataType>varchar(120)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="942" parent="297" name="author">
+    <column id="942" parent="297" name="author_id">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
@@ -4137,7 +4137,7 @@ material_id</ColNames>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="944" parent="297" name="exibit_autor">
-      <ColNames>author</ColNames>
+      <ColNames>author_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="945" parent="297" name="exibit_hall">
@@ -4150,7 +4150,7 @@ material_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="947" parent="297" name="exibit_autor">
-      <ColNames>author</ColNames>
+      <ColNames>author_id</ColNames>
       <RefSchemaName>museum</RefSchemaName>
       <RefTableName>author</RefTableName>
       <RefColNames>id</RefColNames>

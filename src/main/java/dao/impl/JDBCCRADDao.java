@@ -5,6 +5,7 @@ import dao.mapper.ObjectMapper;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,8 +51,8 @@ public class JDBCCRADDao {
   public static<T> List<T> getAll(Connection connection,String query,ObjectMapper<T> mapper) {
     ArrayList<T> list = new ArrayList<>();
     try {
-      Statement statement = connection.createStatement();
-      ResultSet resultSet = statement.executeQuery(query);
+      PreparedStatement preparedStatement = connection.prepareStatement(query);
+      ResultSet resultSet = preparedStatement.executeQuery(query);
       while (resultSet.next()) {
         list.add(mapper.extractFromResultSet(resultSet));
       }
@@ -64,7 +65,7 @@ public class JDBCCRADDao {
   }
 
 
-  private static void addParametersToPreparedStatement(PreparedStatement preparedStatement, Object... parameters){
+   static void addParametersToPreparedStatement(PreparedStatement preparedStatement, Object... parameters){
     try {
       for (int i = 0; i < parameters.length; i++) {
          if (parameters[i] instanceof String) {

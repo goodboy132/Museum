@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ExhibitService {
   List<Exhibit> getAll();
+  List<Exhibit> getAllByAuthor(int id);
 }

@@ -20,4 +20,9 @@ public class ExhibitServiceImpl implements ExhibitService {
   public List<Exhibit> getAll() {
     return exhibitDAO.getAll();
   }
+
+  @Override
+  public List<Exhibit> getAllByAuthor(int authorId) {
+    return exhibitDAO.getAllByAuthor(authorId);
+  }
 }
