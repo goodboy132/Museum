@@ -5,8 +5,8 @@ import java.util.Optional;
 
 public interface GenericDAO<E> {
   Integer save(E element);
-  void update(E element);
-  void delete(E element);
+  Integer update(E element);
+  Integer delete(E element);
   Optional<E> getOneById(Long elementId);
   List<E> getAll();
 }

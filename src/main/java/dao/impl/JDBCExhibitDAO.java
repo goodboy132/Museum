@@ -38,14 +38,15 @@ public class JDBCExhibitDAO implements ExhibitDAO {
   }
 
   @Override
-  public void update(Exhibit element) {
-
+  public Integer update(Exhibit element) {
+    return null;
   }
 
   @Override
-  public void delete(Exhibit element) {
-
+  public Integer delete(Exhibit element) {
+    return null;
   }
+
 
   @Override
   public Optional<Exhibit> getOneById(Long elementId) {
