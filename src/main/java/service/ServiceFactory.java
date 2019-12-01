@@ -7,6 +7,9 @@ public abstract class ServiceFactory {
   private volatile static ServiceFactory serviceFactory;
   public abstract AuthorService getAuthorService();
   public abstract ExhibitService getExhibitService();
+  public abstract HallStyleService getHallStyleService();
+  public abstract HallService getHallService();
+  public abstract MaterialService getMaterialService();
 
   public static ServiceFactory getInstance(){
     if (serviceFactory == null){
