@@ -66,7 +66,8 @@ public class JDBCCRADDao {
           preparedStatement.setLong(i + 1, (Long) parameters[i]);
         }
          else if (parameters[i] instanceof LocalDateTime) {
-           preparedStatement.setTimestamp(i + 1, new Timestamp(((Date) parameters[i]).getTime()));
+           LocalDateTime ldt = LocalDateTime.now();
+           preparedStatement.setTimestamp(i + 1, (Timestamp) parameters[i]);
          }
         else if (parameters[i] == null) {
           preparedStatement.setNull(i + 1, Types.NULL);
