@@ -1,4 +1,4 @@
-package controller;
+package controller.exhibit;
 
 import com.sun.net.httpserver.HttpServer;
 import entity.Author;
@@ -13,18 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @WebServlet("/exhibits")
 public class ExhibitServlet extends HttpServlet {
   private ExhibitService exhibitService;
-  private AuthorService authorService;
 
   @Override
   public void init() {
     exhibitService = ServiceFactory.getInstance().getExhibitService();
-    authorService = ServiceFactory.getInstance().getAuthorService();
   }
 
   @Override

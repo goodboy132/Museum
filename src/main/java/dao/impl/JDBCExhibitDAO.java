@@ -33,24 +33,33 @@ public class JDBCExhibitDAO implements ExhibitDAO {
   }
 
   @Override
-  public Integer save(Exhibit element) {
-    return null;
+  public Integer save(Exhibit exhibit) {
+    String saveExhibitQuery = "INSERT INTO exhibit(exhibit_name,receipt_date,technique,description,author_id,hall_id)" +
+            " VALUES(?,?,?,?,?,?)";
+    return JDBCCRADDao.save(connection,saveExhibitQuery,exhibit.getName(),exhibit.getReceiptDate(),
+            exhibit.getTechnique(),exhibit.getDescription(),exhibit.getAuthor().getId(),exhibit.getHall().getId());
   }
 
   @Override
-  public Integer update(Exhibit element) {
-    return null;
+  public Integer update(Exhibit exhibit) {
+    String updateExhibitQuery = "UPDATE exhibit set exhibit_name = ?, receipt_date = ?, technique = ?," +
+            " description = ?, author_id = ?, hall_id = ? WHERE id = ?";
+    return JDBCCRADDao.save(connection,updateExhibitQuery,exhibit.getName(),exhibit.getReceiptDate(),
+            exhibit.getTechnique(),exhibit.getDescription(),exhibit.getAuthor().getId(),exhibit.getHall().getId(),
+            exhibit.getId());
   }
 
   @Override
-  public Integer delete(Exhibit element) {
-    return null;
+  public Integer delete(Exhibit exhibit) {
+    String deleteExhibitQuery = "DELETE FROM author where author.id = ?";
+    return JDBCCRADDao.update(connection,deleteExhibitQuery,exhibit.getId());
   }
 
 
   @Override
   public Optional<Exhibit> getOneById(Long elementId) {
-    return Optional.empty();
+    String getExhibitByIdQuery = "select * from author where author.id = ?";
+    return JDBCCRADDao.getOneById(connection,getExhibitByIdQuery,elementId,new ExhibitMapper());
   }
 
   @Override

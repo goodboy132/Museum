@@ -4131,7 +4131,7 @@ material_id</ColNames>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="943" parent="297" name="hall">
+    <column id="943" parent="297" name="hall_id">
       <Position>7</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
@@ -4141,7 +4141,7 @@ material_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="945" parent="297" name="exibit_hall">
-      <ColNames>hall</ColNames>
+      <ColNames>hall_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="946" parent="297" name="PRIMARY">
@@ -4156,7 +4156,7 @@ material_id</ColNames>
       <RefColNames>id</RefColNames>
     </foreign-key>
     <foreign-key id="948" parent="297" name="exibit_hall">
-      <ColNames>hall</ColNames>
+      <ColNames>hall_id</ColNames>
       <RefSchemaName>museum</RefSchemaName>
       <RefTableName>hall</RefTableName>
       <RefColNames>id</RefColNames>
