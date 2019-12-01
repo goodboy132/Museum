@@ -32,13 +32,16 @@ public class JDBCAuthorDao implements AuthorDAO {
   }
 
   @Override
-  public void update(Author element) {
-
+  public Integer update(Author element) {
+    String updateQuery = "UPDATE author set name = ?, surname = ?, born_date = ?, death_date = ? WHERE id = ?";
+    return JDBCCRADDao.update(connection, updateQuery, element.getFirstName(), element.getLastName(),
+            element.getBornDate(), element.getDeathDate(), element.getId());
   }
 
   @Override
-  public void delete(Author element) {
-
+  public Integer delete(Author element) {
+    String deleteQuery = "DELETE FROM author where author.id = ?";
+    return JDBCCRADDao.update(connection, deleteQuery, element.getId());
   }
 
   @Override
@@ -48,7 +51,9 @@ public class JDBCAuthorDao implements AuthorDAO {
   }
 
   @Override
-  public List<Author> getAll() {
-    return null;
+  public List<Author> getAll()
+  {
+    String getAllQuery = "select * from author";
+    return JDBCCRADDao.getAll(connection, getAllQuery, new AuthorMapper());
   }
 }

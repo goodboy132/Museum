@@ -22,8 +22,14 @@ public class JDBCCRADDao {
     }
   }
 
-  public static void update(Object element) {
+  public static Integer update(Connection connection, String query, Object... parameters) {
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+      addParametersToPreparedStatement(statement, parameters);
 
+      return statement.executeUpdate();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public static void delete(Object element) {
