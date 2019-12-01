@@ -4,8 +4,11 @@ import dao.AuthorDAO;
 import dao.ExhibitDAO;
 import dao.mapper.ExhibitMapper;
 import entity.Exhibit;
+import entity.Material;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 

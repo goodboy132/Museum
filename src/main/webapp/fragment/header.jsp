@@ -1,10 +1,11 @@
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<%--<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>--%>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" href="<c:url value='header.css'/>" type="text/css">
+    <style type="text/css">
+        <%@ include file="../static/header.css" %>
+    </style>
 </head>
 <body>
 <div class="header">
@@ -33,7 +34,7 @@
             </ul>
         </div>
     </div>
-    </div>
+</div>
 </body>
 </html>
 

@@ -19,22 +19,16 @@ import java.util.List;
 @WebServlet("/")
 public class ExhibitServlet extends HttpServlet {
   private ExhibitService exhibitService;
-  AuthorService authorService;
 
   @Override
-  public void init() throws ServletException {
+  public void init() {
     exhibitService = ServiceFactory.getInstance().getExhibitService();
-    authorService = ServiceFactory.getInstance().getAuthorService();
   }
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    Author author = new Author();
-    author.setBornDate(LocalDateTime.now());
-    authorService.save(author);
-
     List<Exhibit> exhibits = exhibitService.getAll();
     req.setAttribute("exhibits",exhibits);
-    req.getRequestDispatcher("exhibits.jsp").include(req,resp);
+    req.getRequestDispatcher("exhibits.jsp").forward(req,resp);
   }
 }
