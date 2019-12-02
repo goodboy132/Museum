@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.ExcursionTimeDAO;
+import dao.mapper.ExcursionTimeMapper;
 import entity.ExcursionTime;
 
 import java.sql.Connection;
@@ -43,11 +44,12 @@ public class JDBCExcursionTimeDAO implements ExcursionTimeDAO {
   @Override
   public Optional<ExcursionTime> getOneById(Long elementId) {
     String getOneExcursionTimeQuery = "select * from excursion_time where id = ?";
-    return JDBCCRADDao.getOneById(connection, getOneExcursionTimeQuery, elementId, new Exc);
+    return JDBCCRADDao.getOneById(connection, getOneExcursionTimeQuery, elementId, new ExcursionTimeMapper());
   }
 
   @Override
   public List<ExcursionTime> getAll() {
-    return null;
+    String getAllExcursionTimes = "select * from excursion_time";
+    return JDBCCRADDao.getAll(connection, getAllExcursionTimes, new ExcursionTimeMapper());
   }
 }
