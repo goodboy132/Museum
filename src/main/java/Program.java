@@ -35,13 +35,10 @@ public class Program {
 
 //    System.out.println(ServiceFactory.getInstance().getHallService().getAll().toString());
 //    System.out.println(ServiceFactory.getInstance().getHallService().getById(2L).toString());
+    WorkerPosition workerPosition = new WorkerPosition();
+    workerPosition.setId(2L);
+    workerPosition.setName("*****");
 
-
-    Material material = new Material();
-    material.setId(1L);
-    material.setName("Test_test");
-
-    ServiceFactory.getInstance().getMaterialService().update(material);
-
+    ServiceFactory.getInstance().getWorkerPositionService().delete(workerPosition);
   }
 }

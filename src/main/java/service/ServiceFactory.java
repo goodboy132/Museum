@@ -10,6 +10,7 @@ public abstract class ServiceFactory {
   public abstract HallStyleService getHallStyleService();
   public abstract HallService getHallService();
   public abstract MaterialService getMaterialService();
+  public abstract WorkerPositionService getWorkerPositionService();
 
   public static ServiceFactory getInstance(){
     if (serviceFactory == null){
