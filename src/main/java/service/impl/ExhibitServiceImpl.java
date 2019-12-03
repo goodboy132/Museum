@@ -35,7 +35,7 @@ public class ExhibitServiceImpl implements ExhibitService {
   }
 
   @Override
-  public Optional<Exhibit> getById(Long id) {
+  public Optional<Exhibit> getById(Long id) {   //need to make get by id
     return Optional.empty();
   }
 
