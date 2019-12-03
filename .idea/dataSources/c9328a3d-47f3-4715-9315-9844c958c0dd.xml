@@ -3998,7 +3998,7 @@
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="918" parent="294" name="worker">
+    <column id="918" parent="294" name="worker_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
@@ -4019,7 +4019,7 @@
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="922" parent="294" name="excursion_worker">
-      <ColNames>worker</ColNames>
+      <ColNames>worker_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="923" parent="294" name="excursion_excursion_time">
@@ -4032,7 +4032,7 @@
       <Primary>1</Primary>
     </key>
     <foreign-key id="925" parent="294" name="excursion_worker">
-      <ColNames>worker</ColNames>
+      <ColNames>worker_id</ColNames>
       <RefSchemaName>museum</RefSchemaName>
       <RefTableName>worker</RefTableName>
       <RefColNames>id</RefColNames>
@@ -4065,7 +4065,7 @@
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="931" parent="296" name="exibit_id">
+    <column id="931" parent="296" name="exhibit_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -4083,12 +4083,12 @@
     </index>
     <key id="934" parent="296" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>exibit_id
+      <ColNames>exhibit_id
 material_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="935" parent="296" name="exibit_material_id_exibit_id">
-      <ColNames>exibit_id</ColNames>
+      <ColNames>exhibit_id</ColNames>
       <RefSchemaName>museum</RefSchemaName>
       <RefTableName>exhibit</RefTableName>
       <RefColNames>id</RefColNames>
@@ -4244,12 +4244,12 @@ material_id</ColNames>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="964" parent="301" name="hall">
+    <column id="964" parent="301" name="hall_id">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="965" parent="301" name="position">
+    <column id="965" parent="301" name="position_id">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
@@ -4265,11 +4265,11 @@ material_id</ColNames>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="968" parent="301" name="worker_hall">
-      <ColNames>hall</ColNames>
+      <ColNames>hall_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="969" parent="301" name="worker_position">
-      <ColNames>position</ColNames>
+      <ColNames>position_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="970" parent="301" name="PRIMARY">
@@ -4278,7 +4278,7 @@ material_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="971" parent="301" name="worker_position">
-      <ColNames>position</ColNames>
+      <ColNames>position_id</ColNames>
       <RefSchemaName>museum</RefSchemaName>
       <RefTableName>worker_position</RefTableName>
       <RefColNames>id</RefColNames>
