@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.mapper.ObjectMapper;
+import entity.HallStyle;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -86,6 +87,9 @@ public class JDBCCRADDao {
          else if (parameters[i] instanceof LocalDateTime) {
            preparedStatement.setTimestamp(i + 1, Timestamp.valueOf((LocalDateTime) parameters[i]));
          }
+//         else if (parameters[i] instanceof HallStyle) {
+//           preparedStatement.setLong(i + 1, ((HallStyle)parameters[i]).getId());
+//         }
         else if (parameters[i] == null) {
           preparedStatement.setNull(i + 1, Types.NULL);
         }

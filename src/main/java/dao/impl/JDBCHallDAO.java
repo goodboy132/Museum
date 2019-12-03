@@ -25,8 +25,8 @@ public class JDBCHallDAO implements HallDAO {
 
   @Override //Don't work
   public Integer save(Hall element) {
-    String saveHallQuery = "INSERT INTO hall(hall_name, hall_style) VALUES(??)";
-    return JDBCCRADDao.save(connection, saveHallQuery, element.getName(), element.getHallStyle());
+    String saveHallQuery = "INSERT INTO hall(hall_name, hall_style) VALUES(?,?)";
+    return JDBCCRADDao.save(connection, saveHallQuery, element.getName(), element.getHallStyle().getId());
   }
 
   @Override //Don't work
@@ -35,13 +35,13 @@ public class JDBCHallDAO implements HallDAO {
     return JDBCCRADDao.update(connection, updateHallQuery, element.getName(), element.getHallStyle(), element.getId());
   }
 
-  @Override
+  @Override //Work
   public Integer delete(Hall element) {
     String deleteHallQuery = "DELETE FROM hall WHERE id = ?";
     return JDBCCRADDao.update(connection, deleteHallQuery, element.getId());
   }
 
-  @Override
+  @Override //Work
   public Optional<Hall> getOneById(Long elementId) {
     String getOneHallByIdQuery = "SELECT * FROM hall\n" +
             "JOIN hall_style \n" +
@@ -50,7 +50,7 @@ public class JDBCHallDAO implements HallDAO {
     return JDBCCRADDao.getOneById(connection, getOneHallByIdQuery, elementId, new  HallMapper());
   }
 
-  @Override
+  @Override //Work
   public List<Hall> getAll() {
     String getAllHallsQuery = "SELECT * FROM hall\n" +
             "JOIN hall_style \n" +

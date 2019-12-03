@@ -22,23 +22,23 @@ public class Program {
 //    exhibit.setDescription("description");
 //    exhibit.setAuthor();
 //    exhibit.setHall();
-//    HallStyle hallStyle = new HallStyle();
-//    hallStyle.setId(10L);
-//    hallStyle.setName("detective");
-//
-//    Hall hall = new Hall();
-//    hall.setName("Luvr");
-//    hall.setHallStyle(hallStyle);
-//
-//
-//    ServiceFactory.getInstance().getHallService().save(hall);
+    HallStyle hallStyle = new HallStyle();
+    hallStyle.setId(4L);
+    hallStyle.setName("detective");
+
+    Hall hall = new Hall();
+    hall.setName("Pasha");
+    hall.setHallStyle(hallStyle);
+
+
+    ServiceFactory.getInstance().getHallService().save(hall);
 
 //    System.out.println(ServiceFactory.getInstance().getHallService().getAll().toString());
 //    System.out.println(ServiceFactory.getInstance().getHallService().getById(2L).toString());
-    WorkerPosition workerPosition = new WorkerPosition();
-    workerPosition.setId(2L);
-    workerPosition.setName("*****");
-
-    ServiceFactory.getInstance().getWorkerPositionService().delete(workerPosition);
+//    WorkerPosition workerPosition = new WorkerPosition();
+//    workerPosition.setId(2L);
+//    workerPosition.setName("*****");
+//
+//    ServiceFactory.getInstance().getWorkerPositionService().update(workerPosition);
   }
 }
