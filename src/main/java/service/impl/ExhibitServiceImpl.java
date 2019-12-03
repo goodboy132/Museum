@@ -36,7 +36,7 @@ public class ExhibitServiceImpl implements ExhibitService {
 
   @Override
   public Optional<Exhibit> getById(Long id) {   //need to make get by id
-    return Optional.empty();
+    return exhibitDAO.getOneById(id);
   }
 
   @Override

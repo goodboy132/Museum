@@ -1,10 +1,10 @@
 package controller.exhibit;
-
-import com.sun.net.httpserver.HttpServer;
 import entity.Author;
 import entity.Exhibit;
+import entity.Worker;
 import service.AuthorService;
 import service.ExhibitService;
+import service.HallService;
 import service.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -18,16 +18,21 @@ import java.util.List;
 @WebServlet("/exhibits")
 public class ExhibitServlet extends HttpServlet {
   private ExhibitService exhibitService;
+  private AuthorService authorService;
+  private HallService hallService;
 
   @Override
   public void init() {
     exhibitService = ServiceFactory.getInstance().getExhibitService();
+    authorService = ServiceFactory.getInstance().getAuthorService();
+    hallService = ServiceFactory.getInstance().getHallService();
   }
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    List<Exhibit> exhibits1 = exhibitService.getAllByAuthor(4);
-    req.setAttribute("exhibits",exhibits1);
+    req.setAttribute("authors", authorService.getAll());
+    req.setAttribute("halls", hallService.getAll());
+//    req.setAttribute("guides",
     req.getRequestDispatcher("exhibits.jsp").forward(req,resp);
   }
 }
