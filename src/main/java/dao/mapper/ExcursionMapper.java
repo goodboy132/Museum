@@ -17,8 +17,8 @@ public class ExcursionMapper implements ObjectMapper<Excursion> {
     excursion.setName(resultSet.getString("excursion_name"));
     excursion.setProgram(resultSet.getString("excursion_program"));
     excursionTime.setId(resultSet.getLong("id"));
-    excursionTime.setStartTime(resultSet.getTime("start_time"));
-    excursionTime.setEndTime(resultSet.getTime("end_time"));
+    excursionTime.setStartTime(resultSet.getTimestamp("start_time").toLocalDateTime());
+    excursionTime.setEndTime(resultSet.getTimestamp("end_time").toLocalDateTime());
     excursion.setExcursionDate(excursionTime);
     return excursion;
 

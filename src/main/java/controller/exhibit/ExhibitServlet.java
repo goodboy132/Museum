@@ -26,7 +26,7 @@ public class ExhibitServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    List<Exhibit> exhibits1 = exhibitService.getAllByAuthor(4);
+    List<Exhibit> exhibits1 = exhibitService.getAllByAuthor(5);
     req.setAttribute("exhibits",exhibits1);
     req.getRequestDispatcher("exhibits.jsp").forward(req,resp);
   }

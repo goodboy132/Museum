@@ -47,8 +47,8 @@ public class WorkerMapper implements ObjectMapper<Worker> {
       excursion.setName(resultSet.getString("excursion_name"));
       excursion.setProgram(resultSet.getString("excursion_program"));
       excursionDate.setId(resultSet.getLong("id"));
-      excursionDate.setStartTime(resultSet.getTime("start_time"));
-      excursionDate.setEndTime(resultSet.getTime("end_time"));
+      excursionDate.setStartTime(resultSet.getTimestamp("start_time").toLocalDateTime());
+      excursionDate.setEndTime(resultSet.getTimestamp("end_time").toLocalDateTime());
       excursion.setExcursionDate(excursionDate);
 
       excursions.add(excursion);

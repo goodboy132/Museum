@@ -2,6 +2,7 @@ import entity.*;
 import service.ServiceFactory;
 
 import javax.xml.ws.Service;
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 public class Program {
@@ -22,16 +23,17 @@ public class Program {
 //    exhibit.setDescription("description");
 //    exhibit.setAuthor();
 //    exhibit.setHall();
-    HallStyle hallStyle = new HallStyle();
-    hallStyle.setId(4L);
-    hallStyle.setName("detective");
-
-    Hall hall = new Hall();
-    hall.setName("Pasha");
-    hall.setHallStyle(hallStyle);
+    long milli = 123456789999l;
 
 
-    ServiceFactory.getInstance().getHallService().save(hall);
+    java.sql.Time time = new java.sql.Time(milli);
+
+    ExcursionTime excursionTime = new ExcursionTime();
+    excursionTime.setId(2L);
+    excursionTime.setStartTime(LocalDateTime.now());
+    excursionTime.setEndTime(LocalDateTime.now());
+
+    System.out.println(ServiceFactory.getInstance().getExcursionTimeService().delete(excursionTime));
 
 //    System.out.println(ServiceFactory.getInstance().getHallService().getAll().toString());
 //    System.out.println(ServiceFactory.getInstance().getHallService().getById(2L).toString());
