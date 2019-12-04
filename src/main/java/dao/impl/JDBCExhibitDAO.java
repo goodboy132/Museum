@@ -1,18 +1,11 @@
 package dao.impl;
-
-import dao.AuthorDAO;
 import dao.ExhibitDAO;
 import dao.mapper.ExhibitMapper;
-import entity.Author;
+import dao.mapper.MaterialMapper;
 import entity.Exhibit;
 import entity.Material;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,16 +50,21 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
 
   @Override
-  public Optional<Exhibit> getOneById(Long elementId) {
-    String getExhibitByIdQuery = "select * from author where author.id = ?";
-    return JDBCCRADDao.getOneById(connection,getExhibitByIdQuery,elementId,new ExhibitMapper());
+  public Optional<Exhibit> getOneById(Long elementId){
+    String getExhibitByIdQuery = "select * from exhibit join author on exhibit.author_id = author.id where exhibit.id = ?";
+    Optional<Exhibit> exhibit = JDBCCRADDao.getOneById(connection, getExhibitByIdQuery, elementId, new ExhibitMapper());
+    exhibit.ifPresent(this::getMaterialsForExhibit);
+    return exhibit;
   }
+
+
 
   @Override
   public List<Exhibit> getAll() {
-    String getAllExhibitsQuery = "select * from exhibit join exhbit_material" +
-            " em on exhibit.id = em.exibit_id join material m on em.material_id = m.id";
-    return JDBCCRADDao.getAll(connection,getAllExhibitsQuery,new ExhibitMapper());
+    String getAllExhibitsQuery = "select * from exhibit";
+    List<Exhibit> exhibits = JDBCCRADDao.getAll(connection, getAllExhibitsQuery, new ExhibitMapper());
+    exhibits.forEach(this::getMaterialsForExhibit);
+    return exhibits;
   }
 
   @Override
@@ -85,6 +83,23 @@ public class JDBCExhibitDAO implements ExhibitDAO {
     catch (SQLException e){
       e.printStackTrace();
       throw new RuntimeException();
+    }
+  }
+
+  private void getMaterialsForExhibit(Exhibit exhibit){
+    List<Material> materials = new ArrayList<>();
+    String getMaterialsByExhibitIdQuery = "select * from material  join exhibit_material on material.id = " +
+            "exhibit_material.material_id where exhibit_material.exhibit_id = ?";
+    try {
+      PreparedStatement preparedStatement = connection.prepareStatement(getMaterialsByExhibitIdQuery);
+      JDBCCRADDao.addParametersToPreparedStatement(preparedStatement, exhibit.getId());
+      ResultSet resultSet = preparedStatement.executeQuery();
+      while (resultSet.next()){
+        materials.add(new MaterialMapper().extractFromResultSet(resultSet));
+      }
+      exhibit.setMaterials(materials);
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 }

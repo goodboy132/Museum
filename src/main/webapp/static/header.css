@@ -90,7 +90,7 @@
     cursor: pointer;
 }
 
-li:not(:first-child) {
+.thecond_header li:not(:first-child) {
     padding-left: 20px;
 }
 
