@@ -5,6 +5,7 @@ import entity.HallStyle;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,7 +85,7 @@ public class JDBCCRADDao {
         else if (parameters[i] instanceof Long) {
           preparedStatement.setLong(i + 1, (Long) parameters[i]);
         }
-         else if (parameters[i] instanceof LocalDateTime) {
+        else if (parameters[i] instanceof LocalDateTime) {
            preparedStatement.setTimestamp(i + 1, Timestamp.valueOf((LocalDateTime) parameters[i]));
          }
         else if (parameters[i] == null) {

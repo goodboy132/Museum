@@ -25,7 +25,7 @@ public class JDBCExcursionTimeDAO implements ExcursionTimeDAO {
 
   @Override
   public Integer save(ExcursionTime element) {
-    String saveExcursionTimeQuery = "insert into excursion_time(start_time, end_time) values(??)";
+    String saveExcursionTimeQuery = "insert into excursion_time(start_time, end_time) values(?,?)";
     return JDBCCRADDao.save(connection, saveExcursionTimeQuery, element.getStartTime(), element.getEndTime());
   }
 
