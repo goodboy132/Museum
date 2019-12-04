@@ -7285,14 +7285,21 @@ material_id</ColNames>
       <ColumnKind>normal</ColumnKind>
     </column>
 <<<<<<< HEAD
+    <column id="1066" parent="358" name="position_id">
+=======
+<<<<<<< HEAD
     <column id="964" parent="301" name="position_id">
 =======
     <column id="1066" parent="358" name="hall_id">
 >>>>>>> dcbff26ff6877f2782409656c4ac30c28c2b19fe
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
+<<<<<<< HEAD
+    <column id="1067" parent="358" name="username">
+=======
 <<<<<<< HEAD
     <column id="965" parent="301" name="username">
       <Position>5</Position>
@@ -7311,34 +7318,33 @@ material_id</ColNames>
     <key id="968" parent="301" name="PRIMARY">
 =======
     <column id="1067" parent="358" name="position_id">
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <Position>5</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1068" parent="358" name="username">
+    <column id="1068" parent="358" name="password">
       <Position>6</Position>
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1069" parent="358" name="password">
-      <Position>7</Position>
-      <DataType>varchar(45)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="1070" parent="358" name="worker_hall">
-      <ColNames>hall_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="1071" parent="358" name="worker_position">
+    <index id="1069" parent="358" name="worker_position">
       <ColNames>position_id</ColNames>
       <Type>btree</Type>
     </index>
+<<<<<<< HEAD
+    <key id="1070" parent="358" name="PRIMARY">
+=======
     <key id="1072" parent="358" name="PRIMARY">
 >>>>>>> dcbff26ff6877f2782409656c4ac30c28c2b19fe
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+<<<<<<< HEAD
+    <foreign-key id="1071" parent="358" name="worker_position">
+=======
 <<<<<<< HEAD
     <foreign-key id="969" parent="301" name="worker_position">
       <ColNames>position_id</ColNames>
@@ -7349,27 +7355,43 @@ material_id</ColNames>
     <column id="970" parent="302" name="worker_id">
 =======
     <foreign-key id="1073" parent="358" name="worker_position">
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <ColNames>position_id</ColNames>
       <RefTableName>worker_position</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
+<<<<<<< HEAD
+    <column id="1072" parent="359" name="worker_id">
+=======
     <column id="1074" parent="359" name="worker_id">
 >>>>>>> dcbff26ff6877f2782409656c4ac30c28c2b19fe
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
 <<<<<<< HEAD
+    <column id="1073" parent="359" name="hall_id">
+=======
+<<<<<<< HEAD
     <column id="971" parent="302" name="hall_id">
 =======
     <column id="1075" parent="359" name="hall_id">
 >>>>>>> dcbff26ff6877f2782409656c4ac30c28c2b19fe
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
+<<<<<<< HEAD
+    <index id="1074" parent="359" name="worker_hall_id_hall_id">
+      <ColNames>hall_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="1075" parent="359" name="PRIMARY">
+=======
 <<<<<<< HEAD
     <index id="972" parent="302" name="worker_hall_id_hall_id">
       <ColNames>hall_id</ColNames>
@@ -7383,36 +7405,49 @@ material_id</ColNames>
     </index>
     <key id="1077" parent="359" name="PRIMARY">
 >>>>>>> dcbff26ff6877f2782409656c4ac30c28c2b19fe
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <NameSurrogate>1</NameSurrogate>
       <ColNames>worker_id
 hall_id</ColNames>
       <Primary>1</Primary>
     </key>
 <<<<<<< HEAD
+    <foreign-key id="1076" parent="359" name="worker_hall_id_worker_id">
+=======
+<<<<<<< HEAD
     <foreign-key id="974" parent="302" name="worker_hall_id_worker_id">
 =======
     <foreign-key id="1078" parent="359" name="worker_hall_id_worker_id">
 >>>>>>> dcbff26ff6877f2782409656c4ac30c28c2b19fe
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <ColNames>worker_id</ColNames>
       <RefSchemaName>museum</RefSchemaName>
       <RefTableName>worker</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
 <<<<<<< HEAD
+    <foreign-key id="1077" parent="359" name="worker_hall_id_hall_id">
+=======
+<<<<<<< HEAD
     <foreign-key id="975" parent="302" name="worker_hall_id_hall_id">
 =======
     <foreign-key id="1079" parent="359" name="worker_hall_id_hall_id">
 >>>>>>> dcbff26ff6877f2782409656c4ac30c28c2b19fe
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <ColNames>hall_id</ColNames>
       <RefSchemaName>museum</RefSchemaName>
       <RefTableName>hall</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
 <<<<<<< HEAD
+    <column id="1078" parent="360" name="id">
+=======
+<<<<<<< HEAD
     <column id="976" parent="303" name="id">
 =======
     <column id="1080" parent="360" name="id">
 >>>>>>> dcbff26ff6877f2782409656c4ac30c28c2b19fe
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -7420,19 +7455,27 @@ hall_id</ColNames>
       <ColumnKind>normal</ColumnKind>
     </column>
 <<<<<<< HEAD
+    <column id="1079" parent="360" name="position_name">
+=======
+<<<<<<< HEAD
     <column id="977" parent="303" name="position_name">
 =======
     <column id="1081" parent="360" name="position_name">
 >>>>>>> dcbff26ff6877f2782409656c4ac30c28c2b19fe
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
 <<<<<<< HEAD
+    <key id="1080" parent="360" name="PRIMARY">
+=======
+<<<<<<< HEAD
     <key id="978" parent="303" name="PRIMARY">
 =======
     <key id="1082" parent="360" name="PRIMARY">
 >>>>>>> dcbff26ff6877f2782409656c4ac30c28c2b19fe
+>>>>>>> 07196292f4c0520e0b3d4028a6444de10fb66406
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
