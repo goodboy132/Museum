@@ -11,6 +11,7 @@ public class ServiceFactoryImpl extends ServiceFactory {
   private MaterialService materialService;
   private WorkerPositionService workerPositionService;
   private ExcursionTimeService excursionTimeService;
+  private WorkerService workerService;
 
 
 
@@ -65,6 +66,14 @@ public class ServiceFactoryImpl extends ServiceFactory {
       excursionTimeService = new ExcursionTimeServiceImpl();
     }
     return excursionTimeService;
+  }
+
+  @Override
+  public WorkerService getWorkerService() {
+    if (workerService == null) {
+      workerService = new WorkerServiceImpl();
+    }
+    return workerService;
   }
 
 

@@ -4615,89 +4615,80 @@ material_id</ColNames>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1066" parent="358" name="hall_id">
+    <column id="1066" parent="358" name="position_id">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1067" parent="358" name="position_id">
+    <column id="1067" parent="358" name="username">
       <Position>5</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1068" parent="358" name="username">
+    <column id="1068" parent="358" name="password">
       <Position>6</Position>
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1069" parent="358" name="password">
-      <Position>7</Position>
-      <DataType>varchar(45)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="1070" parent="358" name="worker_hall">
-      <ColNames>hall_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="1071" parent="358" name="worker_position">
+    <index id="1069" parent="358" name="worker_position">
       <ColNames>position_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="1072" parent="358" name="PRIMARY">
+    <key id="1070" parent="358" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="1073" parent="358" name="worker_position">
+    <foreign-key id="1071" parent="358" name="worker_position">
       <ColNames>position_id</ColNames>
       <RefTableName>worker_position</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="1074" parent="359" name="worker_id">
+    <column id="1072" parent="359" name="worker_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1075" parent="359" name="hall_id">
+    <column id="1073" parent="359" name="hall_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="1076" parent="359" name="worker_hall_id_hall_id">
+    <index id="1074" parent="359" name="worker_hall_id_hall_id">
       <ColNames>hall_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="1077" parent="359" name="PRIMARY">
+    <key id="1075" parent="359" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>worker_id
 hall_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="1078" parent="359" name="worker_hall_id_worker_id">
+    <foreign-key id="1076" parent="359" name="worker_hall_id_worker_id">
       <ColNames>worker_id</ColNames>
       <RefTableName>worker</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="1079" parent="359" name="worker_hall_id_hall_id">
+    <foreign-key id="1077" parent="359" name="worker_hall_id_hall_id">
       <ColNames>hall_id</ColNames>
       <RefTableName>hall</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="1080" parent="360" name="id">
+    <column id="1078" parent="360" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1081" parent="360" name="position_name">
+    <column id="1079" parent="360" name="position_name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="1082" parent="360" name="PRIMARY">
+    <key id="1080" parent="360" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

@@ -12,6 +12,7 @@ public abstract class ServiceFactory {
   public abstract MaterialService getMaterialService();
   public abstract WorkerPositionService getWorkerPositionService();
   public abstract ExcursionTimeService getExcursionTimeService();
+  public abstract WorkerService getWorkerService();
 
   public static ServiceFactory getInstance(){
     if (serviceFactory == null){
