@@ -1,6 +1,8 @@
 package dao.impl;
 import dao.ExhibitDAO;
+import dao.mapper.AuthorMapper;
 import dao.mapper.ExhibitMapper;
+import dao.mapper.HallMapper;
 import dao.mapper.MaterialMapper;
 import entity.Exhibit;
 import entity.Material;
@@ -51,19 +53,17 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
   @Override
   public Optional<Exhibit> getOneById(Long elementId){
-    String getExhibitByIdQuery = "select * from exhibit join author on exhibit.author_id = author.id where exhibit.id = ?";
+    String getExhibitByIdQuery = "select * from exhibit where id = ?";
     Optional<Exhibit> exhibit = JDBCCRADDao.getOneById(connection, getExhibitByIdQuery, elementId, new ExhibitMapper());
-    exhibit.ifPresent(this::getMaterialsForExhibit);
+    exhibit.ifPresent(this::setMappedFieldsToExhibit);
     return exhibit;
   }
-
-
 
   @Override
   public List<Exhibit> getAll() {
     String getAllExhibitsQuery = "select * from exhibit";
     List<Exhibit> exhibits = JDBCCRADDao.getAll(connection, getAllExhibitsQuery, new ExhibitMapper());
-    exhibits.forEach(this::getMaterialsForExhibit);
+    exhibits.forEach(this::setMappedFieldsToExhibit);
     return exhibits;
   }
 
@@ -78,6 +78,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
       while (resultSet.next()) {
         exhibitsByAuthor.add(new ExhibitMapper().extractFromResultSet(resultSet));
       }
+      exhibitsByAuthor.forEach(this::setMappedFieldsToExhibit);
       return exhibitsByAuthor;
     }
     catch (SQLException e){
@@ -85,6 +86,19 @@ public class JDBCExhibitDAO implements ExhibitDAO {
       throw new RuntimeException();
     }
   }
+
+  @Override
+  public List<Exhibit> getAllByWorker(int workerId) {
+    return null;
+  }
+
+
+  private void setMappedFieldsToExhibit(Exhibit exhibit){
+    getMaterialsForExhibit(exhibit);
+    getAuthorForExhibit(exhibit);
+    getHoleForExhibit(exhibit);
+  }
+
 
   private void getMaterialsForExhibit(Exhibit exhibit){
     List<Material> materials = new ArrayList<>();
@@ -99,6 +113,36 @@ public class JDBCExhibitDAO implements ExhibitDAO {
       }
       exhibit.setMaterials(materials);
     } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+  private void getAuthorForExhibit(Exhibit exhibit){
+    String getAuthorForExhibitQuery = "select * from author join exhibit on author.id = exhibit.author_id where " +
+            "exhibit.id = ?";
+    try {
+      PreparedStatement preparedStatement = connection.prepareStatement(getAuthorForExhibitQuery);
+      JDBCCRADDao.addParametersToPreparedStatement(preparedStatement,exhibit.getId());
+      ResultSet resultSet = preparedStatement.executeQuery();
+      if (resultSet.next()) {
+        exhibit.setAuthor(new AuthorMapper().extractFromResultSet(resultSet));
+      }
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+  }
+  private void getHoleForExhibit(Exhibit exhibit){
+    String getHallForExhibitQuery = "select * from hall join exhibit on hall.id = exhibit.hall_id where " +
+            "exhibit.id = ?";
+    try {
+      PreparedStatement preparedStatement = connection.prepareStatement(getHallForExhibitQuery);
+      JDBCCRADDao.addParametersToPreparedStatement(preparedStatement,exhibit.getId());
+      ResultSet resultSet = preparedStatement.executeQuery();
+      if (resultSet.next()) {
+        exhibit.setHall(new HallMapper().extractFromResultSet(resultSet));
+      }
+    }
+    catch (SQLException e){
       e.printStackTrace();
     }
   }

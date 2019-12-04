@@ -32,7 +32,6 @@ public class ExhibitServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     req.setAttribute("authors", authorService.getAll());
     req.setAttribute("halls", hallService.getAll());
-//    req.setAttribute("guides",
     req.getRequestDispatcher("exhibits.jsp").forward(req,resp);
   }
 }
