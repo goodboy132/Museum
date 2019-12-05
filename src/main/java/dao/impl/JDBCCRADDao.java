@@ -56,11 +56,14 @@ public class JDBCCRADDao {
     }
   }
 
-  public static<T> List<T> getAll(Connection connection,String query,ObjectMapper<T> mapper) {
+  public static<T> List<T> getAll(Connection connection,String query,ObjectMapper<T> mapper,Object... parameters) {
     ArrayList<T> list = new ArrayList<>();
     try {
       PreparedStatement preparedStatement = connection.prepareStatement(query);
-      ResultSet resultSet = preparedStatement.executeQuery(query);
+      if (parameters.length >0){
+        addParametersToPreparedStatement(preparedStatement,parameters);
+      }
+      ResultSet resultSet = preparedStatement.executeQuery();
       while (resultSet.next()) {
         list.add(mapper.extractFromResultSet(resultSet));
       }
@@ -74,7 +77,7 @@ public class JDBCCRADDao {
 
 
    static void addParametersToPreparedStatement(PreparedStatement preparedStatement, Object... parameters){
-    try {
+     try {
       for (int i = 0; i < parameters.length; i++) {
          if (parameters[i] instanceof String) {
           preparedStatement.setString(i + 1, (String) parameters[i]);

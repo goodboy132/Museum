@@ -13,5 +13,7 @@ public interface ExhibitService {
   int delete(Exhibit exhibit);
   Optional<Exhibit> getById(Long id);
   List<Exhibit> getAll();
-  List<Exhibit> getAllByAuthor(int id);
+  List<Exhibit> getAllByAuthor(Long id);
+  List<Exhibit> getAllByWorker(Long id);
+  List<Exhibit> getAllByHall(Long id);
 }
