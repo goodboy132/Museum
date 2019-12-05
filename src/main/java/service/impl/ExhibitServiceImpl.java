@@ -45,7 +45,17 @@ public class ExhibitServiceImpl implements ExhibitService {
   }
 
   @Override
-  public List<Exhibit> getAllByAuthor(int authorId) {
+  public List<Exhibit> getAllByAuthor(Long authorId) {
     return exhibitDAO.getAllByAuthor(authorId);
+  }
+
+  @Override
+  public List<Exhibit> getAllByWorker(Long workerId) {
+    return exhibitDAO.getAllByWorker(workerId);
+  }
+
+  @Override
+  public List<Exhibit> getAllByHall(Long hallId) {
+    return exhibitDAO.getAllByHole(hallId);
   }
 }
