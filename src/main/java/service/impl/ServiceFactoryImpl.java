@@ -1,6 +1,4 @@
 package service.impl;
-
-import entity.Exhibit;
 import service.*;
 
 public class ServiceFactoryImpl extends ServiceFactory {
@@ -9,7 +7,6 @@ public class ServiceFactoryImpl extends ServiceFactory {
   private HallStyleService hallStyleService;
   private HallService hallService;
   private MaterialService materialService;
-  private WorkerPositionService workerPositionService;
   private ExcursionTimeService excursionTimeService;
   private WorkerService workerService;
 

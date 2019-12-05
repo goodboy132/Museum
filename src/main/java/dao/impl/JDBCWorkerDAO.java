@@ -35,17 +35,20 @@ public class JDBCWorkerDAO implements WorkerDAO {
 
   @Override
   public Integer save(Worker element) {
-    return null;
+    String saveWorkerQuery = "insert into worker(name, surname, position_id, username, password) values(?,?,?,?,?)";
+    return JDBCCRADDao.save(connection, saveWorkerQuery, element.getFirstName(), element.getLastName(), element.getWorkerPosition().getId(), element.getLogin(), element.getPassword());
   }
 
   @Override
   public Integer update(Worker element) {
-    return null;
+    String updateWorkerQuery = "update worker set name = ?, surname = ?, position_id = ?, username = ?, password = ? where id = ?";
+    return JDBCCRADDao.update(connection, updateWorkerQuery, element.getFirstName(), element.getLastName(), element.getWorkerPosition().getId(), element.getLogin(), element.getPassword(), element.getId());
   }
 
   @Override
   public Integer delete(Worker element) {
-    return null;
+    String deleteWorkerQuery = "delete from worker where worker.id = ?";
+    return JDBCCRADDao.update(connection, deleteWorkerQuery, element.getId());
   }
 
   @Override
