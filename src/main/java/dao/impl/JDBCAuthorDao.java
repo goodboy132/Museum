@@ -3,6 +3,9 @@ package dao.impl;
 import dao.AuthorDAO;
 import dao.mapper.AuthorMapper;
 import entity.Author;
+import entity.WorkerPosition;
+import entity.enums.WorkerPositions;
+
 import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
@@ -27,8 +30,8 @@ public class JDBCAuthorDao implements AuthorDAO {
   @Override
   public Integer save(Author author) {
     String saveQuery = "INSERT INTO author(name,surname,born_date,death_date) VALUES(?,?,?,?)";
-    return JDBCCRADDao.save(connection, saveQuery,author.getFirstName(),author.getLastName(),
-            author.getBornDate(),author.getDeathDate());
+    return JDBCCRADDao.save(connection, saveQuery, author.getFirstName(), author.getLastName(),
+            author.getBornDate(), author.getDeathDate());
   }
 
   @Override
@@ -47,12 +50,11 @@ public class JDBCAuthorDao implements AuthorDAO {
   @Override
   public Optional<Author> getOneById(Long elementId) {
     String getByIdQuery = "select * from author where author.id = ?";
-    return JDBCCRADDao.getOneById(connection,getByIdQuery,elementId,new AuthorMapper());
+    return JDBCCRADDao.getOneById(connection, getByIdQuery, elementId, new AuthorMapper());
   }
 
   @Override
-  public List<Author> getAll()
-  {
+  public List<Author> getAll() {
     String getAllQuery = "select * from author";
     return JDBCCRADDao.getAll(connection, getAllQuery, new AuthorMapper());
   }

@@ -1,19 +1,14 @@
 package controller.exhibit;
-import entity.Author;
-import entity.Exhibit;
-import entity.Worker;
 import service.AuthorService;
 import service.ExhibitService;
 import service.HallService;
 import service.ServiceFactory;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/exhibits")
 public class ExhibitServlet extends HttpServlet {

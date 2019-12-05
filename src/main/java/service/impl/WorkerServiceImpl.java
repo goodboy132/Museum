@@ -3,6 +3,7 @@ package service.impl;
 import dao.WorkerDAO;
 import dao.databace.Database;
 import dao.impl.JDBCWorkerDAO;
+import entity.Author;
 import entity.Worker;
 import service.WorkerService;
 
@@ -40,5 +41,10 @@ public class WorkerServiceImpl implements WorkerService {
   @Override
   public List<Worker> getAll() {
     return workerDAO.getAll();
+  }
+
+  @Override
+  public List<Worker> getAllByPosition(String position) {
+    return workerDAO.getWorkersByPosition(position);
   }
 }

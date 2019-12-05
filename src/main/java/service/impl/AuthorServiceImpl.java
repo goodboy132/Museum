@@ -42,5 +42,4 @@ public class AuthorServiceImpl implements AuthorService {
     return authorDAO.getAll();
   }
 
-
 }

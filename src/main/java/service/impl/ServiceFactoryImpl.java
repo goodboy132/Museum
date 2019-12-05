@@ -53,14 +53,6 @@ public class ServiceFactoryImpl extends ServiceFactory {
   }
 
   @Override
-  public WorkerPositionService getWorkerPositionService() {
-    if (workerPositionService == null) {
-      workerPositionService = new WorkerPositionImpl();
-    }
-    return workerPositionService;
-  }
-
-  @Override
   public ExcursionTimeService getExcursionTimeService() {
     if (excursionTimeService == null) {
       excursionTimeService = new ExcursionTimeServiceImpl();

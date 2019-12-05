@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ExcursionTimeMapper implements ObjectMapper<ExcursionTime> {
-
   @Override
   public ExcursionTime extractFromResultSet(ResultSet resultSet) throws SQLException {
     ExcursionTime excursionTime = new ExcursionTime();

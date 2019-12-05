@@ -2,6 +2,8 @@ package dao;
 
 import entity.Worker;
 
-public interface WorkerDAO extends GenericDAO<Worker> {
+import java.util.List;
 
+public interface WorkerDAO extends GenericDAO<Worker> {
+  List<Worker> getWorkersByPosition(String positionName);
 }

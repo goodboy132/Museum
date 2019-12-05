@@ -1,5 +1,6 @@
 package service;
 
+import entity.Author;
 import entity.Worker;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface WorkerService {
   int delete(Worker worker);
   Optional<Worker> getOneById(Long id);
   List<Worker> getAll();
+  List<Worker> getAllByPosition(String position);
 }

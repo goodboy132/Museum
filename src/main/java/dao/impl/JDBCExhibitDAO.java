@@ -1,5 +1,4 @@
 package dao.impl;
-
 import dao.ExhibitDAO;
 import dao.mapper.AuthorMapper;
 import dao.mapper.ExhibitMapper;
@@ -7,7 +6,6 @@ import dao.mapper.HallMapper;
 import dao.mapper.MaterialMapper;
 import entity.Exhibit;
 import entity.Material;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
   @Override
   public Integer save(Exhibit exhibit) {
-    String saveExhibitQuery = "INSERT INTO exhibit(exhibit_name,receipt_date,technique,description,author_id,hall_id)" +
+    String saveExhibitQuery = "INSERT INTO exhibit(exhibit_name,receipt_date,technique,description,author_id,hall_id)"+
             " VALUES(?,?,?,?,?,?)";
     return JDBCCRADDao.save(connection, saveExhibitQuery, exhibit.getName(), exhibit.getReceiptDate(),
             exhibit.getTechnique(), exhibit.getDescription(), exhibit.getAuthor().getId(), exhibit.getHall().getId());
@@ -98,13 +96,13 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
 
   private void setMappedFieldsToExhibit(Exhibit exhibit) {
-    getMaterialsForExhibit(exhibit);
-    getAuthorForExhibit(exhibit);
-    getHoleForExhibit(exhibit);
+    setMaterialsForExhibit(exhibit);
+    setAuthorForExhibit(exhibit);
+    setHoleForExhibit(exhibit);
   }
 
 
-  private void getMaterialsForExhibit(Exhibit exhibit) {
+  private void setMaterialsForExhibit(Exhibit exhibit) {
     List<Material> materials = new ArrayList<>();
     String getMaterialsByExhibitIdQuery = "select * from material  join exhibit_material on material.id = " +
             "exhibit_material.material_id where exhibit_material.exhibit_id = ?";
@@ -121,7 +119,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
     }
   }
 
-  private void getAuthorForExhibit(Exhibit exhibit) {
+  private void setAuthorForExhibit(Exhibit exhibit) {
     String getAuthorForExhibitQuery = "select * from author join exhibit on author.id = exhibit.author_id where " +
             "exhibit.id = ?";
     try {
@@ -136,7 +134,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
     }
   }
 
-  private void getHoleForExhibit(Exhibit exhibit) {
+  private void setHoleForExhibit(Exhibit exhibit) {
     String getHallForExhibitQuery = "select * from hall join exhibit on hall.id = exhibit.hall_id where " +
             "exhibit.id = ?";
     try {
