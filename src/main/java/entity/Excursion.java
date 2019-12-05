@@ -2,7 +2,7 @@ package entity;
 
 import lombok.Data;
 
-import java.util.Objects;
+import java.util.List;
 
 @Data
 
@@ -10,7 +10,6 @@ public class Excursion {
   private Long id;
   private String name;
   private String program;
-  private String timeTable;
   private Worker worker;
-  private ExcursionTime excursionDate;
+  private List<TimeTable> excursionTime;
 }

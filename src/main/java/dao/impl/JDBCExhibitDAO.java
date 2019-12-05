@@ -4,7 +4,9 @@ import dao.mapper.AuthorMapper;
 import dao.mapper.ExhibitMapper;
 import dao.mapper.HallMapper;
 import dao.mapper.MaterialMapper;
+import entity.Author;
 import entity.Exhibit;
+import entity.Hall;
 import entity.Material;
 import java.sql.*;
 import java.util.ArrayList;
@@ -103,49 +105,25 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
 
   private void setMaterialsForExhibit(Exhibit exhibit) {
-    List<Material> materials = new ArrayList<>();
     String getMaterialsByExhibitIdQuery = "select * from material  join exhibit_material on material.id = " +
             "exhibit_material.material_id where exhibit_material.exhibit_id = ?";
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(getMaterialsByExhibitIdQuery);
-      JDBCCRADDao.addParametersToPreparedStatement(preparedStatement, exhibit.getId());
-      ResultSet resultSet = preparedStatement.executeQuery();
-      while (resultSet.next()) {
-        materials.add(new MaterialMapper().extractFromResultSet(resultSet));
-      }
-      exhibit.setMaterials(materials);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    List<Material> materials = JDBCCRADDao.getAll
+            (connection, getMaterialsByExhibitIdQuery, new MaterialMapper(), exhibit.getId());
+    exhibit.setMaterials(materials);
   }
 
   private void setAuthorForExhibit(Exhibit exhibit) {
     String getAuthorForExhibitQuery = "select * from author join exhibit on author.id = exhibit.author_id where " +
             "exhibit.id = ?";
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(getAuthorForExhibitQuery);
-      JDBCCRADDao.addParametersToPreparedStatement(preparedStatement, exhibit.getId());
-      ResultSet resultSet = preparedStatement.executeQuery();
-      if (resultSet.next()) {
-        exhibit.setAuthor(new AuthorMapper().extractFromResultSet(resultSet));
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    Optional<Author> author = JDBCCRADDao.getOneById(
+            connection, getAuthorForExhibitQuery, exhibit.getId(), new AuthorMapper());
+    exhibit.setAuthor(author.get());
   }
 
   private void setHoleForExhibit(Exhibit exhibit) {
     String getHallForExhibitQuery = "select * from hall join exhibit on hall.id = exhibit.hall_id where " +
             "exhibit.id = ?";
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(getHallForExhibitQuery);
-      JDBCCRADDao.addParametersToPreparedStatement(preparedStatement, exhibit.getId());
-      ResultSet resultSet = preparedStatement.executeQuery();
-      if (resultSet.next()) {
-        exhibit.setHall(new HallMapper().extractFromResultSet(resultSet));
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    Optional<Hall> hall = JDBCCRADDao.getOneById(connection, getHallForExhibitQuery, exhibit.getId(), new HallMapper());
+    exhibit.setHall(hall.get());
   }
 }

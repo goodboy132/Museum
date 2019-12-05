@@ -1,14 +1,8 @@
 package dao.impl;
 
 import dao.WorkerDAO;
-import dao.mapper.AuthorMapper;
-import dao.mapper.HallMapper;
-import dao.mapper.WorkerMapper;
-import dao.mapper.WorkerPositionMapper;
-import entity.Author;
-import entity.Hall;
-import entity.Worker;
-import entity.WorkerPosition;
+import dao.mapper.*;
+import entity.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,59 +51,52 @@ public class JDBCWorkerDAO implements WorkerDAO {
             " worker.username, worker.password from worker where worker.id = ?";
     Optional<Worker> worker =
             JDBCCRADDao.getOneById(connection, getOneWorkerWithHallIdQuery, elementId, new WorkerMapper());
-    setWorkerHalls(worker.get());
-    setWorkerPosition(worker.get());
-    System.out.println(worker);
-    return null;
+    worker.ifPresent(this::setMappedFieldsToWorker);
+    return worker;
   }
 
-  @Override //remake
+  @Override
   public List<Worker> getAll() {
-    String getAllWorkersQuery = "select * from worker\n" +
-            "join worker_position\n" +
-            "on worker.position_id = worker_position.id";
-    return JDBCCRADDao.getAll(connection, getAllWorkersQuery, new WorkerMapper());
+    String getAllWorkersQuery = "select * from worker join worker_position on worker.position_id = worker_position.id";
+    List<Worker> workers = JDBCCRADDao.getAll(connection, getAllWorkersQuery, new WorkerMapper());
+    workers.forEach(this::setMappedFieldsToWorker);
+    return workers;
   }
 
   public List<Worker> getWorkersByPosition(String positionName) {
     String getGuidesQuery = "select * from worker w join worker_position wp on w.position_id =" +
             " wp.id where wp.position_name = ?";
     List<Worker> workers = JDBCCRADDao.getAll(connection, getGuidesQuery, new WorkerMapper(), positionName);
-    workers.forEach(this::setWorkerPosition);
+    workers.forEach(this::setMappedFieldsToWorker);
     return workers;
+  }
+  
+
+  private void setMappedFieldsToWorker(Worker worker) {
+   setWorkerExcursions(worker);
+   setWorkerPosition(worker);
+   setWorkerHalls(worker);
   }
 
 
   private void setWorkerHalls(Worker worker){
     String setWorkerHallsQuery = "select * from hall h join worker_hall wh on h.id = wh.hall_id where wh.worker_id = ?";
-    List<Hall> halls = new ArrayList<>();
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(setWorkerHallsQuery);
-      JDBCCRADDao.addParametersToPreparedStatement(preparedStatement, worker.getId());
-      ResultSet resultSet = preparedStatement.executeQuery();
-      while (resultSet.next()) {
-        halls.add(new HallMapper().extractFromResultSet(resultSet));
-      }
-      worker.setHalls(halls);
-    }
-    catch (SQLException e){
-      e.printStackTrace();
-    }
+    List<Hall> halls = JDBCCRADDao.getAll(connection, setWorkerHallsQuery, new HallMapper(), worker.getId());
+    worker.setHalls(halls);
   }
 
   private void setWorkerPosition(Worker worker) {
     String setWorkerPositionQuery = "select * from worker_position join worker w on worker_position.id = " +
             "w.position_id where w.id = ?";
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(setWorkerPositionQuery);
-      JDBCCRADDao.addParametersToPreparedStatement(preparedStatement, worker.getId());
-      ResultSet resultSet = preparedStatement.executeQuery();
-      if (resultSet.next()) {
-        worker.setWorkerPosition(new WorkerPositionMapper().extractFromResultSet(resultSet));
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    Optional<WorkerPosition> position = JDBCCRADDao.getOneById
+            (connection, setWorkerPositionQuery, worker.getId(), new WorkerPositionMapper());
+    worker.setWorkerPosition(position.get());
+  }
+  private void setWorkerExcursions(Worker worker){
+    String setWorkerExcursionsQuery = "select * from excursion e where e.worker_id = ?";
+    List<Excursion> excursions = JDBCCRADDao.getAll
+            (connection, setWorkerExcursionsQuery, new ExcursionMapper(), worker.getId());
+    worker.setExcursions(excursions);
   }
 
 

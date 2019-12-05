@@ -10,7 +10,6 @@ public abstract class ServiceFactory {
   public abstract HallStyleService getHallStyleService();
   public abstract HallService getHallService();
   public abstract MaterialService getMaterialService();
-  public abstract ExcursionTimeService getExcursionTimeService();
   public abstract WorkerService getWorkerService();
 
   public static ServiceFactory getInstance(){

@@ -1,13 +1,9 @@
 package dao.impl;
 
 import dao.mapper.ObjectMapper;
-import entity.HallStyle;
-
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,15 +24,10 @@ public class JDBCCRADDao {
   public static Integer update(Connection connection, String query, Object... parameters) {
     try (PreparedStatement statement = connection.prepareStatement(query)) {
       addParametersToPreparedStatement(statement, parameters);
-
       return statement.executeUpdate();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  public static void delete(Object element) {
-
   }
 
   public static<T> Optional<T> getOneById(Connection connection, String query, Long elementId, ObjectMapper<T> mapper) {

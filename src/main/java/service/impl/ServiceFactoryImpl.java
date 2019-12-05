@@ -7,7 +7,6 @@ public class ServiceFactoryImpl extends ServiceFactory {
   private HallStyleService hallStyleService;
   private HallService hallService;
   private MaterialService materialService;
-  private ExcursionTimeService excursionTimeService;
   private WorkerService workerService;
 
 
@@ -49,13 +48,6 @@ public class ServiceFactoryImpl extends ServiceFactory {
     return materialService;
   }
 
-  @Override
-  public ExcursionTimeService getExcursionTimeService() {
-    if (excursionTimeService == null) {
-      excursionTimeService = new ExcursionTimeServiceImpl();
-    }
-    return excursionTimeService;
-  }
 
   @Override
   public WorkerService getWorkerService() {
