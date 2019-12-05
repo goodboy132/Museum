@@ -25,28 +25,24 @@ public class JDBCWorkerDAO implements WorkerDAO {
 
   @Override
   public Integer save(Worker element) {
-    return null;
+    String saveWorkerQuery = "insert into worker(name, surname, position_id, username, password) values(?,?,?,?,?)";
+    return JDBCCRADDao.save(connection, saveWorkerQuery, element.getFirstName(), element.getLastName(), element.getWorkerPosition().getId(), element.getLogin(), element.getPassword());
   }
 
   @Override
   public Integer update(Worker element) {
-    return null;
+    String updateWorkerQuery = "update worker set name = ?, surname = ?, position_id = ?, username = ?, password = ? where id = ?";
+    return JDBCCRADDao.update(connection, updateWorkerQuery, element.getFirstName(), element.getLastName(), element.getWorkerPosition().getId(), element.getLogin(), element.getPassword(), element.getId());
   }
 
   @Override
   public Integer delete(Worker element) {
-    return null;
+    String deleteWorkerQuery = "delete from worker where worker.id = ?";
+    return JDBCCRADDao.update(connection, deleteWorkerQuery, element.getId());
   }
 
   @Override //remake
   public Optional<Worker> getOneById(Long elementId) {
-    String getOneWorkerWithHallIdQuery = "select worker.id, worker.name, worker.surname, worker.position_id, worker.username, worker.password \n" +
-            "from worker\n" +
-            "join worker_position\n" +
-            "on worker.position_id = worker_position.id" +
-            "where worker.id = ?;";
-    Optional<Worker> oneById = JDBCCRADDao.getOneById(connection, getOneWorkerWithHallIdQuery, elementId, new WorkerMapper());
-    System.out.println(oneById);
     return null;
   }
 
