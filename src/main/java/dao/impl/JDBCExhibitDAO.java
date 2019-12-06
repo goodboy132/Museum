@@ -95,10 +95,29 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
   @Override
   public Map<String,Integer> getStatisticByMaterial(){
-    String getStatisticByMaterialQuery = "SELECT m.material_name, count(e.id) as count_of_material FROM " +
+    String getStatisticByMaterialQuery = "SELECT m.material_name as name, count(e.id) as count FROM " +
             "exhibit e JOIN exhibit_material em on e.id = em.exhibit_id join material m on em.material_id = m.id " +
             "group by material_name ";
    return JDBCCRADDao.getOne(connection,getStatisticByMaterialQuery,null, new StatisticMapper()).get();
+  }
+  @Override
+  public Map<String,Integer> getStatisticByTechnique(){
+    String getStatisticByTechnique = "SELECT t.technique_name as name, count(e.id) as count FROM " +
+            " exhibit e JOIN exhibit_technique et on e.id = et.exhibit_id join technique t on et.technique_id = t.id "+
+            "group by t.technique_name;";
+    return JDBCCRADDao.getOne(connection,getStatisticByTechnique,null, new StatisticMapper()).get();
+  }
+  @Override
+  public Map<String,Integer> getStatisticByAuthor(){
+    String getStatisticByTechnique = "SELECT a.surname as name, count(a.id) as count " +
+            "FROM exhibit e JOIN author a on a.id = e.author_id group by a.id";
+    return JDBCCRADDao.getOne(connection,getStatisticByTechnique,null, new StatisticMapper()).get();
+  }
+  @Override
+  public Map<String,Integer> getStatisticByHall(){
+    String getStatisticByTechnique = "SELECT h.hall_name as name, count(h.id) as count " +
+            "FROM exhibit e JOIN hall h on h.id = e.hall_id group by h.id";
+    return JDBCCRADDao.getOne(connection,getStatisticByTechnique,null, new StatisticMapper()).get();
   }
 
 

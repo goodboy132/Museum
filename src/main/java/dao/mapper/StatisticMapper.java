@@ -12,7 +12,7 @@ public class StatisticMapper implements ObjectMapper<Map<String,Integer>> {
   public Map<String, Integer> extractFromResultSet(ResultSet resultSet) throws SQLException {
     Map<String,Integer> statistic = new HashMap<>();
     while (resultSet.next()){
-      statistic.put(resultSet.getString("material_name"),resultSet.getInt("count_of_material"));
+      statistic.put(resultSet.getString("name"),resultSet.getInt("count"));
     }
     return statistic;
   }

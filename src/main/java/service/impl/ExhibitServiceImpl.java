@@ -64,4 +64,19 @@ public class ExhibitServiceImpl implements ExhibitService {
   public Map<String, Integer> getStatisticByMaterial() {
     return exhibitDAO.getStatisticByMaterial();
   }
+
+  @Override
+  public Map<String, Integer> getStatisticByTechnique() {
+    return exhibitDAO.getStatisticByTechnique();
+  }
+
+  @Override
+  public Map<String,Integer> getStatisticByAuthor(){
+    return exhibitDAO.getStatisticByAuthor();
+  }
+
+  @Override
+  public Map<String,Integer> getStatisticByHall(){
+    return exhibitDAO.getStatisticByHall();
+  }
 }
