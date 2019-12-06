@@ -11,5 +11,6 @@ public class Excursion {
   private String name;
   private String program;
   private Worker worker;
-  private List<TimeTable> excursionTime;
+
+  List<TimeTable> timeTables;
 }

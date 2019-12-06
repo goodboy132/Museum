@@ -8,6 +8,7 @@ public class ServiceFactoryImpl extends ServiceFactory {
   private HallService hallService;
   private MaterialService materialService;
   private WorkerService workerService;
+  private ExcursionService excursionService;
 
 
 
@@ -55,6 +56,14 @@ public class ServiceFactoryImpl extends ServiceFactory {
       workerService = new WorkerServiceImpl();
     }
     return workerService;
+  }
+
+  @Override
+  public ExcursionService getExcursionService() {
+    if (excursionService == null) {
+      excursionService = new ExcursionServiceImpl();
+    }
+    return excursionService;
   }
 
 

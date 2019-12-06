@@ -8,9 +8,9 @@
 </head>
 <body>
 <jsp:include page="fragment/header.jsp"/>
-<c:forEach var="exhibit" items="${exhibits}">
-    <p>${exhibit.exhibits_name}</p>
-</c:forEach>
+<%--<c:forEach var="exhibit" items="${exhibits}">--%>
+    <%--<p>${exhibit}</p>--%>
+<%--</c:forEach>--%>
 <div class="selection">
     <div class="main">
         <div class="header">Exhibits</div>

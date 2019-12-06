@@ -11,6 +11,7 @@ public abstract class ServiceFactory {
   public abstract HallService getHallService();
   public abstract MaterialService getMaterialService();
   public abstract WorkerService getWorkerService();
+  public abstract  ExcursionService getExcursionService();
 
   public static ServiceFactory getInstance(){
     if (serviceFactory == null){
