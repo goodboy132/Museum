@@ -11,4 +11,7 @@ public interface ExhibitDAO extends GenericDAO<Exhibit> {
   List<Exhibit>getAllByWorker(Long workerId);
   List<Exhibit>getAllByHole(Long workerId);
   Map<String,Integer>getStatisticByMaterial();
+  Map<String,Integer>getStatisticByTechnique();
+  Map<String,Integer> getStatisticByAuthor();
+  Map<String,Integer> getStatisticByHall();
 }

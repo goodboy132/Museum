@@ -9,6 +9,7 @@ import java.util.Date;
 
 public class Program {
   public static void main(String[] args) {
+<<<<<<< HEAD
     Exhibit exhibit=new Exhibit();
     HallStyle hallStyle = new HallStyle();
 
@@ -19,6 +20,9 @@ public class Program {
 //    System.out.println(ServiceFactory.getInstance().getExcursionService().getCountOfExcursionsForPeriod(localDateTime, localDateTime2));
 //    System.out.println(ServiceFactory.getInstance().getExcursionService().getAvailableExcursionsForPeriod(localDateTime, localDateTime2));
     System.out.println(ServiceFactory.getInstance().getWorkerService().getStatisticByExcursions());
+=======
+    System.out.println(ServiceFactory.getInstance().getExhibitService().getStatisticByHall());
+>>>>>>> 42836d0e7243b985621d40f2ca1737ba7e8404dd
   }
 
 }

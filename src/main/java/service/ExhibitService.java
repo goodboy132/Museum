@@ -18,4 +18,7 @@ public interface ExhibitService {
   List<Exhibit> getAllByWorker(Long id);
   List<Exhibit> getAllByHall(Long id);
   Map<String,Integer> getStatisticByMaterial();
+  Map<String,Integer> getStatisticByTechnique();
+  Map<String,Integer> getStatisticByAuthor();
+  Map<String,Integer> getStatisticByHall();
 }
