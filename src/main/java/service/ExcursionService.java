@@ -13,4 +13,5 @@ public interface ExcursionService {
   Optional<Excursion> getById(Long id);
   List<Excursion> getAll();
   List<Excursion> getAvailableExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime);
+  Integer getCountOfExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime);
 }

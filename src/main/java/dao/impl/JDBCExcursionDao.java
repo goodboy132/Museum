@@ -9,7 +9,7 @@ import entity.Exhibit;
 import entity.TimeTable;
 import entity.Worker;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -91,5 +91,14 @@ public class JDBCExcursionDao implements ExcursionDAO {
     List<Excursion> excursions = JDBCCRADDao.getAll(connection, getAvailableExcursionsForPeriodQuery, new ExcursionMapper(), startTime, endTime);
     excursions.forEach(this::setMappedFieldsToExhibit);
     return excursions;
+  }
+
+  @Override
+  public Integer getCountOfExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime) {
+    String getCountOfExcursionsForPeriod = "select COUNT(*) as row_count from museum.excursion join museum.time_table " +
+            "on museum.time_table.excursion_id = museum.excursion.id " +
+            "where museum.time_table.start_time between ? and ?";
+    List<Excursion> excursions = JDBCCRADDao.getAll(connection, getCountOfExcursionsForPeriod, new ExcursionMapper(), startTime, endTime);
+    return excursions.size();
   }
 }

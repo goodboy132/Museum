@@ -46,4 +46,9 @@ public class ExcursionServiceImpl implements ExcursionService {
   public List<Excursion> getAvailableExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime) {
     return excursionDao.getAvailableExcursionsForPeriod(startTime, endTime);
   }
+
+  @Override
+  public Integer getCountOfExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime) {
+    return excursionDao.getCountOfExcursionsForPeriod(startTime, endTime);
+  }
 }
