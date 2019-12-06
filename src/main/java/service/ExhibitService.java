@@ -5,6 +5,7 @@ import entity.Author;
 import entity.Exhibit;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ExhibitService {
@@ -16,4 +17,5 @@ public interface ExhibitService {
   List<Exhibit> getAllByAuthor(Long id);
   List<Exhibit> getAllByWorker(Long id);
   List<Exhibit> getAllByHall(Long id);
+  Map<String,Integer> getStatisticByMaterial();
 }

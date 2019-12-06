@@ -1,15 +1,13 @@
 package dao.impl;
 import dao.ExhibitDAO;
-import dao.mapper.AuthorMapper;
-import dao.mapper.ExhibitMapper;
-import dao.mapper.HallMapper;
-import dao.mapper.MaterialMapper;
+import dao.mapper.*;
 import entity.Author;
 import entity.Exhibit;
 import entity.Hall;
 import entity.Material;
 import java.sql.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class JDBCExhibitDAO implements ExhibitDAO {
@@ -56,7 +54,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
   public Optional<Exhibit> getOneById(Long elementId) {
     String getExhibitByIdQuery = "select e.id,exhibit_name,e.receipt_date,e.technique,e.description from exhibit e " +
             "where e.id = ?";
-    Optional<Exhibit> exhibit = JDBCCRADDao.getOneById(connection, getExhibitByIdQuery, elementId, new ExhibitMapper());
+    Optional<Exhibit> exhibit = JDBCCRADDao.getOne(connection, getExhibitByIdQuery, elementId, new ExhibitMapper());
     exhibit.ifPresent(this::setMappedFieldsToExhibit);
     return exhibit;
   }
@@ -95,6 +93,14 @@ public class JDBCExhibitDAO implements ExhibitDAO {
     return exhibits;
   }
 
+  @Override
+  public Map<String,Integer> getStatisticByMaterial(){
+    String getStatisticByMaterialQuery = "SELECT m.material_name, count(e.id) as count_of_material FROM " +
+            "exhibit e JOIN exhibit_material em on e.id = em.exhibit_id join material m on em.material_id = m.id " +
+            "group by material_name ";
+   return JDBCCRADDao.getOne(connection,getStatisticByMaterialQuery,null, new StatisticMapper()).get();
+  }
+
 
   private void setMappedFieldsToExhibit(Exhibit exhibit) {
     setMaterialsForExhibit(exhibit);
@@ -114,7 +120,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
   private void setAuthorForExhibit(Exhibit exhibit) {
     String getAuthorForExhibitQuery = "select * from author join exhibit on author.id = exhibit.author_id where " +
             "exhibit.id = ?";
-    Optional<Author> author = JDBCCRADDao.getOneById(
+    Optional<Author> author = JDBCCRADDao.getOne(
             connection, getAuthorForExhibitQuery, exhibit.getId(), new AuthorMapper());
     exhibit.setAuthor(author.get());
   }
@@ -122,7 +128,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
   private void setHoleForExhibit(Exhibit exhibit) {
     String getHallForExhibitQuery = "select * from hall join exhibit on hall.id = exhibit.hall_id where " +
             "exhibit.id = ?";
-    Optional<Hall> hall = JDBCCRADDao.getOneById(connection, getHallForExhibitQuery, exhibit.getId(), new HallMapper());
+    Optional<Hall> hall = JDBCCRADDao.getOne(connection, getHallForExhibitQuery, exhibit.getId(), new HallMapper());
     exhibit.setHall(hall.get());
   }
 }

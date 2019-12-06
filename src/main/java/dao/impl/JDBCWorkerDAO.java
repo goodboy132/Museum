@@ -53,7 +53,7 @@ public class JDBCWorkerDAO implements WorkerDAO {
     String getOneWorkerWithHallIdQuery = "select worker.id, worker.name, worker.surname, worker.position_id," +
             " worker.username, worker.password from worker where worker.id = ?";
     Optional<Worker> worker =
-            JDBCCRADDao.getOneById(connection, getOneWorkerWithHallIdQuery, elementId, new WorkerMapper());
+            JDBCCRADDao.getOne(connection, getOneWorkerWithHallIdQuery, elementId, new WorkerMapper());
     worker.ifPresent(this::setMappedFieldsToWorker);
     return worker;
   }
@@ -99,7 +99,7 @@ public class JDBCWorkerDAO implements WorkerDAO {
   private void setWorkerPosition(Worker worker) {
     String setWorkerPositionQuery = "select * from worker_position join worker w on worker_position.id = " +
             "w.position_id where w.id = ?";
-    Optional<WorkerPosition> position = JDBCCRADDao.getOneById
+    Optional<WorkerPosition> position = JDBCCRADDao.getOne
             (connection, setWorkerPositionQuery, worker.getId(), new WorkerPositionMapper());
     worker.setWorkerPosition(position.get());
   }

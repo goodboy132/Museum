@@ -1,10 +1,8 @@
 package dao.impl;
-
 import dao.mapper.ObjectMapper;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,16 +29,22 @@ public class JDBCCRADDao {
     }
   }
 
-  public static<T> Optional<T> getOneById(Connection connection, String query, Long elementId, ObjectMapper<T> mapper) {
+  public static<T> Optional<T> getOne(Connection connection, String query, Long elementId, ObjectMapper<T> mapper) {
     try {
       PreparedStatement preparedStatement = connection.prepareStatement(query);
-      addParametersToPreparedStatement(preparedStatement,elementId);
-      ResultSet resultSet = preparedStatement.executeQuery();
-      if (resultSet.next()){
+      if (elementId == null) {
+        ResultSet resultSet = preparedStatement.executeQuery();
         return Optional.of(mapper.extractFromResultSet(resultSet));
       }
       else {
-        return Optional.empty();
+        addParametersToPreparedStatement(preparedStatement, elementId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+          return Optional.of(mapper.extractFromResultSet(resultSet));
+        }
+        else {
+          return Optional.empty();
+        }
       }
     } catch (SQLException e) {
       e.printStackTrace();

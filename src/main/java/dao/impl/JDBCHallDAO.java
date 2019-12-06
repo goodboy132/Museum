@@ -43,17 +43,17 @@ public class JDBCHallDAO implements HallDAO {
 
   @Override
   public Optional<Hall> getOneById(Long elementId) {
-    String getOneHallByIdQuery = "SELECT * FROM hall\n" +
-            "JOIN hall_style \n" +
-            "on hall.hall_style_id = hall_style.id\n" +
+    String getOneHallByIdQuery = "SELECT * FROM hall" +
+            "JOIN hall_style" +
+            "on hall.hall_style_id = hall_style.id" +
             "WHERE hall.id = ?;";
-    return JDBCCRADDao.getOneById(connection, getOneHallByIdQuery, elementId, new  HallMapper());
+    return JDBCCRADDao.getOne(connection, getOneHallByIdQuery, elementId, new  HallMapper());
   }
 
   @Override
   public List<Hall> getAll() {
-    String getAllHallsQuery = "SELECT * FROM hall\n" +
-            "JOIN hall_style \n" +
+    String getAllHallsQuery = "SELECT * FROM hall" +
+            "JOIN hall_style" +
             "on hall.hall_style_id = hall_style.id;";
     return JDBCCRADDao.getAll(connection, getAllHallsQuery, new HallMapper());
   }

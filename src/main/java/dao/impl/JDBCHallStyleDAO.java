@@ -44,7 +44,7 @@ public class JDBCHallStyleDAO implements HallStyleDAO {
   @Override
   public Optional<HallStyle> getOneById(Long elementId) {
     String getHallStyleByIdQuery = "SELECT * FROM hall_style WHERE id = ?";
-    return JDBCCRADDao.getOneById(connection, getHallStyleByIdQuery, elementId, new HallStyleMapper());
+    return JDBCCRADDao.getOne(connection, getHallStyleByIdQuery, elementId, new HallStyleMapper());
   }
 
   @Override

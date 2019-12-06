@@ -1,11 +1,7 @@
 package dao.impl;
-
 import dao.AuthorDAO;
 import dao.mapper.AuthorMapper;
 import entity.Author;
-import entity.WorkerPosition;
-import entity.enums.WorkerPositions;
-
 import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +46,7 @@ public class JDBCAuthorDao implements AuthorDAO {
   @Override
   public Optional<Author> getOneById(Long elementId) {
     String getByIdQuery = "select * from author where author.id = ?";
-    return JDBCCRADDao.getOneById(connection, getByIdQuery, elementId, new AuthorMapper());
+    return JDBCCRADDao.getOne(connection, getByIdQuery, elementId, new AuthorMapper());
   }
 
   @Override

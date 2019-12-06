@@ -9,6 +9,7 @@ import entity.Exhibit;
 import service.ExhibitService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class ExhibitServiceImpl implements ExhibitService {
@@ -57,5 +58,10 @@ public class ExhibitServiceImpl implements ExhibitService {
   @Override
   public List<Exhibit> getAllByHall(Long hallId) {
     return exhibitDAO.getAllByHole(hallId);
+  }
+
+  @Override
+  public Map<String, Integer> getStatisticByMaterial() {
+    return exhibitDAO.getStatisticByMaterial();
   }
 }
