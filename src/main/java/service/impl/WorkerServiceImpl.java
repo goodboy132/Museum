@@ -7,6 +7,7 @@ import entity.Author;
 import entity.Worker;
 import service.WorkerService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +47,10 @@ public class WorkerServiceImpl implements WorkerService {
   @Override
   public List<Worker> getAllByPosition(String position) {
     return workerDAO.getWorkersByPosition(position);
+  }
+
+  @Override
+  public List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime) {
+    return workerDAO.getFreeGuidesForPeriod(startTime,endTime);
   }
 }

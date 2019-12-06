@@ -4,11 +4,14 @@ import dao.WorkerDAO;
 import dao.mapper.*;
 import entity.*;
 
+import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,7 +73,15 @@ public class JDBCWorkerDAO implements WorkerDAO {
     workers.forEach(this::setMappedFieldsToWorker);
     return workers;
   }
-  
+
+  public List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime){
+    String getAvailableGuidesQuery = "select * from worker w join worker_position wp on w.position_id " +
+            "= wp.id join excursion e on w.id = e.worker_id join time_table tt on   e.id = tt.excursion_id " +
+            "where wp.position_name = 'GUIDE' and tt.start_time between ? and ?";
+    List<Worker> workers = JDBCCRADDao.getAll(connection,getAvailableGuidesQuery,new WorkerMapper(),startTime,endTime);
+    workers.forEach(this::setMappedFieldsToWorker);
+    return workers;
+  }
 
   private void setMappedFieldsToWorker(Worker worker) {
    setWorkerExcursions(worker);
@@ -98,6 +109,4 @@ public class JDBCWorkerDAO implements WorkerDAO {
             (connection, setWorkerExcursionsQuery, new ExcursionMapper(), worker.getId());
     worker.setExcursions(excursions);
   }
-
-
 }

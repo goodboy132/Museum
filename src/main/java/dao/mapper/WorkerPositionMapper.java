@@ -12,8 +12,7 @@ public class WorkerPositionMapper implements ObjectMapper<WorkerPosition> {
   public WorkerPosition extractFromResultSet(ResultSet resultSet) throws SQLException {
     WorkerPosition workerPosition = new WorkerPosition();
     workerPosition.setId(resultSet.getLong("id"));
-    workerPosition.setPositionName(WorkerPositions.valueOf
-            (resultSet.getString("position_name")));
+    workerPosition.setPositionName(WorkerPositions.valueOf(resultSet.getString("position_name")));
     return workerPosition;
   }
 }

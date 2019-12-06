@@ -1,6 +1,13 @@
 import service.ServiceFactory;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class Program {
   public static void main(String[] args) {
-    System.out.println(ServiceFactory.getInstance().getWorkerService().getAllByPosition("GUIDE"));
+    Date date = new Date();
+    LocalDateTime of = LocalDateTime.of(2016, 12, 22, 12, 22);
+    LocalDateTime of1 = LocalDateTime.of(2020, 12, 22, 12, 22);
+    System.out.println(ServiceFactory.getInstance().getWorkerService().getFreeGuidesForPeriod(of,of1));
   }
 }
