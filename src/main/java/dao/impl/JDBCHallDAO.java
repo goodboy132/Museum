@@ -47,7 +47,7 @@ public class JDBCHallDAO implements HallDAO {
             "JOIN hall_style" +
             "on hall.hall_style_id = hall_style.id" +
             "WHERE hall.id = ?;";
-    return JDBCCRADDao.getOne(connection, getOneHallByIdQuery, elementId, new  HallMapper());
+    return JDBCCRADDao.getOne(connection, getOneHallByIdQuery, new  HallMapper(), elementId);
   }
 
   @Override

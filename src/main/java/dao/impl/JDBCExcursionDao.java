@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.ExcursionDAO;
+import dao.mapper.CountExcursionMapper;
 import dao.mapper.ExcursionMapper;
 import dao.mapper.TimeTableMapper;
 import dao.mapper.WorkerMapper;
@@ -51,7 +52,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
   @Override
   public Optional<Excursion> getOneById(Long elementId) {
     String getExcursionById = "select excursion.id, excursion_name, excursion_program from excursion where excursion.id = ?";
-    Optional<Excursion> excursion = JDBCCRADDao.getOne(connection, getExcursionById, elementId, new ExcursionMapper());
+    Optional<Excursion> excursion = JDBCCRADDao.getOne(connection, getExcursionById, new ExcursionMapper(), elementId);
     excursion.ifPresent(this::setMappedFieldsToExhibit);
     return excursion;
   }
@@ -73,7 +74,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
     String getWorkerForExcursionQuery = "select * from worker join excursion on worker.id = excursion.worker_id where " +
             "excursion.id = ?";
     Optional<Worker> worker = JDBCCRADDao.getOne(
-            connection, getWorkerForExcursionQuery, excursion.getId(), new WorkerMapper());
+            connection, getWorkerForExcursionQuery, new WorkerMapper(),  excursion.getId());
     excursion.setWorker(worker.get());
   }
 
@@ -95,10 +96,10 @@ public class JDBCExcursionDao implements ExcursionDAO {
 
   @Override
   public Integer getCountOfExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime) {
-    String getCountOfExcursionsForPeriod = "select * from museum.excursion join museum.time_table " +
+    String getCountOfExcursionsForPeriod = "select COUNT(*) as count_rows from museum.excursion join museum.time_table " +
             "on museum.time_table.excursion_id = museum.excursion.id " +
             "where museum.time_table.start_time between ? and ?";
-    List<Excursion> excursions = JDBCCRADDao.getAll(connection, getCountOfExcursionsForPeriod, new ExcursionMapper(), startTime, endTime);
-    return excursions.size();
+    Optional<Integer> count = JDBCCRADDao.getOne(connection, getCountOfExcursionsForPeriod, new CountExcursionMapper(), startTime, endTime);
+    return count.get();
   }
 }

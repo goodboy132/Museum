@@ -29,15 +29,15 @@ public class JDBCCRADDao {
     }
   }
 
-  public static<T> Optional<T> getOne(Connection connection, String query, Long elementId, ObjectMapper<T> mapper) {
+  public static<T> Optional<T> getOne(Connection connection, String query,  ObjectMapper<T> mapper, Object... parameters) {
     try {
       PreparedStatement preparedStatement = connection.prepareStatement(query);
-      if (elementId == null) {
+      if (parameters.length < 1) {
         ResultSet resultSet = preparedStatement.executeQuery();
         return Optional.of(mapper.extractFromResultSet(resultSet));
       }
       else {
-        addParametersToPreparedStatement(preparedStatement, elementId);
+        addParametersToPreparedStatement(preparedStatement, parameters);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
           return Optional.of(mapper.extractFromResultSet(resultSet));

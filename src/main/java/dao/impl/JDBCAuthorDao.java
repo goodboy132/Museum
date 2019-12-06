@@ -46,7 +46,7 @@ public class JDBCAuthorDao implements AuthorDAO {
   @Override
   public Optional<Author> getOneById(Long elementId) {
     String getByIdQuery = "select * from author where author.id = ?";
-    return JDBCCRADDao.getOne(connection, getByIdQuery, elementId, new AuthorMapper());
+    return JDBCCRADDao.getOne(connection, getByIdQuery, new AuthorMapper(), elementId);
   }
 
   @Override

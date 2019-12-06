@@ -1,6 +1,5 @@
 package dao.mapper;
 
-import org.omg.CORBA.Object;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

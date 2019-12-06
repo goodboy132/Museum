@@ -9,6 +9,7 @@ import service.WorkerService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class WorkerServiceImpl implements WorkerService {
@@ -53,4 +54,10 @@ public class WorkerServiceImpl implements WorkerService {
   public List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime) {
     return workerDAO.getFreeGuidesForPeriod(startTime,endTime);
   }
+
+  @Override
+  public Map<String, Integer> getStatisticByExcursions() {
+    return workerDAO.getStatisticByExcursions();
+  }
+
 }

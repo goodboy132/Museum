@@ -5,6 +5,7 @@ import entity.Worker;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface WorkerService {
@@ -15,4 +16,5 @@ public interface WorkerService {
   List<Worker> getAll();
   List<Worker> getAllByPosition(String position);
   List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime);
+  Map<String, Integer> getStatisticByExcursions();
 }
