@@ -95,7 +95,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
 
   @Override
   public Integer getCountOfExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime) {
-    String getCountOfExcursionsForPeriod = "select COUNT(*) as row_count from museum.excursion join museum.time_table " +
+    String getCountOfExcursionsForPeriod = "select * from museum.excursion join museum.time_table " +
             "on museum.time_table.excursion_id = museum.excursion.id " +
             "where museum.time_table.start_time between ? and ?";
     List<Excursion> excursions = JDBCCRADDao.getAll(connection, getCountOfExcursionsForPeriod, new ExcursionMapper(), startTime, endTime);
