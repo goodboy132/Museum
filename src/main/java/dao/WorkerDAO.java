@@ -9,5 +9,7 @@ import java.util.Map;
 public interface WorkerDAO extends GenericDAO<Worker> {
   List<Worker> getWorkersByPosition(String positionName);
   List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime,LocalDateTime endTime);
-  Map<String ,Integer> getStatisticByExcursions();
+  Map<String, Integer> getStatisticByExcursions();
+  Map<String, LocalDateTime> getStatisticAboutWorkedHours();
+
 }

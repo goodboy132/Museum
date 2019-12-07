@@ -17,4 +17,5 @@ public interface WorkerService {
   List<Worker> getAllByPosition(String position);
   List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime);
   Map<String, Integer> getStatisticByExcursions();
+  Map<String, LocalDateTime> getStatisticAboutWorkedHours();
 }

@@ -2,6 +2,7 @@ package service.impl;
 
 import dao.WorkerDAO;
 import dao.databace.Database;
+import dao.impl.JDBCCRADDao;
 import dao.impl.JDBCWorkerDAO;
 import entity.Author;
 import entity.Worker;
@@ -58,6 +59,11 @@ public class WorkerServiceImpl implements WorkerService {
   @Override
   public Map<String, Integer> getStatisticByExcursions() {
     return workerDAO.getStatisticByExcursions();
+  }
+
+  @Override
+  public Map<String, LocalDateTime> getStatisticAboutWorkedHours() {
+    return workerDAO.getStatisticAboutWorkedHours();
   }
 
 }

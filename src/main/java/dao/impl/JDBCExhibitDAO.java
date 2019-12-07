@@ -105,19 +105,19 @@ public class JDBCExhibitDAO implements ExhibitDAO {
     String getStatisticByTechnique = "SELECT t.technique_name as name, count(e.id) as count FROM " +
             " exhibit e JOIN exhibit_technique et on e.id = et.exhibit_id join technique t on et.technique_id = t.id "+
             "group by t.technique_name;";
-    return JDBCCRADDao.getOne(connection,getStatisticByTechnique,null, new StatisticMapper()).get();
+    return JDBCCRADDao.getOne(connection,getStatisticByTechnique, new StatisticMapper()).get();
   }
   @Override
   public Map<String,Integer> getStatisticByAuthor(){
     String getStatisticByTechnique = "SELECT a.surname as name, count(a.id) as count " +
             "FROM exhibit e JOIN author a on a.id = e.author_id group by a.id";
-    return JDBCCRADDao.getOne(connection,getStatisticByTechnique,null, new StatisticMapper()).get();
+    return JDBCCRADDao.getOne(connection,getStatisticByTechnique, new StatisticMapper()).get();
   }
   @Override
   public Map<String,Integer> getStatisticByHall(){
     String getStatisticByTechnique = "SELECT h.hall_name as name, count(h.id) as count " +
             "FROM exhibit e JOIN hall h on h.id = e.hall_id group by h.id";
-    return JDBCCRADDao.getOne(connection,getStatisticByTechnique,null, new StatisticMapper()).get();
+    return JDBCCRADDao.getOne(connection,getStatisticByTechnique, new StatisticMapper()).get();
   }
 
 

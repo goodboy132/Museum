@@ -9,20 +9,13 @@ import java.util.Date;
 
 public class Program {
   public static void main(String[] args) {
-<<<<<<< HEAD
-    Exhibit exhibit=new Exhibit();
-    HallStyle hallStyle = new HallStyle();
+    LocalDateTime t1 = LocalDateTime.of(2000, 1, 1, 1 , 1, 1);
+    LocalDateTime t2 = LocalDateTime.of(2030, 1, 1, 1 , 1, 1);
 
-//    LocalDateTime localDateTime = LocalDateTime.of(2019, 1, 1, 12, 12);
-//    LocalDateTime localDateTime2 = LocalDateTime.of(2020, 12, 12, 12, 12);
-//
-//
-//    System.out.println(ServiceFactory.getInstance().getExcursionService().getCountOfExcursionsForPeriod(localDateTime, localDateTime2));
-//    System.out.println(ServiceFactory.getInstance().getExcursionService().getAvailableExcursionsForPeriod(localDateTime, localDateTime2));
-    System.out.println(ServiceFactory.getInstance().getWorkerService().getStatisticByExcursions());
-=======
-    System.out.println(ServiceFactory.getInstance().getExhibitService().getStatisticByHall());
->>>>>>> 42836d0e7243b985621d40f2ca1737ba7e8404dd
+    System.out.println(t1);
+    System.out.println(t2);
+    System.out.println(ServiceFactory.getInstance().getWorkerService().getStatisticAboutWorkedHours());
+
   }
 
 }

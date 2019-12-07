@@ -115,4 +115,15 @@ public class JDBCWorkerDAO implements WorkerDAO {
             "group by worker.surname";
     return JDBCCRADDao.getOne(connection, getCountOfFinishedExcursion, new StatisticExcursionMapper()).get();
   }
+
+  @Override
+  public Map<String, LocalDateTime> getStatisticAboutWorkedHours() {
+    String getStatisticAboutWorkedHoursQuery = "select worker.*, SEC_TO_TIME(SUM(TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time))) as duration from worker \n" +
+            "join excursion\n" +
+            "on excursion.worker_id = worker.id\n" +
+            "join time_table\n" +
+            "on time_table.excursion_id = excursion.id\n" +
+            "group by worker.surname";
+    return JDBCCRADDao.getOne(connection, getStatisticAboutWorkedHoursQuery, new WorkedHoursMapper()).get();
+  }
 }
