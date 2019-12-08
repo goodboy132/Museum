@@ -1,13 +1,11 @@
 package com.soft.museum.service.impl;
 
+import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.dao.WorkerDAO;
 import com.soft.museum.dao.databace.Database;
 import com.soft.museum.dao.impl.JDBCWorkerDAO;
 import com.soft.museum.entity.Worker;
-import com.soft.museum.exception.NotDeletedException;
-import com.soft.museum.exception.NotFoundException;
-import com.soft.museum.exception.NotSavedException;
-import com.soft.museum.exception.NotUpdatedException;
+import com.soft.museum.exception.*;
 import com.soft.museum.service.WorkerService;
 
 import java.sql.SQLException;
@@ -71,18 +69,30 @@ public class WorkerServiceImpl implements WorkerService {
   @Override
   public List<Worker> getAllByPosition(String position) throws NotFoundException {
     try {
-      return workerDAO.getWorkersByPosition(position);
+      List<Worker> workersByPosition = workerDAO.getWorkersByPosition(position);
+      if (!workersByPosition.isEmpty()) {
+        return workersByPosition;
+      } else {
+        throw new NotFoundException(ErrorMessage.WORKERS_WITH_WORKER_POSITION_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime) throws NotFoundException {
     try {
-      return workerDAO.getFreeGuidesForPeriod(startTime,endTime);
+      List<Worker> freeGuidesForPeriod = workerDAO.getFreeGuidesForPeriod(startTime, endTime);
+      if (!freeGuidesForPeriod.isEmpty()) {
+        return freeGuidesForPeriod;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_FREE_TOUR_GUIDE_IN_THIS_PERIOD);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 }

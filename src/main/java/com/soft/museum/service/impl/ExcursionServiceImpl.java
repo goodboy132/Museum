@@ -1,13 +1,11 @@
 package com.soft.museum.service.impl;
 
+import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.dao.ExcursionDAO;
 import com.soft.museum.dao.databace.Database;
 import com.soft.museum.dao.impl.JDBCExcursionDao;
 import com.soft.museum.entity.Excursion;
-import com.soft.museum.exception.NotDeletedException;
-import com.soft.museum.exception.NotFoundException;
-import com.soft.museum.exception.NotSavedException;
-import com.soft.museum.exception.NotUpdatedException;
+import com.soft.museum.exception.*;
 import com.soft.museum.service.ExcursionService;
 
 import java.sql.SQLException;
@@ -71,9 +69,15 @@ public class ExcursionServiceImpl implements ExcursionService {
   public List<Excursion> getAvailableExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime)
           throws NotFoundException {
     try {
-      return excursionDao.getAvailableExcursionsForPeriod(startTime, endTime);
+      List<Excursion> availableExcursionsForPeriod = excursionDao.getAvailableExcursionsForPeriod(startTime, endTime);
+      if (!availableExcursionsForPeriod.isEmpty()) {
+        return availableExcursionsForPeriod;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_AVAILABLE_EXCURSIONS_IN_THIS_PERIOD);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 

@@ -49,7 +49,7 @@ public class JDBCWorkerDAO implements WorkerDAO {
             " worker.username, worker.password from worker where worker.id = ?";
     Optional<Worker> worker =
             JDBCCRADDao.getOne(connection, getOneWorkerWithHallIdQuery, elementId, new WorkerMapper());
-    if (worker.isPresent()){
+    if (worker.isPresent()) {
       setMappedFieldsToWorker(worker.get());
     }
     return worker;
@@ -69,27 +69,31 @@ public class JDBCWorkerDAO implements WorkerDAO {
     String getGuidesQuery = "select * from worker w join worker_position wp on w.position_id =" +
             " wp.id where wp.position_name = ?";
     List<Worker> workers = JDBCCRADDao.getAll(connection, getGuidesQuery, new WorkerMapper(), positionName);
-    for (Worker worker : workers) {
-      setMappedFieldsToWorker(worker);
+    if (!workers.isEmpty()) {
+      for (Worker worker : workers) {
+        setMappedFieldsToWorker(worker);
+      }
     }
     return workers;
   }
 
   public List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime) throws SQLException {
-    String getAvailableGuidesQuery = "select * from worker w join worker_position wp on w.position_id " +
+    String getAvailableGuidesQuery = "select * from worker w join worjker_position wp on w.position_id " +
             "= wp.id join excursion e on w.id = e.worker_id join time_table tt on   e.id = tt.excursion_id " +
-            "where wp.position_name = 'GUIDE' and tt.start_time between ? and ?";
-    List<Worker> workers = JDBCCRADDao.getAll(connection,getAvailableGuidesQuery,new WorkerMapper(),startTime,endTime);
-    for (Worker worker : workers) {
-      setMappedFieldsToWorker(worker);
+            "where wp.position_name = 'GUIDE' and tt.start_time not between ? and ?";
+    List<Worker> workers = JDBCCRADDao.getAll(connection, getAvailableGuidesQuery, new WorkerMapper(), startTime, endTime);
+    if (!workers.isEmpty()) {
+      for (Worker worker : workers) {
+        setMappedFieldsToWorker(worker);
+      }
     }
     return workers;
   }
 
   private void setMappedFieldsToWorker(Worker worker) throws SQLException {
-   setWorkerExcursions(worker);
-   setWorkerPosition(worker);
-   setWorkerHalls(worker);
+    setWorkerExcursions(worker);
+    setWorkerPosition(worker);
+    setWorkerHalls(worker);
   }
 
 
@@ -106,6 +110,7 @@ public class JDBCWorkerDAO implements WorkerDAO {
             (connection, setWorkerPositionQuery, worker.getId(), new WorkerPositionMapper());
     worker.setWorkerPosition(position.get());
   }
+
   private void setWorkerExcursions(Worker worker) throws SQLException {
     String setWorkerExcursionsQuery = "select * from excursion e where e.worker_id = ?";
     List<Excursion> excursions = JDBCCRADDao.getAll

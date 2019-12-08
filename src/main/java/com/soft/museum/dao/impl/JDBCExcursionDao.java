@@ -90,8 +90,10 @@ public class JDBCExcursionDao implements ExcursionDAO {
             "on museum.time_table.excursion_id = museum.excursion.id " +
             "where museum.time_table.start_time between ? and ?";
     List<Excursion> excursions = JDBCCRADDao.getAll(connection, getAvailableExcursionsForPeriodQuery, new ExcursionMapper(), startTime, endTime);
-    for (Excursion excursion : excursions) {
-      setMappedFieldsToExhibit(excursion);
+    if (!excursions.isEmpty()) {
+      for (Excursion excursion : excursions) {
+        setMappedFieldsToExhibit(excursion);
+      }
     }
     return excursions;
   }
