@@ -1,5 +1,6 @@
 package dao.impl;
 
+import com.mysql.jdbc.Connection;
 import dao.MaterialDAO;
 import dao.mapper.MaterialMapper;
 import entity.Material;
