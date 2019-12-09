@@ -1,18 +1,17 @@
 package com.soft.museum.service.impl;
 
+import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.dao.WorkerDAO;
 import com.soft.museum.dao.databace.Database;
 import com.soft.museum.dao.impl.JDBCWorkerDAO;
 import com.soft.museum.entity.Worker;
-import com.soft.museum.exception.NotDeletedException;
-import com.soft.museum.exception.NotFoundException;
-import com.soft.museum.exception.NotSavedException;
-import com.soft.museum.exception.NotUpdatedException;
+import com.soft.museum.exception.*;
 import com.soft.museum.service.WorkerService;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class WorkerServiceImpl implements WorkerService {
@@ -71,18 +70,60 @@ public class WorkerServiceImpl implements WorkerService {
   @Override
   public List<Worker> getAllByPosition(String position) throws NotFoundException {
     try {
-      return workerDAO.getWorkersByPosition(position);
+      List<Worker> workersByPosition = workerDAO.getWorkersByPosition(position);
+      if (!workersByPosition.isEmpty()) {
+        return workersByPosition;
+      } else {
+        throw new NotFoundException(ErrorMessage.WORKERS_WITH_WORKER_POSITION_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime) throws NotFoundException {
     try {
-      return workerDAO.getFreeGuidesForPeriod(startTime,endTime);
+      List<Worker> freeGuidesForPeriod = workerDAO.getFreeGuidesForPeriod(startTime, endTime);
+      if (!freeGuidesForPeriod.isEmpty()) {
+        return freeGuidesForPeriod;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_FREE_TOUR_GUIDE_IN_THIS_PERIOD);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
+    }
+  }
+
+  @Override
+  public Map<String, Integer> getStatisticByExcursions() throws NotFoundException {
+    try {
+      Map<String, Integer> statisticByExcursions = workerDAO.getStatisticByExcursions();
+      if (!statisticByExcursions.isEmpty()) {
+        return statisticByExcursions;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_WORKER_EXCURSION);
+      }
+    } catch (SQLException e) {
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
+    }
+  }
+
+  @Override
+  public Map<String, LocalDateTime> getStatisticAboutWorkedHours() throws NotFoundException {
+    try {
+      Map<String, LocalDateTime> statisticAboutWorkedHours = workerDAO.getStatisticAboutWorkedHours();
+      if (!statisticAboutWorkedHours.isEmpty()) {
+        return statisticAboutWorkedHours;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_WORKED_HOURS);
+      }
+    } catch (SQLException e) {
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 }

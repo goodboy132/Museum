@@ -39,7 +39,8 @@
             </c:forEach>
             <li id="author">Author</li>
             <c:forEach var="author" items="${authors}">
-                <p>${author.firstName}</p>
+                <p>${author.name}</p>
+                <p>${author.surname}</p>
             </c:forEach>
             <li id="guide">Tour Guide</li>
         </ol>

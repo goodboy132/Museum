@@ -9,6 +9,7 @@ import com.soft.museum.exception.*;
 import com.soft.museum.service.ExhibitService;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -52,10 +53,9 @@ public class ExhibitServiceImpl implements ExhibitService {
   public Exhibit getById(Long id) throws NotFoundException {
     try {
       Optional<Exhibit> exhibit = exhibitDAO.getOneById(id);
-      if (exhibit.isPresent()){
+      if (exhibit.isPresent()) {
         return exhibit.get();
-      }
-      else {
+      } else {
         throw new NotFoundException(ErrorMessage.EXHIBIT_NOT_FOUND);
       }
     } catch (SQLException e) {
@@ -67,7 +67,13 @@ public class ExhibitServiceImpl implements ExhibitService {
   @Override
   public List<Exhibit> getAll() throws NotFoundException {
     try {
-      return exhibitDAO.getAll();
+      List<Exhibit> all = exhibitDAO.getAll();
+      if (!all.isEmpty()){
+        return all;
+      }
+      else {
+        throw new NotFoundException(ErrorMessage.EXHIBITS_NOT_FOUND);
+      }
     } catch (SQLException e) {
       throw new NotFoundException(e.getMessage());
     }
@@ -76,63 +82,105 @@ public class ExhibitServiceImpl implements ExhibitService {
   @Override
   public List<Exhibit> getAllByAuthor(Long authorId) throws NotFoundException {
     try {
-      return exhibitDAO.getAllByAuthor(authorId);
+      List<Exhibit> allByAuthor = exhibitDAO.getAllByAuthor(authorId);
+      if (!allByAuthor.isEmpty()) {
+        return allByAuthor;
+      } else {
+        throw new NotFoundException(ErrorMessage.EXHIBITS_WITH_AUTHOR_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public List<Exhibit> getAllByWorker(Long workerId) throws NotFoundException {
     try {
-      return exhibitDAO.getAllByWorker(workerId);
+      List<Exhibit> allByWorker = exhibitDAO.getAllByWorker(workerId);
+      if (!allByWorker.isEmpty()) {
+        return allByWorker;
+      } else {
+        throw new NotFoundException(ErrorMessage.EXHIBITS_BY_WORKER_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public List<Exhibit> getAllByHall(Long hallId) throws NotFoundException {
     try {
-      return exhibitDAO.getAllByHole(hallId);
+      List<Exhibit> allByHole = exhibitDAO.getAllByHole(hallId);
+      if (!allByHole.isEmpty()) {
+        return allByHole;
+      } else {
+        throw new NotFoundException(ErrorMessage.EXHIBITS_IN_HALL_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public Map<String, Integer> getStatisticByMaterial() throws NotFoundException {
     try {
-      return exhibitDAO.getStatisticByMaterial();
+      Map<String, Integer> statisticByMaterial = exhibitDAO.getStatisticByMaterial();
+      if (!statisticByMaterial.isEmpty()) {
+        return statisticByMaterial;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_EXHIBIT_MATERIAL);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public Map<String, Integer> getStatisticByTechnique() throws NotFoundException {
     try {
-      return exhibitDAO.getStatisticByTechnique();
+      Map<String, Integer> statisticByTechnique = exhibitDAO.getStatisticByTechnique();
+      if (!statisticByTechnique.isEmpty()) {
+        return statisticByTechnique;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_EXHIBIT_TECHNIQUE);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
-  public Map<String,Integer> getStatisticByAuthor() throws NotFoundException {
+  public Map<String, Integer> getStatisticByAuthor() throws NotFoundException {
     try {
-      return exhibitDAO.getStatisticByAuthor();
+      Map<String, Integer> statisticByAuthor = exhibitDAO.getStatisticByAuthor();
+      if (!statisticByAuthor.isEmpty()) {
+        return statisticByAuthor;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_EXHIBIT_AUTHOR);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
-  public Map<String,Integer> getStatisticByHall() throws NotFoundException {
+  public Map<String, Integer> getStatisticByHall() throws NotFoundException {
     try {
-      return exhibitDAO.getStatisticByHall();
+      Map<String, Integer> statisticByHall = exhibitDAO.getStatisticByHall();
+      if (!statisticByHall.isEmpty()) {
+        return statisticByHall;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_EXHIBIT_HALL);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 }

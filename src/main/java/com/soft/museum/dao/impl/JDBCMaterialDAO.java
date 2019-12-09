@@ -46,7 +46,7 @@ public class JDBCMaterialDAO implements MaterialDAO {
   @Override
   public Optional<Material> getOneById(Long elementId) throws SQLException {
     String getOneMaterialQuery = "select * from material where id = ?";
-    return JDBCCRADDao.getOne(connection, getOneMaterialQuery, elementId, new MaterialMapper());
+    return JDBCCRADDao.getOne(connection, getOneMaterialQuery, new MaterialMapper(), elementId);
   }
 
   @Override
