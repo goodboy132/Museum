@@ -30,21 +30,33 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
-  @Override
+  @Override //problem
   public int update(Exhibit exhibit) throws NotUpdatedException {
     try {
-      return exhibitDAO.update(exhibit);
+      Integer update = exhibitDAO.update(exhibit);
+      if (update > 0) {
+        return update;
+      } else {
+        throw new NotUpdatedException(ErrorMessage.EXHIBIT_NOT_UPDATED);
+      }
     } catch (SQLException e) {
-      throw new NotUpdatedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public int delete(Exhibit exhibit) throws NotDeletedException {
     try {
-      return exhibitDAO.delete(exhibit);
+      Integer deleteExhibit = exhibitDAO.delete(exhibit);
+      if (deleteExhibit > 0) {
+        return deleteExhibit;
+      } else {
+        throw new NotDeletedException(ErrorMessage.EXHIBIT_NOT_DELETED);
+      }
     } catch (SQLException e) {
-      throw new NotDeletedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
@@ -66,9 +78,15 @@ public class ExhibitServiceImpl implements ExhibitService {
   @Override
   public List<Exhibit> getAll() throws NotFoundException {
     try {
-      return exhibitDAO.getAll();
+      List<Exhibit> all = exhibitDAO.getAll();
+      if (!all.isEmpty()) {
+        return all;
+      } else {
+        throw new NotFoundException(ErrorMessage.EXHIBITS_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 

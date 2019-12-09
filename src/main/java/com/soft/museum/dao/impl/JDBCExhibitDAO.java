@@ -44,7 +44,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
   @Override
   public Integer delete(Exhibit exhibit) throws SQLException {
-    String deleteExhibitQuery = "DELETE FROM author where author.id = ?";
+    String deleteExhibitQuery = "DELETE FROM exhibit where exhibit.id = ?";
     return JDBCCRADDao.update(connection, deleteExhibitQuery, exhibit.getId());
   }
 
@@ -62,7 +62,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
   @Override
   public List<Exhibit> getAll() throws SQLException {
-    String getAllExhibitsQuery = "select e.id,exhibit_name,e.receipt_date,e.technique,e.description from exhibit e";
+    String getAllExhibitsQuery = "select e.id,exhibit_name,e.receipt_date,e.technique_id,e.description from exhibit e";
     List<Exhibit> exhibits = JDBCCRADDao.getAll(connection, getAllExhibitsQuery, new ExhibitMapper());
     for (Exhibit exhibit : exhibits) {
       setMappedFieldsToExhibit(exhibit);

@@ -1371,13 +1371,13 @@ technique_id</ColNames>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="336" parent="289" name="hall_style">
+    <column id="336" parent="289" name="hall_style_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="337" parent="289" name="hall_hall_style">
-      <ColNames>hall_style</ColNames>
+      <ColNames>hall_style_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="338" parent="289" name="PRIMARY">
@@ -1386,7 +1386,7 @@ technique_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="339" parent="289" name="hall_hall_style">
-      <ColNames>hall_style</ColNames>
+      <ColNames>hall_style_id</ColNames>
       <RefTableName>hall_style</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>

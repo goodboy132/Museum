@@ -1,13 +1,11 @@
 package com.soft.museum.service.impl;
 
+import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.dao.HallDAO;
 import com.soft.museum.dao.databace.Database;
 import com.soft.museum.dao.impl.JDBCHallDAO;
 import com.soft.museum.entity.Hall;
-import com.soft.museum.exception.NotDeletedException;
-import com.soft.museum.exception.NotFoundException;
-import com.soft.museum.exception.NotSavedException;
-import com.soft.museum.exception.NotUpdatedException;
+import com.soft.museum.exception.*;
 import com.soft.museum.service.HallService;
 
 import java.sql.SQLException;
@@ -33,36 +31,60 @@ public class HallServiceImpl implements HallService {
   @Override
   public int update(Hall hall) throws NotUpdatedException {
     try {
-      return hallDAO.update(hall);
+      Integer update = hallDAO.update(hall);
+      if (update > 0) {
+        return update;
+      } else {
+        throw new NotUpdatedException(ErrorMessage.HALL_NOT_UPDATED);
+      }
     } catch (SQLException e) {
-      throw new NotUpdatedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public int delete(Hall hall) throws NotDeletedException {
     try {
-      return hallDAO.delete(hall);
+      Integer deleteHall = hallDAO.delete(hall);
+      if (deleteHall > 0) {
+        return deleteHall;
+      } else {
+        throw new NotDeletedException(ErrorMessage.HALL_NOT_DELETED);
+      }
     } catch (SQLException e) {
-      throw new NotDeletedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public Optional<Hall> getById(Long id) throws NotFoundException {
     try {
-      return hallDAO.getOneById(id);
+      Optional<Hall> oneById = hallDAO.getOneById(id);
+      if (oneById.isPresent()) {
+        return oneById;
+      } else {
+        throw new NotFoundException(ErrorMessage.HALL_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public List<Hall> getAll() throws NotFoundException {
     try {
-      return hallDAO.getAll();
+      List<Hall> allHalls = hallDAO.getAll();
+      if (!allHalls.isEmpty()) {
+        return allHalls;
+      } else {
+        throw new NotFoundException(ErrorMessage.HALLS_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 }

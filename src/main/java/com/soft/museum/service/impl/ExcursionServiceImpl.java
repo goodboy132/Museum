@@ -32,36 +32,60 @@ public class ExcursionServiceImpl implements ExcursionService {
   @Override
   public int delete(Excursion excursion) throws NotDeletedException {
     try {
-      return excursionDao.delete(excursion);
+      Integer deleteExcursion = excursionDao.delete(excursion);
+      if (deleteExcursion > 0) {
+        return deleteExcursion;
+      } else {
+        throw new NotDeletedException(ErrorMessage.EXCURSION_NOT_DELETED);
+      }
     } catch (SQLException e) {
-      throw new NotDeletedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public int update(Excursion excursion) throws NotUpdatedException {
     try {
-      return excursionDao.update(excursion);
+      Integer update = excursionDao.update(excursion);
+      if (update > 0) {
+        return update;
+      } else {
+        throw new NotUpdatedException(ErrorMessage.EXCURSION_NOT_UPDATED);
+      }
     } catch (SQLException e) {
-      throw new NotUpdatedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public Optional<Excursion> getById(Long id) throws NotFoundException {
     try {
-      return excursionDao.getOneById(id);
+      Optional<Excursion> oneById = excursionDao.getOneById(id);
+      if (oneById.isPresent()) {
+        return oneById;
+      } else {
+        throw new NotFoundException(ErrorMessage.EXCURSION_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public List<Excursion> getAll() throws NotFoundException {
     try {
-      return excursionDao.getAll();
+      List<Excursion> all = excursionDao.getAll();
+      if (!all.isEmpty()) {
+        return all;
+      } else {
+        throw new NotFoundException(ErrorMessage.EXCURSIONS_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
