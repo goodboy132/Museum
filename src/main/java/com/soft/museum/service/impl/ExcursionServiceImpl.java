@@ -85,9 +85,15 @@ public class ExcursionServiceImpl implements ExcursionService {
   public Integer getCountOfExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime)
           throws NotFoundException {
     try {
-      return excursionDao.getCountOfExcursionsForPeriod(startTime, endTime);
+      Integer countOfExcursionsForPeriod = excursionDao.getCountOfExcursionsForPeriod(startTime, endTime);
+      if (countOfExcursionsForPeriod > 0) {
+        return countOfExcursionsForPeriod;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_AVAILABLE_EXCURSIONS_IN_THIS_PERIOD);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 }

@@ -1,5 +1,6 @@
 package com.soft.museum.dao.impl;
 import com.soft.museum.dao.ExcursionDAO;
+import com.soft.museum.dao.mapper.CountExcursionMapper;
 import com.soft.museum.dao.mapper.ExcursionMapper;
 import com.soft.museum.dao.mapper.TimeTableMapper;
 import com.soft.museum.dao.mapper.WorkerMapper;
@@ -48,7 +49,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
   @Override
   public Optional<Excursion> getOneById(Long elementId) throws SQLException {
     String getExcursionById = "select excursion.id, excursion_name, excursion_program from excursion where excursion.id = ?";
-    Optional<Excursion> excursion = JDBCCRADDao.getOne(connection, getExcursionById, elementId, new ExcursionMapper());
+    Optional<Excursion> excursion = JDBCCRADDao.getOne(connection, getExcursionById, new ExcursionMapper(), elementId);
     if (excursion.isPresent()) {
       setMappedFieldsToExhibit(excursion.get());
     }
@@ -74,7 +75,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
     String getWorkerForExcursionQuery = "select * from worker join excursion on worker.id = excursion.worker_id where " +
             "excursion.id = ?";
     Optional<Worker> worker = JDBCCRADDao.getOne(
-            connection, getWorkerForExcursionQuery, excursion.getId(), new WorkerMapper());
+            connection, getWorkerForExcursionQuery, new WorkerMapper(), excursion.getId());
     excursion.setWorker(worker.get());
   }
 
@@ -99,11 +100,12 @@ public class JDBCExcursionDao implements ExcursionDAO {
   }
 
   @Override
-  public Integer getCountOfExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime) throws SQLException {
-    String getCountOfExcursionsForPeriod = "select * from museum.excursion join museum.time_table " +
+  public Integer getCountOfExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime) {
+    String getCountOfExcursionsForPeriod = "select COUNT(*) as count_rows from museum.excursion join museum.time_table " +
             "on museum.time_table.excursion_id = museum.excursion.id " +
             "where museum.time_table.start_time between ? and ?";
-    List<Excursion> excursions = JDBCCRADDao.getAll(connection, getCountOfExcursionsForPeriod, new ExcursionMapper(), startTime, endTime);
-    return excursions.size();
+    Optional<Integer> count = JDBCCRADDao.getOne(connection, getCountOfExcursionsForPeriod, new CountExcursionMapper(), startTime, endTime);
+    return count.get();
   }
+
 }

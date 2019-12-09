@@ -11,6 +11,7 @@ import com.soft.museum.service.WorkerService;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class WorkerServiceImpl implements WorkerService {
@@ -89,6 +90,36 @@ public class WorkerServiceImpl implements WorkerService {
         return freeGuidesForPeriod;
       } else {
         throw new NotFoundException(ErrorMessage.NO_FREE_TOUR_GUIDE_IN_THIS_PERIOD);
+      }
+    } catch (SQLException e) {
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
+    }
+  }
+
+  @Override
+  public Map<String, Integer> getStatisticByExcursions() throws NotFoundException {
+    try {
+      Map<String, Integer> statisticByExcursions = workerDAO.getStatisticByExcursions();
+      if (!statisticByExcursions.isEmpty()) {
+        return statisticByExcursions;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_WORKER_EXCURSION);
+      }
+    } catch (SQLException e) {
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
+    }
+  }
+
+  @Override
+  public Map<String, LocalDateTime> getStatisticAboutWorkedHours() throws NotFoundException {
+    try {
+      Map<String, LocalDateTime> statisticAboutWorkedHours = workerDAO.getStatisticAboutWorkedHours();
+      if (!statisticAboutWorkedHours.isEmpty()) {
+        return statisticAboutWorkedHours;
+      } else {
+        throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_WORKED_HOURS);
       }
     } catch (SQLException e) {
       ExceptionLogger.getInstance().log(e.getLocalizedMessage());

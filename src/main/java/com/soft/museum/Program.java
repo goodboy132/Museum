@@ -18,7 +18,7 @@ public class Program {
     LocalDateTime t2 = LocalDateTime.of(1991, 1 , 1 , 1, 1);
 
     try {
-      System.out.println(ServiceFactory.getInstance().getExcursionService().getAvailableExcursionsForPeriod(t1, t2));
+      System.out.println(ServiceFactory.getInstance().getWorkerService().getStatisticAboutWorkedHours());
     } catch (NotFoundException e) {
       e.printStackTrace();
     }
