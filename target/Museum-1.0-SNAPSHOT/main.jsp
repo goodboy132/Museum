@@ -25,7 +25,6 @@
             <br>
             <span>Art</span>
 
-
         </div>
     </div>
 </body>

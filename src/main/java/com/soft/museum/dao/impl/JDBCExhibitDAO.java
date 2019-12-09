@@ -62,7 +62,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
   @Override
   public List<Exhibit> getAll() throws SQLException {
-    String getAllExhibitsQuery = "select e.id,exhibit_name,e.receipt_date,e.technique,e.description from exhibit e";
+    String getAllExhibitsQuery = "select e.id,exhibit_name,e.receipt_date,e.description from exhibit e";
     List<Exhibit> exhibits = JDBCCRADDao.getAll(connection, getAllExhibitsQuery, new ExhibitMapper());
     for (Exhibit exhibit : exhibits) {
       setMappedFieldsToExhibit(exhibit);

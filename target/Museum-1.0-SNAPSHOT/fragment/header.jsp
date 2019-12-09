@@ -27,7 +27,7 @@
         <div class="thecond_header">
             <ul>
                 <li>About museum</li>
-                <li><a href="/exhibits">Exhibits</a></li>
+                <li><a href="${pageContext.request.contextPath}/exhibits">Exhibits</a></li>
                 <li>Excursion</li>
                 <li>Tour guides</li>
                 <li>Contacts</li>

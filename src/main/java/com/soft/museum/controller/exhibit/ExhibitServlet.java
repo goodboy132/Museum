@@ -1,4 +1,5 @@
 package com.soft.museum.controller.exhibit;
+import com.soft.museum.exception.NotFoundException;
 import com.soft.museum.service.AuthorService;
 import com.soft.museum.service.ExhibitService;
 import com.soft.museum.service.HallService;
@@ -25,8 +26,12 @@ public class ExhibitServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//    req.setAttribute("authors", authorService.getAll());
-//    req.setAttribute("halls", hallService.getAll());
-    req.getRequestDispatcher("main.jsp").forward(req,resp);
+    try {
+
+      req.setAttribute("exhibits",exhibitService.getAll());
+    } catch (NotFoundException e) {
+      e.printStackTrace();
+    }
+    req.getRequestDispatcher("exhibits.jsp").forward(req,resp);
   }
 }
