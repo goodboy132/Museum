@@ -72,14 +72,14 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
   @Override
   public List<Exhibit> getAllByAuthor(Long authorId) throws SQLException {
-    String getAllByAuthor = "select e.id,exhibit_name,e.receipt_date,e.technique,e.description " +
+    String getAllByAuthor = "select e.id,exhibit_name,e.receipt_date,e.technique_id,e.description " +
             "from exhibit e where e.author_id = ?";
     return getAllBy(getAllByAuthor, authorId);
   }
 
   @Override
   public List<Exhibit> getAllByWorker(Long workerId) throws SQLException {
-    String getAllByWorkerQuery = "select e.id,exhibit_name,e.receipt_date,e.technique,e.description from exhibit e " +
+    String getAllByWorkerQuery = "select e.id,exhibit_name,e.receipt_date,e.technique_id,e.description from exhibit e " +
             "join hall h on e.hall_id = h.id join worker_hall wh on h.id = wh.hall_id where wh.worker_id = ?";
 
     return getAllBy(getAllByWorkerQuery, workerId);
@@ -87,7 +87,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
   @Override
   public List<Exhibit> getAllByHole(Long hallId) throws SQLException {
-    String getAllByHallQuery = "select e.id,exhibit_name,e.receipt_date,e.technique,e.description from exhibit e " +
+    String getAllByHallQuery = "select e.id,exhibit_name,e.receipt_date,e.technique_id,e.description from exhibit e " +
             "where e.hall_id = ?";
     return getAllBy(getAllByHallQuery, hallId);
   }

@@ -75,27 +75,45 @@ public class ExhibitServiceImpl implements ExhibitService {
   @Override
   public List<Exhibit> getAllByAuthor(Long authorId) throws NotFoundException {
     try {
-      return exhibitDAO.getAllByAuthor(authorId);
+      List<Exhibit> allByAuthor = exhibitDAO.getAllByAuthor(authorId);
+      if (!allByAuthor.isEmpty()) {
+        return allByAuthor;
+      } else {
+        throw new NotFoundException(ErrorMessage.EXHIBITS_WITH_AUTHOR_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public List<Exhibit> getAllByWorker(Long workerId) throws NotFoundException {
     try {
-      return exhibitDAO.getAllByWorker(workerId);
+      List<Exhibit> allByWorker = exhibitDAO.getAllByWorker(workerId);
+      if (!allByWorker.isEmpty()) {
+        return allByWorker;
+      } else {
+        throw new NotFoundException(ErrorMessage.EXHIBITS_BY_WORKER_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public List<Exhibit> getAllByHall(Long hallId) throws NotFoundException {
     try {
-      return exhibitDAO.getAllByHole(hallId);
+      List<Exhibit> allByHole = exhibitDAO.getAllByHole(hallId);
+      if (!allByHole.isEmpty()) {
+        return allByHole;
+      } else {
+        throw new NotFoundException(ErrorMessage.EXHIBITS_IN_HALL_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 

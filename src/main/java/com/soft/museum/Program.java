@@ -18,7 +18,7 @@ public class Program {
     LocalDateTime t2 = LocalDateTime.of(1991, 1 , 1 , 1, 1);
 
     try {
-      System.out.println(ServiceFactory.getInstance().getWorkerService().getStatisticAboutWorkedHours());
+      System.out.println(ServiceFactory.getInstance().getExhibitService().getAllByWorker(41L));
     } catch (NotFoundException e) {
       e.printStackTrace();
     }
