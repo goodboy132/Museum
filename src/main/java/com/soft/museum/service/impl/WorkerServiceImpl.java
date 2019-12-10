@@ -25,9 +25,15 @@ public class WorkerServiceImpl implements WorkerService {
   @Override
   public int save(Worker worker) throws NotSavedException {
     try {
-      return workerDAO.save(worker);
+      Integer save = workerDAO.save(worker);
+      if (save > 0) {
+        return save;
+      } else {
+        throw new NotSavedException(ErrorMessage.WORKER_NOT_SAVED);
+      }
     } catch (SQLException e) {
-      throw new NotSavedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 

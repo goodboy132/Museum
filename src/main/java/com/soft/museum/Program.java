@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 public class Program {
   public static void main(String[] args) {
     Author author = new Author();
-    author.setId(2L);
-    author.setFirstName("pavlo");
-    author.setLastName("baluh");
+    author.setId(4L);
+    author.setFirstName("Taras");
+    author.setLastName("Shevchenko");
     author.setBornDate(LocalDateTime.now());
     author.setDeathDate(LocalDateTime.now());
 
@@ -24,47 +24,43 @@ public class Program {
     workerPosition.setId(1L);
 
     Worker worker = new Worker();
-    worker.setId(3L);
-    worker.setFirstName("Max");
-    worker.setLastName("Green");
+    worker.setFirstName("Jim");
+    worker.setLastName("white");
     worker.setWorkerPosition(workerPosition);
-    worker.setLogin("green_max");
-    worker.setPassword("pass");
+    worker.setLogin("white_jim");
+    worker.setPassword("12345");
 
     HallStyle hallStyle = new HallStyle();
-    hallStyle.setId(2L);
-    hallStyle.setName("nature");
+    hallStyle.setName("wild nature");
 
     Hall hall = new Hall();
     hall.setId(200L);
-    hall.setName("^^^");
+    hall.setName("Good hall");
     hall.setHallStyle(hallStyle);
 
     Excursion excursion = new Excursion();
     excursion.setId(3L);
-    excursion.setName("name");
-    excursion.setProgram("bla-bla");
+    excursion.setName("Water fall");
+    excursion.setProgram("We will see great water fall");
     excursion.setWorker(worker);
 
     Technique technique = new Technique();
     technique.setId(1L);
 
     Exhibit exhibit = new Exhibit();
-    exhibit.setId(500L);
-    exhibit.setName("update");
+    exhibit.setName("Round stone");
     exhibit.setReceiptDate(LocalDateTime.now());
     exhibit.setTechnique(technique);
-    exhibit.setDescription("update");
+    exhibit.setDescription("Nice exhibit");
     exhibit.setAuthor(author);
     exhibit.setHall(hall);
 
     Material material = new Material();
-    material.setId(400L);
-    material.setName("Fire");
+    material.setName("Plastic");
 
     try {
-      System.out.println(ServiceFactory.getInstance().getWorkerService().update(worker));
-    } catch (NotUpdatedException e) {
+      System.out.println(ServiceFactory.getInstance().getWorkerService().save(worker));
+    } catch (NotSavedException e) {
       e.printStackTrace();
     }
 

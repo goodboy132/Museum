@@ -38,6 +38,14 @@ public class ErrorMessage {
   public static final String MATERIAL_NOT_DELETED = "Can't delete this material";
   public static final String WORKER_NOT_DELETED = "Can't delete this worker";
 
+  public static final String AUTHOR_NOT_SAVED = "Can't save this author";
+  public static final String EXCURSION_NOT_SAVED = "Can't save this excursion";
+  public static final String EXHIBIT_NOT_SAVED = "Can't save this exhibit";
+  public static final String HALL_NOT_SAVED = "Can't save this hall";
+  public static final String HALL_STYLE_NOT_SAVED = "Can't save this hall style";
+  public static final String MATERIAL_NOT_SAVED = "Can't save this material";
+  public static final String WORKER_NOT_SAVED = "Can't save this worker";
+
   public static final String AUTHOR_NOT_UPDATED = "Can't update this author";
   public static final String EXCURSION_NOT_UPDATED = "Can't update this excursion";
   public static final String EXHIBIT_NOT_UPDATED = "Can't update this exhibit";

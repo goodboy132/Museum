@@ -22,9 +22,15 @@ public class MaterialServiceImpl implements MaterialService {
   @Override
   public int save(Material material) throws NotSavedException {
     try {
-      return materialDAO.save(material);
+      Integer save = materialDAO.save(material);
+      if (save > 0) {
+        return save;
+      } else {
+        throw new NotSavedException(ErrorMessage.MATERIAL_NOT_SAVED);
+      }
     } catch (SQLException e) {
-      throw new NotSavedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 

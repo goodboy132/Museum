@@ -22,9 +22,13 @@ public class HallServiceImpl implements HallService {
   @Override
   public int save(Hall hall) throws NotSavedException {
     try {
-      return hallDAO.save(hall);
+      Integer save = hallDAO.save(hall);
+      if (save > 0) {
+        return save;
+      } throw new NotSavedException(ErrorMessage.HALL_NOT_SAVED);
     } catch (SQLException e) {
-      throw new NotSavedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 

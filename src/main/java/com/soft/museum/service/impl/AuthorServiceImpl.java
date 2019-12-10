@@ -23,11 +23,15 @@ public class AuthorServiceImpl implements AuthorService {
   @Override
   public boolean save(Author author) throws NotSavedException {
     try {
-      authorDAO.save(author);
-      return true;
+      Integer save = authorDAO.save(author);
+      if (save > 0) {
+        return true;
+      } else {
+        throw new NotSavedException(ErrorMessage.AUTHOR_NOT_SAVED);
+      }
     } catch (SQLException e) {
       ExceptionLogger.getInstance().log(e.getLocalizedMessage());
-      throw new NotSavedException(e.getMessage());
+      throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 

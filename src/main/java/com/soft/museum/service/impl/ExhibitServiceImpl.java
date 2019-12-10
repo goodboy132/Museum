@@ -21,12 +21,18 @@ public class ExhibitServiceImpl implements ExhibitService {
   }
 
 
-  @Override
+  @Override //problem
   public int save(Exhibit exhibit) throws NotSavedException {
     try {
-      return exhibitDAO.save(exhibit);
+      Integer save = exhibitDAO.save(exhibit);
+      if (save > 0) {
+        return save;
+      } else {
+        throw new NotSavedException(ErrorMessage.EXHIBIT_NOT_SAVED);
+      }
     } catch (SQLException e) {
-      throw new NotSavedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 

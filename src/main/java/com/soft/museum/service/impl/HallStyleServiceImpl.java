@@ -23,9 +23,15 @@ public class HallStyleServiceImpl implements HallStyleService {
   @Override
   public int save(HallStyle hallStyle) throws NotSavedException {
     try {
-      return hallStyleDAO.save(hallStyle);
+      Integer save = hallStyleDAO.save(hallStyle);
+      if (save > 0) {
+        return save;
+      } else {
+        throw new NotSavedException(ErrorMessage.HALL_STYLE_NOT_SAVED);
+      }
     } catch (SQLException e) {
-      throw new NotSavedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
