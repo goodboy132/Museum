@@ -15,17 +15,15 @@
             <table>
                 <tr>
                     <th width="20%">Exhibit name</th>
+                    <th width="25%">Description</th>
                     <th width="25%">Author</th>
-                    <th width="25%">Technique</th>
-                    <th width="30%">Material</th>
                 </tr>
                 <c:forEach var="exhibit" items="${exhibits}">
-                    <tr class="hover">
-                        <td>${exhibit.name}</td>
-                        <td>${exhibit.name}</td>
-                        <td>>${exhibit.name}</td>
-                        <td>${exhibit.name}</td>
-                    </tr>
+                        <tr class="hover exhibit">
+                            <td>${exhibit.exhibitName}</td>
+                            <td>${exhibit.description}</td>
+                            <td>${exhibit.authorDto.authorName} ${exhibit.authorDto.authorSurname}</td>
+                        </tr>
                 </c:forEach>
             </table>
         </div>
@@ -33,23 +31,49 @@
     <div class="right-bar">
         <div class="header_filter">Filter By:</div>
         <ol class="filter">
-            <li onclick="" id="hall">Hall</li>
+            <li id="hall">Hall<b onclick="show('halls',event.target)" class="icon"> +</b></li>
             <c:forEach var="hall" items="${halls}">
-                <p>${hall.name}</p>
+                <p class="hidden halls" style="margin-left: 20px">${hall.name}</p>
             </c:forEach>
-            <li id="author">Author</li>
+            <li id="author">Author <b onclick="show('authors',event.target)" class="icon"> +</b></li>
             <c:forEach var="author" items="${authors}">
-                <p>${author.name}</p>
-                <p>${author.surname}</p>
+                <p class="hidden authors" style="margin-left: 20px">${author.authorName} ${author.authorSurname}</p>
             </c:forEach>
-            <li id="guide">Tour Guide</li>
+            <li id="guide">Tour Guide <b onclick="show('guides',event.target)" class="icon"> +</b></li>
+            <c:forEach var="guide" items="${guides}">
+                <p class="hidden guides" style="margin-left: 20px">${guide.firstName} ${guide.lastName}</p>
+            </c:forEach>
         </ol>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script>
-    document.getElementById('author').click()
+    function ref(id) {
+        $.ajax({
+            url: "/filter",
+            data: {
+                "id": id
+            },
+            cache: false,
+            type: "GET",
+            success: function (response) {
+            },
+        });
+    }
 
-    })
+
+    function show(type, el) {
+        let elementsByClassName = document.getElementsByClassName(type);
+        for (let i = 0; i <= elementsByClassName.length; i++) {
+            if (elementsByClassName[i].style.display === 'block') {
+                elementsByClassName[i].style.display = 'none';
+                el.textContent = ' +';
+            } else {
+                elementsByClassName[i].style.display = 'block';
+                el.textContent = ' -';
+            }
+        }
+    }
 </script>
 </body>
 </html>

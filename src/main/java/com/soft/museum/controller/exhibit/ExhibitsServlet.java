@@ -1,13 +1,13 @@
 package com.soft.museum.controller.exhibit;
 
 import com.soft.museum.entity.Exhibit;
+import com.soft.museum.entity.Hall;
+import com.soft.museum.entity.Worker;
 import com.soft.museum.entity.dto.AuthorDto;
 import com.soft.museum.entity.dto.ExhibitDto;
+import com.soft.museum.entity.dto.WorkerDto;
 import com.soft.museum.exception.NotFoundException;
-import com.soft.museum.service.AuthorService;
-import com.soft.museum.service.ExhibitService;
-import com.soft.museum.service.HallService;
-import com.soft.museum.service.ServiceFactory;
+import com.soft.museum.service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,28 +23,35 @@ public class ExhibitsServlet extends HttpServlet {
   private ExhibitService exhibitService;
   private AuthorService authorService;
   private HallService hallService;
+  private WorkerService workerService;
 
   @Override
   public void init() {
     exhibitService = ServiceFactory.getInstance().getExhibitService();
     authorService = ServiceFactory.getInstance().getAuthorService();
     hallService = ServiceFactory.getInstance().getHallService();
+    workerService = ServiceFactory.getInstance().getWorkerService();
   }
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try {
       List<AuthorDto> authors = authorService.getAll().stream().map(author ->
-              new AuthorDto(author.getFirstName(),author.getLastName())).collect(Collectors.toList());
+              new AuthorDto(author.getId(),author.getFirstName(),author.getLastName())).collect(Collectors.toList());
+      List<Hall> halls = hallService.getAll();
+      List<WorkerDto> guides = workerService.getAll().stream().map
+              (worker -> new WorkerDto(worker.getId(),worker.getFirstName(),worker.getLastName())).collect(Collectors.toList());
       List<ExhibitDto> exhibits = exhibitService.getAll().stream().map(exhibit -> new ExhibitDto
-              (exhibit.getName(), exhibit.getDescription(),
-                      new AuthorDto(exhibit.getAuthor().getFirstName(), exhibit.getAuthor().getLastName())))
-              .collect(Collectors.toList());
+              (exhibit.getId(),exhibit.getName(), exhibit.getDescription(),
+                      new AuthorDto(exhibit.getId(),exhibit.getAuthor().getFirstName(),
+                              exhibit.getAuthor().getLastName()))).collect(Collectors.toList());
       req.setAttribute("authors",authors);
+      req.setAttribute("halls",halls);
+      req.setAttribute("guides",guides);
       req.setAttribute("exhibits", exhibits);
     } catch (NotFoundException e) {
-      e.printStackTrace();
+      resp.sendError(1,e.getLocalizedMessage());
     }
-    req.getRequestDispatcher("exhibits.jsp").forward(req, resp);
+    req.getRequestDispatcher("exhibits.jsp").include(req, resp);
   }
 }

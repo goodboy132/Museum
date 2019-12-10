@@ -33,7 +33,8 @@ public class JDBCHallDAO implements HallDAO {
   @Override
   public Integer update(Hall element) throws SQLException {
     String updateHallQuery = "UPDATE hall SET hall_name = ?, hall_style_id = ? WHERE id = ?";
-    return JDBCCRADDao.update(connection, updateHallQuery, element.getName(), element.getHallStyle().getId(), element.getId());
+    return JDBCCRADDao.update(connection, updateHallQuery, element.getName(), element.getHallStyle().getId(),
+            element.getId());
   }
 
   @Override
@@ -53,8 +54,8 @@ public class JDBCHallDAO implements HallDAO {
 
   @Override
   public List<Hall> getAll() throws SQLException {
-    String getAllHallsQuery = "SELECT * FROM hall" +
-            "JOIN hall_style" +
+    String getAllHallsQuery = "SELECT * FROM hall " +
+            "JOIN hall_style " +
             "on hall.hall_style_id = hall_style.id;";
     return JDBCCRADDao.getAll(connection, getAllHallsQuery, new HallMapper());
   }

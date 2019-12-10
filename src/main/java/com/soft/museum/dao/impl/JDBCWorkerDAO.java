@@ -1,10 +1,7 @@
 package com.soft.museum.dao.impl;
-
 import com.soft.museum.dao.WorkerDAO;
 import com.soft.museum.dao.mapper.*;
 import com.soft.museum.entity.*;
-import dao.mapper.WorkedHoursMapper;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -30,13 +27,16 @@ public class JDBCWorkerDAO implements WorkerDAO {
   @Override
   public Integer save(Worker element) throws SQLException {
     String saveWorkerQuery = "insert into worker(name, surname, position_id, username, password) values(?,?,?,?,?)";
-    return JDBCCRADDao.save(connection, saveWorkerQuery, element.getFirstName(), element.getLastName(), element.getWorkerPosition().getId(), element.getLogin(), element.getPassword());
+    return JDBCCRADDao.save(connection, saveWorkerQuery, element.getFirstName(), element.getLastName(),
+            element.getWorkerPosition().getId(), element.getLogin(), element.getPassword());
   }
 
   @Override
   public Integer update(Worker element) throws SQLException {
-    String updateWorkerQuery = "update worker set name = ?, surname = ?, position_id = ?, username = ?, password = ? where id = ?";
-    return JDBCCRADDao.update(connection, updateWorkerQuery, element.getFirstName(), element.getLastName(), element.getWorkerPosition().getId(), element.getLogin(), element.getPassword(), element.getId());
+    String updateWorkerQuery = "update worker set name = ?, surname = ?, position_id = ?, " +
+            "username = ?, password = ? where id = ?";
+    return JDBCCRADDao.update(connection, updateWorkerQuery, element.getFirstName(), element.getLastName(),
+            element.getWorkerPosition().getId(), element.getLogin(), element.getPassword(), element.getId());
   }
 
   @Override
@@ -83,7 +83,8 @@ public class JDBCWorkerDAO implements WorkerDAO {
     String getAvailableGuidesQuery = "select * from worker w join worjker_position wp on w.position_id " +
             "= wp.id join excursion e on w.id = e.worker_id join time_table tt on   e.id = tt.excursion_id " +
             "where wp.position_name = 'GUIDE' and tt.start_time not between ? and ?";
-    List<Worker> workers = JDBCCRADDao.getAll(connection, getAvailableGuidesQuery, new WorkerMapper(), startTime, endTime);
+    List<Worker> workers = JDBCCRADDao.
+            getAll(connection, getAvailableGuidesQuery, new WorkerMapper(), startTime, endTime);
     if (!workers.isEmpty()) {
       for (Worker worker : workers) {
         setMappedFieldsToWorker(worker);
@@ -128,19 +129,22 @@ public class JDBCWorkerDAO implements WorkerDAO {
             "join museum.time_table\n" +
             "on time_table.excursion_id = excursion.id\n" +
             "group by worker.surname";
-    Optional<Map<String, Integer>> statisticByExcursions = JDBCCRADDao.getOne(connection, getCountOfFinishedExcursion, new StatisticExcursionMapper());
+    Optional<Map<String, Integer>> statisticByExcursions = JDBCCRADDao.getOne(connection, getCountOfFinishedExcursion,
+            new StatisticExcursionMapper());
     return statisticByExcursions.get();
   }
 
   @Override
   public Map<String, LocalDateTime> getStatisticAboutWorkedHours() throws SQLException {
-    String getStatisticAboutWorkedHoursQuery = "select worker.*, SEC_TO_TIME(SUM(TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time))) as duration from worker \n" +
+    String getStatisticAboutWorkedHoursQuery = "select worker.*, SEC_TO_TIME(SUM(TIME_TO_SEC(end_time)" +
+            " - TIME_TO_SEC(start_time))) as duration from worker \n" +
             "join excursion\n" +
             "on excursion.worker_id = worker.id\n" +
             "join time_table\n" +
             "on time_table.excursion_id = excursion.id\n" +
             "group by worker.surname";
-    Optional<Map<String, LocalDateTime>> statisticAboutWorkedHours = JDBCCRADDao.getOne(connection, getStatisticAboutWorkedHoursQuery, new WorkedHoursMapper());
+    Optional<Map<String, LocalDateTime>> statisticAboutWorkedHours = JDBCCRADDao.getOne(connection,
+            getStatisticAboutWorkedHoursQuery, new WorkedHoursMapper());
     return statisticAboutWorkedHours.get();
   }
 }

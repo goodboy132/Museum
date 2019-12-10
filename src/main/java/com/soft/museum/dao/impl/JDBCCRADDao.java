@@ -23,8 +23,8 @@ public class JDBCCRADDao {
     return statement.executeUpdate();
   }
 
-  public static<T> Optional<T> getOne(Connection connection, String query,  ObjectMapper<T> mapper, Object... parameters) {
-    try {
+  public static<T> Optional<T> getOne(Connection connection, String query,  ObjectMapper<T> mapper,
+                                      Object... parameters) throws SQLException {
       PreparedStatement preparedStatement = connection.prepareStatement(query);
       if (parameters.length < 1) {
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -40,11 +40,7 @@ public class JDBCCRADDao {
           return Optional.empty();
         }
       }
-    } catch (SQLException e) {
-      e.printStackTrace();
-      throw new RuntimeException();
     }
-  }
 
   public static <T> List<T> getAll(Connection connection, String query, ObjectMapper<T> mapper, Object... parameters)
           throws SQLException {

@@ -7058,13 +7058,13 @@ technique_id</ColNames>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="1240" parent="298" name="hall_style">
+    <column id="1240" parent="298" name="hall_style_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="1241" parent="298" name="hall_hall_style">
-      <ColNames>hall_style</ColNames>
+      <ColNames>hall_style_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="1242" parent="298" name="PRIMARY">
@@ -7073,7 +7073,7 @@ technique_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="1243" parent="298" name="hall_hall_style">
-      <ColNames>hall_style</ColNames>
+      <ColNames>hall_style_id</ColNames>
       <RefSchemaName>museum</RefSchemaName>
       <RefTableName>hall_style</RefTableName>
       <RefColNames>id</RefColNames>

@@ -39,12 +39,11 @@
     margin-left: 20px;
 }
 
-.filter li::after {
+.icon{
+    right: -20px;
     font-style: inherit;
     font-family: sans-serif;
     font-weight: 600;
-    content: "+";
-    padding-left: 5px;
     cursor: pointer;
 }
 
@@ -92,4 +91,15 @@ td {
 }
 .hover:hover{
     background-color: #F8F6F7;;
+}
+.hidden{
+    display: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-family: sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+}
+.hall .author .guide{
+    position: relative;
 }

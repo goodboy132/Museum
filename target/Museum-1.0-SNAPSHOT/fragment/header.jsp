@@ -29,7 +29,7 @@
                 <li>About museum</li>
                 <li><a href="${pageContext.request.contextPath}/exhibits">Exhibits</a></li>
                 <li>Excursion</li>
-                <li>Tour guides</li>
+                <li><a href="${pageContext.request.contextPath}/employees">Employees</a></li>
                 <li>Contacts</li>
             </ul>
         </div>
