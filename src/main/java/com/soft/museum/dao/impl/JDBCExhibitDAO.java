@@ -44,7 +44,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
   @Override
   public Integer delete(Exhibit exhibit) throws SQLException {
-    String deleteExhibitQuery = "DELETE FROM author where author.id = ?";
+    String deleteExhibitQuery = "DELETE FROM exhibit where exhibit.id = ?";
     return JDBCCRADDao.update(connection, deleteExhibitQuery, exhibit.getId());
   }
 

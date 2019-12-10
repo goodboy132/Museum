@@ -1,13 +1,11 @@
 package com.soft.museum.service.impl;
 
+import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.dao.AuthorDAO;
 import com.soft.museum.dao.databace.Database;
 import com.soft.museum.dao.impl.JDBCAuthorDao;
 import com.soft.museum.entity.Author;
-import com.soft.museum.exception.NotDeletedException;
-import com.soft.museum.exception.NotFoundException;
-import com.soft.museum.exception.NotSavedException;
-import com.soft.museum.exception.NotUpdatedException;
+import com.soft.museum.exception.*;
 import com.soft.museum.service.AuthorService;
 
 import java.sql.SQLException;
@@ -25,10 +23,15 @@ public class AuthorServiceImpl implements AuthorService {
   @Override
   public boolean save(Author author) throws NotSavedException {
     try {
-      authorDAO.save(author);
-      return true;
+      Integer save = authorDAO.save(author);
+      if (save > 0) {
+        return true;
+      } else {
+        throw new NotSavedException(ErrorMessage.AUTHOR_NOT_SAVED);
+      }
     } catch (SQLException e) {
-      throw new NotSavedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
@@ -36,36 +39,59 @@ public class AuthorServiceImpl implements AuthorService {
   public Optional<Author> getById(Long id) throws NotFoundException {
     try {
       Optional<Author> author = authorDAO.getOneById(id);
-      return author;
+      if (author.isPresent()) {
+        return author;
+      } else {
+        throw new NotFoundException(ErrorMessage.AUTHOR_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public int update(Author author) throws NotUpdatedException {
     try {
-      return authorDAO.update(author);
+      Integer update = authorDAO.update(author);
+      if (update > 0 ) {
+        return update;
+      } else {
+        throw new NotUpdatedException(ErrorMessage.AUTHOR_NOT_UPDATED);
+      }
     } catch (SQLException e) {
-      throw new NotUpdatedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public int delete(Author author) throws NotDeletedException {
     try {
-      return authorDAO.delete(author);
+      Integer delete = authorDAO.delete(author);
+      if (delete > 0) {
+        return delete;
+      } else {
+        throw new NotDeletedException(ErrorMessage.AUTHOR_NOT_DELETED);
+      }
     } catch (SQLException e) {
-      throw new NotDeletedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
-  @Override
+  @Override //need test
   public List<Author> getAll() throws NotFoundException {
     try {
-      return authorDAO.getAll();
+      List<Author> allAuthors = authorDAO.getAll();
+      if (!allAuthors.isEmpty()) {
+        return allAuthors;
+      } else {
+        throw new NotFoundException(ErrorMessage.AUTHORS_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 

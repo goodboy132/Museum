@@ -36,6 +36,7 @@ public class ExhibitsServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try {
+      System.out.println(exhibitService.getAll());
       List<AuthorDto> authors = authorService.getAll().stream().map(author ->
               new AuthorDto(author.getId(),author.getFirstName(),author.getLastName())).collect(Collectors.toList());
       List<Hall> halls = hallService.getAll();

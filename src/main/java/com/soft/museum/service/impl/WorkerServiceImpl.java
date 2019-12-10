@@ -25,45 +25,75 @@ public class WorkerServiceImpl implements WorkerService {
   @Override
   public int save(Worker worker) throws NotSavedException {
     try {
-      return workerDAO.save(worker);
+      Integer save = workerDAO.save(worker);
+      if (save > 0) {
+        return save;
+      } else {
+        throw new NotSavedException(ErrorMessage.WORKER_NOT_SAVED);
+      }
     } catch (SQLException e) {
-      throw new NotSavedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public int update(Worker worker) throws NotUpdatedException {
     try {
-      return workerDAO.update(worker);
+      Integer update = workerDAO.update(worker);
+      if (update > 0) {
+        return update;
+      } else {
+        throw new NotUpdatedException(ErrorMessage.WORKER_NOT_UPDATED);
+      }
     } catch (SQLException e) {
-      throw new NotUpdatedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public int delete(Worker worker) throws NotDeletedException {
     try {
-      return workerDAO.delete(worker);
+      Integer deleteWorker = workerDAO.delete(worker);
+      if (deleteWorker > 0) {
+        return deleteWorker;
+      } else {
+        throw new NotDeletedException(ErrorMessage.WORKER_NOT_DELETED);
+      }
     } catch (SQLException e) {
-      throw new NotDeletedException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public Optional<Worker> getOneById(Long id) throws NotFoundException {
     try {
-      return workerDAO.getOneById(id);
+      Optional<Worker> oneById = workerDAO.getOneById(id);
+      if (oneById.isPresent()) {
+        return oneById;
+      } else {
+        throw new NotFoundException(ErrorMessage.WORKER_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
   @Override
   public List<Worker> getAll() throws NotFoundException {
     try {
-      return workerDAO.getAll();
+      List<Worker> allWorkers = workerDAO.getAll();
+      if (!allWorkers.isEmpty()) {
+        return allWorkers;
+      } else {
+        throw new NotFoundException(ErrorMessage.WORKERS_NOT_FOUND);
+      }
     } catch (SQLException e) {
-      throw new NotFoundException(e.getMessage());
+      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
+      throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 

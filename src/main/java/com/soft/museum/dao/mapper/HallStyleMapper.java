@@ -11,7 +11,7 @@ public class HallStyleMapper implements ObjectMapper<HallStyle> {
   public HallStyle extractFromResultSet(ResultSet resultSet) throws SQLException {
     HallStyle hallStyle = new HallStyle();
     hallStyle.setId(resultSet.getLong("id"));
-    hallStyle.setName(resultSet.getString("style_name"));
+    hallStyle.setName(resultSet.getString("hall_style_name"));
     return hallStyle;
   }
 }

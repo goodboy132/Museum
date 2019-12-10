@@ -21417,7 +21417,11 @@ User</ColNames>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
+<<<<<<< HEAD
     <column id="3931" parent="583" name="order_status">
+=======
+    <column id="336" parent="289" name="hall_style_id">
+>>>>>>> 527adbdca6abcc9c4445d7e13a3c443457156deb
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
@@ -21437,8 +21441,13 @@ User</ColNames>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
+<<<<<<< HEAD
     <index id="3935" parent="583" name="FKb0haeu1q5vglnukkgt04iuhxt">
       <ColNames>order_id</ColNames>
+=======
+    <index id="337" parent="289" name="hall_hall_style">
+      <ColNames>hall_style_id</ColNames>
+>>>>>>> 527adbdca6abcc9c4445d7e13a3c443457156deb
       <Type>btree</Type>
     </index>
     <key id="3936" parent="583" name="PRIMARY">
@@ -21446,7 +21455,16 @@ User</ColNames>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+<<<<<<< HEAD
     <column id="3937" parent="584" name="id">
+=======
+    <foreign-key id="339" parent="289" name="hall_hall_style">
+      <ColNames>hall_style_id</ColNames>
+      <RefTableName>hall_style</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="340" parent="290" name="id">
+>>>>>>> 527adbdca6abcc9c4445d7e13a3c443457156deb
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
