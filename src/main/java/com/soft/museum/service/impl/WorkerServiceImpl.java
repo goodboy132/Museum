@@ -2,7 +2,7 @@ package com.soft.museum.service.impl;
 
 import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.dao.WorkerDAO;
-import com.soft.museum.dao.databace.Database;
+import com.soft.museum.dao.database.Database;
 import com.soft.museum.dao.impl.JDBCWorkerDAO;
 import com.soft.museum.entity.Worker;
 import com.soft.museum.exception.*;

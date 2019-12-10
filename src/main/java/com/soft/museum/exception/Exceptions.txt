@@ -1,13 +1,3 @@
-2019-12-07T21:06:41.553 Unknown column 'e.receipt_datef' in 'field list'
-2019-12-07T21:09:30.613 Column 'technique' not found.
-2019-12-07T21:10:00.102 Column 'technique' not found.
-2019-12-09T20:27:18.578 Cannot delete or update a parent row: a foreign key constraint fails (`museum`.`time_table`, CONSTRAINT `fk_timetable_excursion` FOREIGN KEY (`excursion_id`) REFERENCES `excursion` (`id`))
-2019-12-09T20:28:35.864 Cannot delete or update a parent row: a foreign key constraint fails (`museum`.`time_table`, CONSTRAINT `fk_timetable_excursion` FOREIGN KEY (`excursion_id`) REFERENCES `excursion` (`id`))
-2019-12-09T20:35:35.881 Cannot delete or update a parent row: a foreign key constraint fails (`museum`.`exhibit_technique`, CONSTRAINT `exhibit_technique_ibfk_1` FOREIGN KEY (`exhibit_id`) REFERENCES `exhibit` (`id`))
-2019-12-09T20:46:39.993 Cannot delete or update a parent row: a foreign key constraint fails (`museum`.`exhibit`, CONSTRAINT `exibit_hall` FOREIGN KEY (`hall_id`) REFERENCES `hall` (`id`))
-2019-12-09T20:52:22.568 Cannot delete or update a parent row: a foreign key constraint fails (`museum`.`hall`, CONSTRAINT `hall_hall_style` FOREIGN KEY (`hall_style`) REFERENCES `hall_style` (`id`))
-2019-12-09T20:56:15.643 Cannot delete or update a parent row: a foreign key constraint fails (`museum`.`exhibit_material`, CONSTRAINT `exibit_material_id_material_id` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`))
-2019-12-09T21:38:37.695 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'hall.hall_style_id = hall_style.id' at line 1
-2019-12-09T21:41:36.627 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'hall.hall_style_id = hall_style.id' at line 1
-2019-12-09T22:01:01.930 Unknown column 'e.technique' in 'field list'
-2019-12-09T22:06:25.452 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'hall.hall_style_id = hall_style.id' at line 1
+2019-12-10T22:57:48.755 Unknown column 'e.technique_id' in 'field list'
+2019-12-10T22:57:55.649 Unknown column 'e.technique_id' in 'field list'
+2019-12-10T22:58:00.059 Unknown column 'e.technique_id' in 'field list'

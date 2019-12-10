@@ -30,7 +30,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
     String saveExhibitQuery = "INSERT INTO exhibit(exhibit_name,receipt_date,technique,description,author_id,hall_id)" +
             " VALUES(?,?,?,?,?,?)";
     return JDBCCRADDao.save(connection, saveExhibitQuery, exhibit.getName(), exhibit.getReceiptDate(),
-            exhibit.getTechnique(), exhibit.getDescription(), exhibit.getAuthor().getId(), exhibit.getHall().getId());
+            exhibit.getTechniques(), exhibit.getDescription(), exhibit.getAuthor().getId(), exhibit.getHall().getId());
   }
 
   @Override
@@ -38,7 +38,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
     String updateExhibitQuery = "UPDATE exhibit set exhibit_name = ?, receipt_date = ?, technique = ?," +
             " description = ?, author_id = ?, hall_id = ? WHERE id = ?";
     return JDBCCRADDao.save(connection, updateExhibitQuery, exhibit.getName(), exhibit.getReceiptDate(),
-            exhibit.getTechnique(), exhibit.getDescription(), exhibit.getAuthor().getId(), exhibit.getHall().getId(),
+            exhibit.getTechniques(), exhibit.getDescription(), exhibit.getAuthor().getId(), exhibit.getHall().getId(),
             exhibit.getId());
   }
 
@@ -72,22 +72,21 @@ public class JDBCExhibitDAO implements ExhibitDAO {
 
   @Override
   public List<Exhibit> getAllByAuthor(Long authorId) throws SQLException {
-    String getAllByAuthor = "select e.id,exhibit_name,e.receipt_date,e.technique_id,e.description " +
+    String getAllByAuthor = "select e.id,exhibit_name,e.receipt_date,e.description " +
             "from exhibit e where e.author_id = ?";
     return getAllBy(getAllByAuthor, authorId);
   }
 
   @Override
   public List<Exhibit> getAllByWorker(Long workerId) throws SQLException {
-    String getAllByWorkerQuery = "select e.id,exhibit_name,e.receipt_date,e.technique_id,e.description from exhibit e " +
+    String getAllByWorkerQuery = "select e.id,exhibit_name,e.receipt_date,e.description from exhibit e " +
             "join hall h on e.hall_id = h.id join worker_hall wh on h.id = wh.hall_id where wh.worker_id = ?";
-
     return getAllBy(getAllByWorkerQuery, workerId);
   }
 
   @Override
   public List<Exhibit> getAllByHole(Long hallId) throws SQLException {
-    String getAllByHallQuery = "select e.id,exhibit_name,e.receipt_date,e.technique_id,e.description from exhibit e " +
+    String getAllByHallQuery = "select e.id,exhibit_name,e.receipt_date,e.description from exhibit e " +
             "where e.hall_id = ?";
     return getAllBy(getAllByHallQuery, hallId);
   }
@@ -130,7 +129,7 @@ public class JDBCExhibitDAO implements ExhibitDAO {
     setMaterialsForExhibit(exhibit);
     setAuthorForExhibit(exhibit);
     setHoleForExhibit(exhibit);
-    setTechniqueForExhibit(exhibit);
+    setTechniquesForExhibit(exhibit);
   }
 
 
@@ -166,11 +165,11 @@ public class JDBCExhibitDAO implements ExhibitDAO {
     exhibit.setHall(hall.get());
   }
 
-  private void setTechniqueForExhibit(Exhibit exhibit) throws SQLException {
-    String getTechniqueForExhibitQuery = "select * from technique join exhibit on technique.id = exhibit.technique_id "
-            + "where exhibit.id = ?";
-    Optional<Technique> technique = JDBCCRADDao.getOne(connection, getTechniqueForExhibitQuery,
+  private void setTechniquesForExhibit(Exhibit exhibit) throws SQLException {
+    String getTechniquesForExhibitQuery = "select * from technique t join exhibit_technique et " +
+            "on t.id = et.technique_id where et.exhibit_id = ? ";
+    List<Technique> techniques = JDBCCRADDao.getAll(connection, getTechniquesForExhibitQuery,
             new TechniqueMapper(), exhibit.getId());
-    exhibit.setTechnique(technique.get());
+    exhibit.setTechniques(techniques);
   }
 }

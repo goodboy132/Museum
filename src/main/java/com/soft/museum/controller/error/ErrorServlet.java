@@ -1,4 +1,4 @@
-package com.soft.museum.controller.exhibit;
+package com.soft.museum.controller.error;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/exhibits/filter")
-public class FilterServlet extends HttpServlet {
+@WebServlet("/error")
+public class ErrorServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    System.out.println(req.getParameter("id"));
+    req.getRequestDispatcher("404.jsp").include(req,resp);
   }
 }

@@ -2,7 +2,7 @@ package com.soft.museum.service.impl;
 
 import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.dao.ExcursionDAO;
-import com.soft.museum.dao.databace.Database;
+import com.soft.museum.dao.database.Database;
 import com.soft.museum.dao.impl.JDBCExcursionDao;
 import com.soft.museum.entity.Excursion;
 import com.soft.museum.exception.*;

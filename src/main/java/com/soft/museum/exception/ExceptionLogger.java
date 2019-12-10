@@ -5,7 +5,8 @@ import java.time.LocalDateTime;
 
 public class ExceptionLogger {
   private static ExceptionLogger instance;
-  private String passToFile = System.getProperty("user.dir") + File.separator + "src" + File.separator +
+  private String passToFile = System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "Museum"
+          + File.separator + "src" + File.separator +
           "main" + File.separator + "java" + File.separator + "com" + File.separator + "soft" + File.separator +
           "museum" + File.separator + "exception" + File.separator + "Exceptions.txt";
 
@@ -20,6 +21,8 @@ public class ExceptionLogger {
 
   public void log(String exception) {
     File file = new File(passToFile);
+    System.out.println(passToFile);
+    System.out.println(file);
     try {
       if (!file.exists()) {
         file.createNewFile();
@@ -30,6 +33,7 @@ public class ExceptionLogger {
       printWriter.close();
     }
     catch (IOException e){
+      e.printStackTrace();
       throw new RuntimeException();
     }
   }

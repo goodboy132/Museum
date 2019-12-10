@@ -1,0 +1,39 @@
+
+.container-exhibit{
+    width: 60%;
+    height: 100%;
+    padding-top: 50px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.exhibit-picture{
+    width: 60%;
+    height: 200px;
+}
+img{
+    width: 100%;
+}
+.exhibit-info{
+    padding-left: 5%;
+    width: 35%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+.exhibit-header{
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.exhibit-about{
+    font-size: 15px;
+    font-family: sans-serif;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+

@@ -1,4 +1,4 @@
-package com.soft.museum.dao.databace;
+package com.soft.museum.dao.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

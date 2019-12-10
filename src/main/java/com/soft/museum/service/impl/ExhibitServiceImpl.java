@@ -2,14 +2,13 @@ package com.soft.museum.service.impl;
 
 import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.dao.ExhibitDAO;
-import com.soft.museum.dao.databace.Database;
+import com.soft.museum.dao.database.Database;
 import com.soft.museum.dao.impl.JDBCExhibitDAO;
 import com.soft.museum.entity.Exhibit;
 import com.soft.museum.exception.*;
 import com.soft.museum.service.ExhibitService;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -105,7 +104,7 @@ public class ExhibitServiceImpl implements ExhibitService {
       if (!allByAuthor.isEmpty()) {
         return allByAuthor;
       } else {
-        throw new NotFoundException(ErrorMessage.EXHIBITS_WITH_AUTHOR_NOT_FOUND);
+        throw new NotFoundException(ErrorMessage.EXHIBITS_WITH_AUTHOR_NOT_FOUND +authorId);
       }
     } catch (SQLException e) {
       ExceptionLogger.getInstance().log(e.getLocalizedMessage());

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,22 +37,31 @@ public class ExhibitsServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try {
-      System.out.println(exhibitService.getAll());
+      List<Exhibit> exhibits;
+      if (req.getParameter("hall") != null) {
+        exhibits = exhibitService.getAllByHall(Long.valueOf(req.getParameter("hall")));
+      } else if (req.getParameter(("author")) != null) {
+        exhibits = exhibitService.getAllByAuthor(Long.valueOf(req.getParameter("author")));
+      } else if (req.getParameter(("guide")) != null) {
+        exhibits = exhibitService.getAllByWorker(Long.valueOf(req.getParameter("guide")));
+      } else {
+        exhibits = exhibitService.getAll();
+      }
+      List<ExhibitDto> exhibitsDto = exhibits.stream().map(exhibit -> new ExhibitDto
+              (exhibit.getId(), exhibit.getName(), exhibit.getDescription(),
+                      new AuthorDto(exhibit.getId(), exhibit.getAuthor().getFirstName(),
+                              exhibit.getAuthor().getLastName()))).collect(Collectors.toList());
       List<AuthorDto> authors = authorService.getAll().stream().map(author ->
-              new AuthorDto(author.getId(),author.getFirstName(),author.getLastName())).collect(Collectors.toList());
+              new AuthorDto(author.getId(), author.getFirstName(), author.getLastName())).collect(Collectors.toList());
       List<Hall> halls = hallService.getAll();
       List<WorkerDto> guides = workerService.getAll().stream().map
-              (worker -> new WorkerDto(worker.getId(),worker.getFirstName(),worker.getLastName())).collect(Collectors.toList());
-      List<ExhibitDto> exhibits = exhibitService.getAll().stream().map(exhibit -> new ExhibitDto
-              (exhibit.getId(),exhibit.getName(), exhibit.getDescription(),
-                      new AuthorDto(exhibit.getId(),exhibit.getAuthor().getFirstName(),
-                              exhibit.getAuthor().getLastName()))).collect(Collectors.toList());
-      req.setAttribute("authors",authors);
-      req.setAttribute("halls",halls);
-      req.setAttribute("guides",guides);
-      req.setAttribute("exhibits", exhibits);
+              (worker -> new WorkerDto(worker.getId(), worker.getFirstName(), worker.getLastName())).collect(Collectors.toList());
+      req.setAttribute("authors", authors);
+      req.setAttribute("halls", halls);
+      req.setAttribute("guides", guides);
+      req.setAttribute("exhibits", exhibitsDto);
     } catch (NotFoundException e) {
-      resp.sendError(1,e.getLocalizedMessage());
+      resp.sendRedirect("http://localhost:8080/error");
     }
     req.getRequestDispatcher("exhibits.jsp").include(req, resp);
   }

@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @WebServlet("/employees")
 public class WorkersServlet extends HttpServlet {
@@ -28,11 +27,9 @@ public class WorkersServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try {
-      List<WorkerDto> workers = workerService.getAll().stream().map(worker ->
-              new WorkerDto(worker.getId(), worker.getFirstName(),
-              worker.getLastName())).collect(Collectors.toList());
+      List<Worker> workers = workerService.getAllByPosition("GUIDE");
       req.setAttribute("employees",workers);
-      req.getRequestDispatcher("employees.jsp");
+      req.getRequestDispatcher("employees.jsp").include(req,resp);
     } catch (NotFoundException e) {
       e.printStackTrace();
     }

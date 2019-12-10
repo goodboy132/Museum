@@ -19,11 +19,11 @@
                     <th width="25%">Author</th>
                 </tr>
                 <c:forEach var="exhibit" items="${exhibits}">
-                        <tr class="hover exhibit">
-                            <td>${exhibit.exhibitName}</td>
-                            <td>${exhibit.description}</td>
-                            <td>${exhibit.authorDto.authorName} ${exhibit.authorDto.authorSurname}</td>
-                        </tr>
+                    <tr onclick="ref(${exhibit.id})" class="hover exhibit">
+                        <td>${exhibit.exhibitName}</td>
+                        <td>${exhibit.description}</td>
+                        <td>${exhibit.authorDto.authorName}${exhibit.authorDto.authorSurname}</td>
+                    </tr>
                 </c:forEach>
             </table>
         </div>
@@ -33,34 +33,33 @@
         <ol class="filter">
             <li id="hall">Hall<b onclick="show('halls',event.target)" class="icon"> +</b></li>
             <c:forEach var="hall" items="${halls}">
-                <p class="hidden halls" style="margin-left: 20px">${hall.name}</p>
+                <p class="hidden halls" style="margin-left: 20px">
+                    <a href="${pageContext.request.contextPath}/exhibits?hall=${hall.id}"> ${hall.name}</a>
+                </p>
             </c:forEach>
             <li id="author">Author <b onclick="show('authors',event.target)" class="icon"> +</b></li>
             <c:forEach var="author" items="${authors}">
-                <p class="hidden authors" style="margin-left: 20px">${author.authorName} ${author.authorSurname}</p>
+                <p class="hidden authors" style="margin-left: 20px">
+                    <a href="${pageContext.request.contextPath}/exhibits?author=${author.id}">${author.authorName}
+                            ${author.authorSurname}</a>
+                </p>
             </c:forEach>
             <li id="guide">Tour Guide <b onclick="show('guides',event.target)" class="icon"> +</b></li>
             <c:forEach var="guide" items="${guides}">
-                <p class="hidden guides" style="margin-left: 20px">${guide.firstName} ${guide.lastName}</p>
+                <p class="hidden guides" style="margin-left: 20px">
+                    <a href="${pageContext.request.contextPath}/exhibits?guide=${guide.id}">
+                            ${guide.firstName} ${guide.lastName}</a>
+                </p>
             </c:forEach>
         </ol>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script>
-    function ref(id) {
-        $.ajax({
-            url: "/filter",
-            data: {
-                "id": id
-            },
-            cache: false,
-            type: "GET",
-            success: function (response) {
-            },
-        });
-    }
 
+    function ref(param) {
+        window.location.href = 'http://localhost:8080/exhibit?id=' + param;
+    }
 
     function show(type, el) {
         let elementsByClassName = document.getElementsByClassName(type);

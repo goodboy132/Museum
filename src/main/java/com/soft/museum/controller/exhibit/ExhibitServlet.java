@@ -26,8 +26,8 @@ public class ExhibitServlet extends HttpServlet {
     Long exhibitId = Long.valueOf(req.getParameter("id"));
     try {
       Exhibit exhibit  = exhibitService.getById(exhibitId);
-      req.setAttribute("exhibit",exhibit);
-      req.getRequestDispatcher("exhibit.jsp").include(req,resp);
+      req.setAttribute("item",exhibit);
+      req.getRequestDispatcher("exhibit.jsp").forward(req,resp);
     } catch (NotFoundException e) {
       e.printStackTrace();
     }
