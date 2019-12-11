@@ -1252,322 +1252,317 @@
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="313" parent="286" name="technique_id">
+    <column id="313" parent="286" name="description">
       <Position>4</Position>
-      <DataType>int(11)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="314" parent="286" name="description">
-      <Position>5</Position>
       <DataType>varchar(120)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="315" parent="286" name="author_id">
+    <column id="314" parent="286" name="author_id">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="315" parent="286" name="hall_id">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="316" parent="286" name="hall_id">
-      <Position>7</Position>
-      <DataType>int(11)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="317" parent="286" name="exibit_autor">
+    <index id="316" parent="286" name="exibit_autor">
       <ColNames>author_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="318" parent="286" name="exibit_hall">
+    <index id="317" parent="286" name="exibit_hall">
       <ColNames>hall_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="319" parent="286" name="PRIMARY">
+    <key id="318" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="320" parent="286" name="exibit_autor">
+    <foreign-key id="319" parent="286" name="exibit_autor">
       <ColNames>author_id</ColNames>
       <RefTableName>author</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="321" parent="286" name="exibit_hall">
+    <foreign-key id="320" parent="286" name="exibit_hall">
       <ColNames>hall_id</ColNames>
       <RefTableName>hall</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="322" parent="287" name="exhibit_id">
+    <column id="321" parent="287" name="exhibit_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="323" parent="287" name="material_id">
+    <column id="322" parent="287" name="material_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="324" parent="287" name="exibit_material_id_material_id">
+    <index id="323" parent="287" name="exibit_material_id_material_id">
       <ColNames>material_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="325" parent="287" name="PRIMARY">
+    <key id="324" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>exhibit_id
 material_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="326" parent="287" name="exibit_material_id_exibit_id">
+    <foreign-key id="325" parent="287" name="exibit_material_id_exibit_id">
       <ColNames>exhibit_id</ColNames>
       <RefTableName>exhibit</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="327" parent="287" name="exibit_material_id_material_id">
+    <foreign-key id="326" parent="287" name="exibit_material_id_material_id">
       <ColNames>material_id</ColNames>
       <RefTableName>material</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="328" parent="288" name="exhibit_id">
+    <column id="327" parent="288" name="exhibit_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="329" parent="288" name="technique_id">
+    <column id="328" parent="288" name="technique_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="330" parent="288" name="exhibit_technique">
+    <index id="329" parent="288" name="exhibit_technique">
       <ColNames>technique_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="331" parent="288" name="PRIMARY">
+    <key id="330" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>exhibit_id
 technique_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="332" parent="288" name="exhibit_technique_ibfk_1">
+    <foreign-key id="331" parent="288" name="exhibit_technique_ibfk_1">
       <ColNames>exhibit_id</ColNames>
       <RefTableName>exhibit</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="333" parent="288" name="exhibit_technique_ibfk_2">
+    <foreign-key id="332" parent="288" name="exhibit_technique_ibfk_2">
       <ColNames>technique_id</ColNames>
       <RefTableName>technique</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="334" parent="289" name="id">
+    <column id="333" parent="289" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="335" parent="289" name="hall_name">
+    <column id="334" parent="289" name="hall_name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="336" parent="289" name="hall_style_id">
+    <column id="335" parent="289" name="hall_style_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="337" parent="289" name="hall_hall_style">
+    <index id="336" parent="289" name="hall_hall_style">
       <ColNames>hall_style_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="338" parent="289" name="PRIMARY">
+    <key id="337" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="339" parent="289" name="hall_hall_style">
+    <foreign-key id="338" parent="289" name="hall_hall_style">
       <ColNames>hall_style_id</ColNames>
       <RefTableName>hall_style</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="340" parent="290" name="id">
+    <column id="339" parent="290" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="341" parent="290" name="hall_style_name">
+    <column id="340" parent="290" name="hall_style_name">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="342" parent="290" name="PRIMARY">
+    <key id="341" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="343" parent="291" name="id">
+    <column id="342" parent="291" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="344" parent="291" name="material_name">
+    <column id="343" parent="291" name="material_name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="345" parent="291" name="PRIMARY">
+    <key id="344" parent="291" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="346" parent="292" name="id">
+    <column id="345" parent="292" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="347" parent="292" name="technique_name">
+    <column id="346" parent="292" name="technique_name">
       <Position>2</Position>
       <DataType>varchar(32)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="348" parent="292" name="PRIMARY">
+    <key id="347" parent="292" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="349" parent="293" name="id">
+    <column id="348" parent="293" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="350" parent="293" name="start_time">
+    <column id="349" parent="293" name="start_time">
       <Position>2</Position>
       <DataType>timestamp|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="351" parent="293" name="end_time">
+    <column id="350" parent="293" name="end_time">
       <Position>3</Position>
       <DataType>timestamp|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="352" parent="293" name="excursion_id">
+    <column id="351" parent="293" name="excursion_id">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="353" parent="293" name="fk_timetable_excursion">
+    <index id="352" parent="293" name="fk_timetable_excursion">
       <ColNames>excursion_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="354" parent="293" name="PRIMARY">
+    <key id="353" parent="293" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="355" parent="293" name="fk_timetable_excursion">
+    <foreign-key id="354" parent="293" name="fk_timetable_excursion">
       <ColNames>excursion_id</ColNames>
       <RefTableName>excursion</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="356" parent="294" name="id">
+    <column id="355" parent="294" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="357" parent="294" name="name">
+    <column id="356" parent="294" name="name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="358" parent="294" name="surname">
+    <column id="357" parent="294" name="surname">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="359" parent="294" name="position_id">
+    <column id="358" parent="294" name="position_id">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="360" parent="294" name="username">
+    <column id="359" parent="294" name="username">
       <Position>5</Position>
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="361" parent="294" name="password">
+    <column id="360" parent="294" name="password">
       <Position>6</Position>
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="362" parent="294" name="worker_position">
+    <index id="361" parent="294" name="worker_position">
       <ColNames>position_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="363" parent="294" name="PRIMARY">
+    <key id="362" parent="294" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="364" parent="294" name="worker_position">
+    <foreign-key id="363" parent="294" name="worker_position">
       <ColNames>position_id</ColNames>
       <RefTableName>worker_position</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="365" parent="295" name="worker_id">
+    <column id="364" parent="295" name="worker_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="366" parent="295" name="hall_id">
+    <column id="365" parent="295" name="hall_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="367" parent="295" name="worker_hall_id_hall_id">
+    <index id="366" parent="295" name="worker_hall_id_hall_id">
       <ColNames>hall_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="368" parent="295" name="PRIMARY">
+    <key id="367" parent="295" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>worker_id
 hall_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="369" parent="295" name="worker_hall_id_worker_id">
+    <foreign-key id="368" parent="295" name="worker_hall_id_worker_id">
       <ColNames>worker_id</ColNames>
       <RefTableName>worker</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="370" parent="295" name="worker_hall_id_hall_id">
+    <foreign-key id="369" parent="295" name="worker_hall_id_hall_id">
       <ColNames>hall_id</ColNames>
       <RefTableName>hall</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="371" parent="296" name="id">
+    <column id="370" parent="296" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="372" parent="296" name="position_name">
+    <column id="371" parent="296" name="position_name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="373" parent="296" name="PRIMARY">
+    <key id="372" parent="296" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

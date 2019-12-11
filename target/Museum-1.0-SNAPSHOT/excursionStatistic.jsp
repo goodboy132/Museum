@@ -4,10 +4,6 @@
 <head>
     <style type="text/css">
         <%@ include file="static/exhibits.css"%>
-        table {
-            display: none;
-        }
-        table.open{display: block}
     </style>
 </head>
 <body>
@@ -16,7 +12,7 @@
     <div class="main">
         <div class="table">
             <div class="header_table">Excursion statistic:</div>
-            <table class="excursion-table">
+            <table>
                 <tr>
                     <th width="20%">Material</th>
                     <th width="20%">Count</th>
@@ -28,7 +24,7 @@
                     </tr>
                 </c:forEach>
             </table>
-            <table class="excursion-table">
+            <table>
                 <tr>
                     <th width="20%">Technique</th>
                     <th width="20%">Count</th>
@@ -41,7 +37,7 @@
                     </tr>
                 </c:forEach>
             </table>
-            <table class="excursion-table">
+            <table>
                 <tr>
                     <th width="20%">Author</th>
                     <th width="20%">Count</th>
@@ -83,17 +79,10 @@
     </div>
 
     <div class="right-bar">
-        <a id="statistic-for-employee" href="${pageContext.request.contextPath}/statisticForEmployee">statistic for
+        <a href="${pageContext.request.contextPath}/statisticForEmployee">statistic for
             employee</a>
         <a href="${pageContext.request.contextPath}/statistic">statistic for excursions</a>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script>
-    $( "#statistic-for-employee" ).on( "click", function() {
-        $( ".excursion-table" ).toggleClass("open");
-    });
-</script>
-
 </body>
 </html>
