@@ -80,9 +80,11 @@ public class JDBCWorkerDAO implements WorkerDAO {
   }
 
   public List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime) throws SQLException {
+    System.out.println(startTime);
+    System.out.println(endTime);
     String getAvailableGuidesQuery = "select * from worker w join worker_position wp on w.position_id " +
-            "= wp.id join excursion e on w.id = e.worker_id join time_table tt on   e.id = tt.excursion_id " +
-            "where wp.position_name = 'GUIDE' and tt.start_time between ? and ?";
+            "= wp.id right join excursion e on w.id = e.worker_id join time_table tt on   e.id = tt.excursion_id " +
+            "where wp.position_name = 'GUIDE' and tt.start_time not between ? and ? group by w.id";
     List<Worker> workers = JDBCCRUDDao.
             getAll(connection, getAvailableGuidesQuery, new WorkerMapper(), startTime, endTime);
     if (!workers.isEmpty()) {

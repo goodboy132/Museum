@@ -44,7 +44,7 @@ public class ErrorMessage {
   public static final String HALL_STYLE_NOT_SAVED = "Can't save this hall style";
   public static final String MATERIAL_NOT_SAVED = "Can't save this material";
   public static final String WORKER_NOT_SAVED = "Can't save this worker";
-
+  public static final  String INCORRECT_DATE = "Incorrect input date:\nTry to enter other period";
   public static final String AUTHOR_NOT_UPDATED = "Can't update this author";
   public static final String EXCURSION_NOT_UPDATED = "Can't update this excursion";
   public static final String EXHIBIT_NOT_UPDATED = "Can't update this exhibit";

@@ -1,5 +1,6 @@
 package com.soft.museum.controller.worker;
 
+import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.entity.Worker;
 import com.soft.museum.entity.WorkerPosition;
 import com.soft.museum.entity.dto.WorkerDto;
@@ -43,10 +44,15 @@ public class WorkersServlet extends HttpServlet {
       req.setAttribute("employees", filteredWorkers);
       req.setAttribute("positions", positions);
       req.getRequestDispatcher("employees.jsp").include(req, resp);
-    } catch (NotFoundException | ParseException e) {
-      e.printStackTrace();
+    } catch (NotFoundException e) {
+      resp.sendRedirect(req.getContextPath() + "error?massage="+e.getMessage());
+    }
+    catch (ParseException e){
+      resp.sendRedirect(req.getContextPath() + "error?massage="+ ErrorMessage.INCORRECT_DATE);
     }
   }
+
+
 
   private List<Worker> filteredWorkers(HttpServletRequest req) throws NotFoundException, ParseException {
     List<Worker> workers;
