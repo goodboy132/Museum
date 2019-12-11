@@ -79,7 +79,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
 
   private void setWorkerForExcursion(Excursion excursion) throws SQLException {
     String getWorkerForExcursionQuery = "select * from worker join excursion on worker.id = excursion.worker_id where"+
-            "excursion.id = ?";
+            " excursion.id = ?";
     Optional<Worker> worker = JDBCCRADDao.getOne(
             connection, getWorkerForExcursionQuery, new WorkerMapper(), excursion.getId());
     excursion.setWorker(worker.get());
@@ -111,7 +111,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
   @Override
   public Integer getCountOfExcursionsForPeriod(LocalDateTime startTime, LocalDateTime endTime) throws SQLException {
     String getCountOfExcursionsForPeriod = "select COUNT(*) as count_rows from museum.excursion join museum.time_table"
-            + "on museum.time_table.excursion_id = museum.excursion.id " +
+            + " on museum.time_table.excursion_id = museum.excursion.id " +
             "where museum.time_table.start_time between ? and ?";
     Optional<Integer> count = JDBCCRADDao.getOne(connection, getCountOfExcursionsForPeriod, new CountExcursionMapper(),
             startTime, endTime);
