@@ -9,7 +9,7 @@ public class ServiceFactoryImpl extends ServiceFactory {
   private MaterialService materialService;
   private WorkerService workerService;
   private ExcursionService excursionService;
-
+  private WorkerPositionService workerPositionService;
 
 
   public AuthorService getAuthorService(){
@@ -64,6 +64,14 @@ public class ServiceFactoryImpl extends ServiceFactory {
       excursionService = new ExcursionServiceImpl();
     }
     return excursionService;
+  }
+
+  @Override
+  public WorkerPositionService getWorkerPositionService() {
+    if (workerPositionService == null) {
+      workerPositionService = new WorkerPositionServiceImpl();
+    }
+    return workerPositionService;
   }
 
 

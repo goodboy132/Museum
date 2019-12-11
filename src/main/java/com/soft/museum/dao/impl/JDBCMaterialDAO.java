@@ -28,30 +28,30 @@ public class JDBCMaterialDAO implements MaterialDAO {
   @Override
   public Integer save(Material element) throws SQLException {
     String saveMaterialQuery = "INSERT INTO material(material_name) VALUES(?)";
-    return JDBCCRADDao.save(connection, saveMaterialQuery, element.getName());
+    return JDBCCRUDDao.save(connection, saveMaterialQuery, element.getName());
   }
 
   @Override
   public Integer update(Material element) throws SQLException {
     String updateMaterialQuery = "update material set material_name = ? where id = ?";
-    return JDBCCRADDao.update(connection, updateMaterialQuery, element.getName(), element.getId());
+    return JDBCCRUDDao.update(connection, updateMaterialQuery, element.getName(), element.getId());
   }
 
   @Override
   public Integer delete(Material element) throws SQLException {
     String deleteMaterialQuery = "delete from material where id = ?";
-    return JDBCCRADDao.update(connection, deleteMaterialQuery, element.getId());
+    return JDBCCRUDDao.update(connection, deleteMaterialQuery, element.getId());
   }
 
   @Override
   public Optional<Material> getOneById(Long elementId) throws SQLException {
     String getOneMaterialQuery = "select * from material where id = ?";
-    return JDBCCRADDao.getOne(connection, getOneMaterialQuery, new MaterialMapper(), elementId);
+    return JDBCCRUDDao.getOne(connection, getOneMaterialQuery, new MaterialMapper(), elementId);
   }
 
   @Override
   public List<Material> getAll() throws SQLException {
     String getAllMaterialsQuery = "select * from material";
-    return JDBCCRADDao.getAll(connection, getAllMaterialsQuery, new MaterialMapper());
+    return JDBCCRUDDao.getAll(connection, getAllMaterialsQuery, new MaterialMapper());
   }
 }

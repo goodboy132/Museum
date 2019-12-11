@@ -32,7 +32,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
   @Override
   public Integer save(Excursion element) throws SQLException {
     String saveExcursionQuery = "insert into excursion(worker_id, excursion_name, excursion_program) values(?, ?, ?)";
-    return JDBCCRADDao.
+    return JDBCCRUDDao.
             save(connection, saveExcursionQuery, element.getWorker().getId(), element.getName(), element.getProgram());
   }
 
@@ -41,21 +41,21 @@ public class JDBCExcursionDao implements ExcursionDAO {
   public Integer update(Excursion element) throws SQLException {
     String updateExcursionQuery = "update excursion set worker_id = ?, excursion_name = ?, excursion_program = ?" +
             " where id = ?";
-    return JDBCCRADDao.update(connection, updateExcursionQuery, element.getWorker().getId(), element.getName(),
+    return JDBCCRUDDao.update(connection, updateExcursionQuery, element.getWorker().getId(), element.getName(),
             element.getProgram(), element.getId());
   }
 
   @Override
   public Integer delete(Excursion element) throws SQLException {
     String deleteExcursionQuery = "delete from excursion where id = ?";
-    return JDBCCRADDao.update(connection, deleteExcursionQuery, element.getId());
+    return JDBCCRUDDao.update(connection, deleteExcursionQuery, element.getId());
   }
 
   @Override
   public Optional<Excursion> getOneById(Long elementId) throws SQLException {
     String getExcursionById = "select excursion.id, excursion_name, excursion_program from " +
             "excursion where excursion.id = ?";
-    Optional<Excursion> excursion = JDBCCRADDao.getOne(connection, getExcursionById, new ExcursionMapper(), elementId);
+    Optional<Excursion> excursion = JDBCCRUDDao.getOne(connection, getExcursionById, new ExcursionMapper(), elementId);
     if (excursion.isPresent()) {
       setMappedFieldsToExhibit(excursion.get());
     }
@@ -65,7 +65,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
   @Override
   public List<Excursion> getAll() throws SQLException {
     String getAllExcursionsQuery = "select excursion.id, excursion_name, excursion_program from excursion";
-    List<Excursion> excursions = JDBCCRADDao.getAll(connection, getAllExcursionsQuery, new ExcursionMapper());
+    List<Excursion> excursions = JDBCCRUDDao.getAll(connection, getAllExcursionsQuery, new ExcursionMapper());
     for (Excursion excursion : excursions) {
       setMappedFieldsToExhibit(excursion);
     }
@@ -80,14 +80,14 @@ public class JDBCExcursionDao implements ExcursionDAO {
   private void setWorkerForExcursion(Excursion excursion) throws SQLException {
     String getWorkerForExcursionQuery = "select * from worker join excursion on worker.id = excursion.worker_id where"+
             "excursion.id = ?";
-    Optional<Worker> worker = JDBCCRADDao.getOne(
+    Optional<Worker> worker = JDBCCRUDDao.getOne(
             connection, getWorkerForExcursionQuery, new WorkerMapper(), excursion.getId());
     excursion.setWorker(worker.get());
   }
 
   private void setTimeTableForExcursion(Excursion excursion) throws SQLException {
     String getTimeTableForExcursionQuery = "select * from time_table where time_table.excursion_id = ?";
-    List<TimeTable> timeTables = JDBCCRADDao.getAll(connection, getTimeTableForExcursionQuery, new TimeTableMapper(),
+    List<TimeTable> timeTables = JDBCCRUDDao.getAll(connection, getTimeTableForExcursionQuery, new TimeTableMapper(),
             excursion.getId());
     excursion.setTimeTables(timeTables);
   }
@@ -98,7 +98,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
     String getAvailableExcursionsForPeriodQuery = "select * from museum.excursion join museum.time_table " +
             "on museum.time_table.excursion_id = museum.excursion.id " +
             "where museum.time_table.start_time between ? and ?";
-    List<Excursion> excursions = JDBCCRADDao.getAll(connection, getAvailableExcursionsForPeriodQuery,
+    List<Excursion> excursions = JDBCCRUDDao.getAll(connection, getAvailableExcursionsForPeriodQuery,
             new ExcursionMapper(), startTime, endTime);
     if (!excursions.isEmpty()) {
       for (Excursion excursion : excursions) {
@@ -113,7 +113,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
     String getCountOfExcursionsForPeriod = "select COUNT(*) as count_rows from museum.excursion join museum.time_table"
             + "on museum.time_table.excursion_id = museum.excursion.id " +
             "where museum.time_table.start_time between ? and ?";
-    Optional<Integer> count = JDBCCRADDao.getOne(connection, getCountOfExcursionsForPeriod, new CountExcursionMapper(),
+    Optional<Integer> count = JDBCCRUDDao.getOne(connection, getCountOfExcursionsForPeriod, new CountExcursionMapper(),
             startTime, endTime);
     return count.get();
   }

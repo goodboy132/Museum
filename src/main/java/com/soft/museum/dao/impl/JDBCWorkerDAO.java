@@ -27,7 +27,7 @@ public class JDBCWorkerDAO implements WorkerDAO {
   @Override
   public Integer save(Worker element) throws SQLException {
     String saveWorkerQuery = "insert into worker(name, surname, position_id, username, password) values(?,?,?,?,?)";
-    return JDBCCRADDao.save(connection, saveWorkerQuery, element.getFirstName(), element.getLastName(),
+    return JDBCCRUDDao.save(connection, saveWorkerQuery, element.getFirstName(), element.getLastName(),
             element.getWorkerPosition().getId(), element.getLogin(), element.getPassword());
   }
 
@@ -35,14 +35,14 @@ public class JDBCWorkerDAO implements WorkerDAO {
   public Integer update(Worker element) throws SQLException {
     String updateWorkerQuery = "update worker set name = ?, surname = ?, position_id = ?, " +
             "username = ?, password = ? where id = ?";
-    return JDBCCRADDao.update(connection, updateWorkerQuery, element.getFirstName(), element.getLastName(),
+    return JDBCCRUDDao.update(connection, updateWorkerQuery, element.getFirstName(), element.getLastName(),
             element.getWorkerPosition().getId(), element.getLogin(), element.getPassword(), element.getId());
   }
 
   @Override
   public Integer delete(Worker element) throws SQLException {
     String deleteWorkerQuery = "delete from worker where worker.id = ?";
-    return JDBCCRADDao.update(connection, deleteWorkerQuery, element.getId());
+    return JDBCCRUDDao.update(connection, deleteWorkerQuery, element.getId());
   }
 
   @Override
@@ -50,7 +50,7 @@ public class JDBCWorkerDAO implements WorkerDAO {
     String getOneWorkerWithHallIdQuery = "select worker.id, worker.name, worker.surname, worker.position_id," +
             " worker.username, worker.password from worker where worker.id = ?";
     Optional<Worker> worker =
-            JDBCCRADDao.getOne(connection, getOneWorkerWithHallIdQuery, new WorkerMapper(), elementId);
+            JDBCCRUDDao.getOne(connection, getOneWorkerWithHallIdQuery, new WorkerMapper(), elementId);
     if (worker.isPresent()) {
       setMappedFieldsToWorker(worker.get());
     }
@@ -60,7 +60,7 @@ public class JDBCWorkerDAO implements WorkerDAO {
   @Override
   public List<Worker> getAll() throws SQLException {
     String getAllWorkersQuery = "select * from worker join worker_position on worker.position_id = worker_position.id";
-    List<Worker> workers = JDBCCRADDao.getAll(connection, getAllWorkersQuery, new WorkerMapper());
+    List<Worker> workers = JDBCCRUDDao.getAll(connection, getAllWorkersQuery, new WorkerMapper());
     for (Worker worker : workers) {
       setMappedFieldsToWorker(worker);
     }
@@ -70,7 +70,7 @@ public class JDBCWorkerDAO implements WorkerDAO {
   public List<Worker> getWorkersByPosition(String positionName) throws SQLException {
     String getGuidesQuery = "select * from worker w join worker_position wp on w.position_id =" +
             " wp.id where wp.position_name = ?";
-    List<Worker> workers = JDBCCRADDao.getAll(connection, getGuidesQuery, new WorkerMapper(), positionName);
+    List<Worker> workers = JDBCCRUDDao.getAll(connection, getGuidesQuery, new WorkerMapper(), positionName);
     if (!workers.isEmpty()) {
       for (Worker worker : workers) {
         setMappedFieldsToWorker(worker);
@@ -80,10 +80,10 @@ public class JDBCWorkerDAO implements WorkerDAO {
   }
 
   public List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime) throws SQLException {
-    String getAvailableGuidesQuery = "select * from worker w join worjker_position wp on w.position_id " +
+    String getAvailableGuidesQuery = "select * from worker w join worker_position wp on w.position_id " +
             "= wp.id join excursion e on w.id = e.worker_id join time_table tt on   e.id = tt.excursion_id " +
-            "where wp.position_name = 'GUIDE' and tt.start_time not between ? and ?";
-    List<Worker> workers = JDBCCRADDao.
+            "where wp.position_name = 'GUIDE' and tt.start_time between ? and ?";
+    List<Worker> workers = JDBCCRUDDao.
             getAll(connection, getAvailableGuidesQuery, new WorkerMapper(), startTime, endTime);
     if (!workers.isEmpty()) {
       for (Worker worker : workers) {
@@ -102,21 +102,21 @@ public class JDBCWorkerDAO implements WorkerDAO {
 
   private void setWorkerHalls(Worker worker) throws SQLException {
     String setWorkerHallsQuery = "select * from hall h join worker_hall wh on h.id = wh.hall_id where wh.worker_id = ?";
-    List<Hall> halls = JDBCCRADDao.getAll(connection, setWorkerHallsQuery, new HallMapper(), worker.getId());
+    List<Hall> halls = JDBCCRUDDao.getAll(connection, setWorkerHallsQuery, new HallMapper(), worker.getId());
     worker.setHalls(halls);
   }
 
   private void setWorkerPosition(Worker worker) throws SQLException {
     String setWorkerPositionQuery = "select * from worker_position join worker w on worker_position.id = " +
             "w.position_id where w.id = ?";
-    Optional<WorkerPosition> position = JDBCCRADDao.getOne
+    Optional<WorkerPosition> position = JDBCCRUDDao.getOne
             (connection, setWorkerPositionQuery, new WorkerPositionMapper(), worker.getId());
     worker.setWorkerPosition(position.get());
   }
 
   private void setWorkerExcursions(Worker worker) throws SQLException {
     String setWorkerExcursionsQuery = "select * from excursion e where e.worker_id = ?";
-    List<Excursion> excursions = JDBCCRADDao.getAll
+    List<Excursion> excursions = JDBCCRUDDao.getAll
             (connection, setWorkerExcursionsQuery, new ExcursionMapper(), worker.getId());
     worker.setExcursions(excursions);
   }
@@ -129,7 +129,7 @@ public class JDBCWorkerDAO implements WorkerDAO {
             "join museum.time_table\n" +
             "on time_table.excursion_id = excursion.id\n" +
             "group by worker.surname";
-    Optional<Map<String, Integer>> statisticByExcursions = JDBCCRADDao.getOne(connection, getCountOfFinishedExcursion,
+    Optional<Map<String, Integer>> statisticByExcursions = JDBCCRUDDao.getOne(connection, getCountOfFinishedExcursion,
             new StatisticExcursionMapper());
     return statisticByExcursions.get();
   }
@@ -143,7 +143,7 @@ public class JDBCWorkerDAO implements WorkerDAO {
             "join time_table\n" +
             "on time_table.excursion_id = excursion.id\n" +
             "group by worker.surname";
-    Optional<Map<String, LocalDateTime>> statisticAboutWorkedHours = JDBCCRADDao.getOne(connection,
+    Optional<Map<String, LocalDateTime>> statisticAboutWorkedHours = JDBCCRUDDao.getOne(connection,
             getStatisticAboutWorkedHoursQuery, new WorkedHoursMapper());
     return statisticAboutWorkedHours.get();
   }

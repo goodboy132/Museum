@@ -33,10 +33,30 @@ td {
 }
 .selection-employee{
     margin-left: 5%;
+    margin-right: 5%;
     margin-top: 5%;
     width: 20%;
     height: 100%;
 }
 .hover:hover{
     background-color: #F8F6F7;;
+}
+.selection-employee form{
+    margin-top: 20px;
+
+}
+.filter-position{
+    display: flex;
+    flex-direction: column;
+}
+button{
+    width: 100%;
+    font-size: 16px;
+    font-family: sans-serif;
+    margin-top: 20px;
+}
+.inputs{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
 }

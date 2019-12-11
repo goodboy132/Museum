@@ -1,3 +1,1 @@
-2019-12-10T22:57:48.755 Unknown column 'e.technique_id' in 'field list'
-2019-12-10T22:57:55.649 Unknown column 'e.technique_id' in 'field list'
-2019-12-10T22:58:00.059 Unknown column 'e.technique_id' in 'field list'
+2019-12-11T18:23:48.082 Table 'museum.worjker_position' doesn't exist

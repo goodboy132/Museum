@@ -27,30 +27,30 @@ public class JDBCHallStyleDAO implements HallStyleDAO {
   @Override
   public Integer save(HallStyle element) throws SQLException {
     String saveHallStyleQuery = "INSERT INTO hall_style(hall_style_name) VALUES(?)";
-    return JDBCCRADDao.save(connection, saveHallStyleQuery, element.getName());
+    return JDBCCRUDDao.save(connection, saveHallStyleQuery, element.getName());
   }
 
   @Override
   public Integer update(HallStyle element) throws SQLException {
     String updateHallStyleQuery = "UPDATE hall_style set hall_style_name = ? WHERE id = ?";
-    return JDBCCRADDao.update(connection, updateHallStyleQuery, element.getName(), element.getId());
+    return JDBCCRUDDao.update(connection, updateHallStyleQuery, element.getName(), element.getId());
   }
 
   @Override
   public Integer delete(HallStyle element) throws SQLException {
     String deleteHallStyleQuery = "DELETE FROM hall_style WHERE id = ?";
-    return JDBCCRADDao.update(connection, deleteHallStyleQuery, element.getId());
+    return JDBCCRUDDao.update(connection, deleteHallStyleQuery, element.getId());
   }
 
   @Override
   public Optional<HallStyle> getOneById(Long elementId) throws SQLException {
     String getHallStyleByIdQuery = "SELECT * FROM hall_style WHERE id = ?";
-    return JDBCCRADDao.getOne(connection, getHallStyleByIdQuery, new HallStyleMapper(), elementId);
+    return JDBCCRUDDao.getOne(connection, getHallStyleByIdQuery, new HallStyleMapper(), elementId);
   }
 
   @Override
   public List<HallStyle> getAll() throws SQLException {
     String getAllHallStylesQuery = "SELECT * FROM hall_style";
-    return JDBCCRADDao.getAll(connection, getAllHallStylesQuery, new HallStyleMapper());
+    return JDBCCRUDDao.getAll(connection, getAllHallStylesQuery, new HallStyleMapper());
   }
 }

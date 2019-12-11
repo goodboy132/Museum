@@ -27,20 +27,20 @@ public class JDBCHallDAO implements HallDAO {
   @Override
   public Integer save(Hall element) throws SQLException {
     String saveHallQuery = "INSERT INTO hall(hall_name, hall_style_id) VALUES(?,?)";
-    return JDBCCRADDao.save(connection, saveHallQuery, element.getName(), element.getHallStyle().getId());
+    return JDBCCRUDDao.save(connection, saveHallQuery, element.getName(), element.getHallStyle().getId());
   }
 
   @Override
   public Integer update(Hall element) throws SQLException {
     String updateHallQuery = "UPDATE hall SET hall_name = ?, hall_style_id = ? WHERE id = ?";
-    return JDBCCRADDao.update(connection, updateHallQuery, element.getName(), element.getHallStyle().getId(),
+    return JDBCCRUDDao.update(connection, updateHallQuery, element.getName(), element.getHallStyle().getId(),
             element.getId());
   }
 
   @Override
   public Integer delete(Hall element) throws SQLException {
     String deleteHallQuery = "DELETE FROM hall WHERE id = ?";
-    return JDBCCRADDao.update(connection, deleteHallQuery, element.getId());
+    return JDBCCRUDDao.update(connection, deleteHallQuery, element.getId());
   }
 
   @Override //show without hall_style
@@ -49,7 +49,7 @@ public class JDBCHallDAO implements HallDAO {
             "join hall_style " +
             "on hall.hall_style_id = hall_style.id " +
             "where hall.id = ?";
-    return JDBCCRADDao.getOne(connection, getOneHallByIdQuery, new  HallMapper(), elementId);
+    return JDBCCRUDDao.getOne(connection, getOneHallByIdQuery, new  HallMapper(), elementId);
   }
 
   @Override //show without hall_style
@@ -57,6 +57,6 @@ public class JDBCHallDAO implements HallDAO {
     String getAllHallsQuery = "select * from hall " +
             "join hall_style " +
             "on hall.hall_style_id = hall_style.id;";
-    return JDBCCRADDao.getAll(connection, getAllHallsQuery, new HallMapper());
+    return JDBCCRUDDao.getAll(connection, getAllHallsQuery, new HallMapper());
   }
 }
