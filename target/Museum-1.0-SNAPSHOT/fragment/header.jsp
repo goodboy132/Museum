@@ -28,9 +28,9 @@
             <ul>
                 <li>About museum</li>
                 <li><a href="${pageContext.request.contextPath}/exhibits">Exhibits</a></li>
-                <li>Excursion</li>
+                <li><a href="${pageContext.request.contextPath}/excursions">Excursions</a></li>
                 <li><a href="${pageContext.request.contextPath}/employees">Employees</a></li>
-                <li>Contacts</li>
+                <li><a href="${pageContext.request.contextPath}/statistic">Statistic</a></li>
             </ul>
         </div>
     </div>
