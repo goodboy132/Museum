@@ -10,7 +10,7 @@
 <jsp:include page="fragment/header.jsp"/>
 <div class="selection">
     <div class="main">
-        <div class="table">
+        <div style="margin-bottom: 100px;" class="table">
             <div class="header_table">All Exhibits:</div>
             <table>
                 <tr>

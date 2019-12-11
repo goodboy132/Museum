@@ -11,7 +11,7 @@
 <div class="selection">
     <div class="main">
             <div class="header_table">All Excursions:</div>
-            <table>
+            <table style="margin-bottom: 100px;">
                 <tr>
                     <th width="20%">Excursion name</th>
                     <th width="20%">Program</th>
