@@ -35,7 +35,7 @@ public class ExhibitsStatisticServlet extends HttpServlet {
       req.setAttribute("statisticByAuthor", statisticByAuthor);
       req.setAttribute("statisticByHall", statisticByHall);
     } catch (NotFoundException e) {
-      e.printStackTrace();
+      resp.sendRedirect(req.getContextPath() + "error?massage="+e.getMessage());
     }
     req.getRequestDispatcher("excursionStatistic.jsp").include(req, resp);
   }

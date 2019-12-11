@@ -6,7 +6,7 @@
         <%@ include file="static/employee.css"%>
     </style>
 </head>
-<body>
+<body style="position: relative">
 <jsp:include page="fragment/header.jsp"/>
 <div class="container-employee">
     <table>
@@ -61,6 +61,7 @@
     </div>
 </div>
 </body>
+<jsp:include page="fragment/footer.jsp"/>
 <script>
     document.getElementById("btn").addEventListener('click', filterEmployees);
 

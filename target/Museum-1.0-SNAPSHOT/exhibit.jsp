@@ -6,7 +6,7 @@
         <%@ include file="static/exhibit.css"%>
     </style>
 </head>
-<body>
+<body style="position: relative">
 <jsp:include page="fragment/header.jsp"/>
 <div class="container-exhibit">
     <div class="exhibit-picture">
@@ -33,5 +33,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="fragment/footer.jsp"/>
 </body>
 </html>

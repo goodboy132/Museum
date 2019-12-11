@@ -6,7 +6,7 @@
         <%@ include file="static/exhibits.css"%>
     </style>
 </head>
-<body>
+<body style="position: relative">
 <jsp:include page="fragment/header.jsp"/>
 <div class="selection">
     <div class="main">
@@ -54,6 +54,7 @@
         </ol>
     </div>
 </div>
+<jsp:include page="fragment/footer.jsp"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script>
 

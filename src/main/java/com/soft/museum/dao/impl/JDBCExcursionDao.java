@@ -97,7 +97,7 @@ public class JDBCExcursionDao implements ExcursionDAO {
           throws SQLException {
     String getAvailableExcursionsForPeriodQuery = "select * from museum.excursion join museum.time_table " +
             "on museum.time_table.excursion_id = museum.excursion.id " +
-            "where museum.time_table.start_time between ? and ?";
+            "where museum.time_table.start_time  between ? and ? group by excursion.id";
     List<Excursion> excursions = JDBCCRUDDao.getAll(connection, getAvailableExcursionsForPeriodQuery,
             new ExcursionMapper(), startTime, endTime);
     if (!excursions.isEmpty()) {

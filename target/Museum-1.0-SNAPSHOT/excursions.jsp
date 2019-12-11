@@ -3,14 +3,13 @@
 <html>
 <head>
     <style type="text/css">
-        <%@ include file="static/exhibits.css"%>
+        <%@ include file="static/excursion.css"%>
     </style>
 </head>
-<body>
+<body style="position: relative">
 <jsp:include page="fragment/header.jsp"/>
 <div class="selection">
     <div class="main">
-        <div class="table">
             <div class="header_table">All Excursions:</div>
             <table>
                 <tr>
@@ -26,7 +25,8 @@
                         <td>${excursion.worker.firstName} ${excursion.worker.lastName}</td>
                         <td>
                             <c:forEach var="time_table" items="${excursion.timeTables}">
-                                ${time_table.startTime} - ${time_table.endTime}
+                                ${time_table.startTime.getYear()}/${time_table.startTime.getMonthValue()}/${time_table.startTime.getDayOfMonth()} ${time_table.startTime.getHour()}:${time_table.startTime.getMinute()} -
+                                ${time_table.endTime.getYear()}/${time_table.endTime.getMonthValue()}/${time_table.endTime.getDayOfMonth()} ${time_table.endTime.getHour()}:${time_table.endTime.getMinute()}
                                 <br>
                             </c:forEach>
                         </td>
@@ -34,13 +34,23 @@
                     </tr>
                 </c:forEach>
             </table>
-        </div>
     </div>
-    <div class="right-bar">
-        <p>Start date: <input type="datetime-local" name="calendar">
-        <p>End date: <input type="datetime-local" name="calendar">
+    <div class="filter-position">
+        <h2 style="padding-top: 30px;">Free excursions in current date: </h2>
+        <form action="/excursions" method="get">
+            <div class="inputs">
+                <div style="width: 50%; margin-right:10px">From:</div>
+                <div style="width: 50%">To:</div>
+            </div>
+            <div class="inputs">
+                <input style="width: 50%; margin-right: 10px;" id="from" name="from" type="date">
+                <input style="width: 50%" id="to" name="to" type="date">
+            </div>
+            <button>Filter</button>
+        </form>
     </div>
 </div>
 
 </body>
+<jsp:include page="fragment/footer.jsp"/>
 </html>
