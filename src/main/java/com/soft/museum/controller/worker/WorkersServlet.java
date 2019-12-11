@@ -1,5 +1,6 @@
 package com.soft.museum.controller.worker;
 
+import com.soft.museum.constant.DateParser;
 import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.entity.Worker;
 import com.soft.museum.entity.WorkerPosition;
@@ -60,11 +61,8 @@ public class WorkersServlet extends HttpServlet {
      return workerService.getAllByPosition(req.getParameter("filter"));
     }
     if (req.getParameter("from") != null && req.getParameter("to") != null) {
-      Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("from"));
-      Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("to"));
-      LocalDateTime from = LocalDateTime.ofInstant(date1.toInstant(), ZoneId.systemDefault());
-      LocalDateTime to = LocalDateTime.ofInstant(date2.toInstant(), ZoneId.systemDefault());
-      return workerService.getFreeGuidesForPeriod(from, to);
+      List<LocalDateTime> parsed = DateParser.parse(req.getParameter("from"), req.getParameter("to"));
+      return workerService.getFreeGuidesForPeriod(parsed.get(0),parsed.get(1));
     } else {
       workers = workerService.getAll();
     }

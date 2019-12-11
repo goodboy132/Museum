@@ -47,7 +47,7 @@
         <div class="filter-position">
             <h2 style="padding-top: 30px;">Free guides in current date: </h2>
             <form action="/employees" method="get">
-                <div class="inputs">
+                <div style="margin-top: 20px" class="inputs">
                     <div style="width: 50%; margin-right:10px">From:</div>
                     <div style="width: 50%">To:</div>
                 </div>
