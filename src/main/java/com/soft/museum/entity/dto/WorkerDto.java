@@ -1,9 +1,10 @@
 package com.soft.museum.entity.dto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+@Builder
 public class WorkerDto {
   private Long id;
   private String firstName;

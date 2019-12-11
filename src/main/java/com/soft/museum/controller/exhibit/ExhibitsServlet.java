@@ -37,32 +37,41 @@ public class ExhibitsServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try {
-      List<Exhibit> exhibits;
-      if (req.getParameter("hall") != null) {
-        exhibits = exhibitService.getAllByHall(Long.valueOf(req.getParameter("hall")));
-      } else if (req.getParameter(("author")) != null) {
-        exhibits = exhibitService.getAllByAuthor(Long.valueOf(req.getParameter("author")));
-      } else if (req.getParameter(("guide")) != null) {
-        exhibits = exhibitService.getAllByWorker(Long.valueOf(req.getParameter("guide")));
-      } else {
-        exhibits = exhibitService.getAll();
-      }
-      List<ExhibitDto> exhibitsDto = exhibits.stream().map(exhibit -> new ExhibitDto
-              (exhibit.getId(), exhibit.getName(), exhibit.getDescription(),
-                      new AuthorDto(exhibit.getId(), exhibit.getAuthor().getFirstName(),
-                              exhibit.getAuthor().getLastName()))).collect(Collectors.toList());
-      List<AuthorDto> authors = authorService.getAll().stream().map(author ->
-              new AuthorDto(author.getId(), author.getFirstName(), author.getLastName())).collect(Collectors.toList());
+      List<ExhibitDto> exhibitsDto = getExhibitsDto(req);
       List<Hall> halls = hallService.getAll();
+      List<AuthorDto> authors = authorService.getAll().stream().map(author ->
+              AuthorDto.builder().authorName(author.getFirstName()).authorSurname(author.getLastName()).
+                      id(author.getId()).build()).collect(Collectors.toList());
       List<WorkerDto> guides = workerService.getAll().stream().map
-              (worker -> new WorkerDto(worker.getId(), worker.getFirstName(), worker.getLastName())).collect(Collectors.toList());
+              (worker -> WorkerDto.builder().id(worker.getId()).firstName(worker.getFirstName()).
+                      lastName(worker.getLastName()).build()).collect(Collectors.toList());
       req.setAttribute("authors", authors);
       req.setAttribute("halls", halls);
       req.setAttribute("guides", guides);
       req.setAttribute("exhibits", exhibitsDto);
     } catch (NotFoundException e) {
-      resp.sendRedirect("http://localhost:8080/error");
+      resp.sendRedirect(req.getContextPath() + "error");
     }
     req.getRequestDispatcher("exhibits.jsp").include(req, resp);
   }
+
+
+  private List<ExhibitDto> getExhibitsDto(HttpServletRequest req) throws NotFoundException {
+    List<Exhibit> exhibits;
+    if (req.getParameter("hall") != null) {
+      exhibits = exhibitService.getAllByHall(Long.valueOf(req.getParameter("hall")));
+    } else if (req.getParameter(("author")) != null) {
+      exhibits = exhibitService.getAllByAuthor(Long.valueOf(req.getParameter("author")));
+    } else if (req.getParameter(("guide")) != null) {
+      exhibits = exhibitService.getAllByWorker(Long.valueOf(req.getParameter("guide")));
+    } else {
+      exhibits = exhibitService.getAll();
+    }
+    List<ExhibitDto> exhibitsDto = exhibits.stream().map(exhibit -> ExhibitDto.builder().id(exhibit.getId()).
+            exhibitName(exhibit.getName()).description(exhibit.getDescription()).
+            authorDto(AuthorDto.builder().authorName(exhibit.getAuthor().getFirstName()).id(exhibit.getAuthor().getId()).
+                    authorSurname(exhibit.getAuthor().getLastName()).build()).build()).collect(Collectors.toList());
+    return exhibitsDto;
+  }
+
 }

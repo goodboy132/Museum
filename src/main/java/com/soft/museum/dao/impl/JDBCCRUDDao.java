@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class JDBCCRADDao {
+public class JDBCCRUDDao {
 
 
   public static Integer save(Connection connection, String query, Object... parameters) throws SQLException {

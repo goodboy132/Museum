@@ -27,32 +27,32 @@ public class JDBCAuthorDao implements AuthorDAO {
   @Override
   public Integer save(Author author) throws SQLException {
     String saveQuery = "INSERT INTO author(name,surname,born_date,death_date) VALUES(?,?,?,?)";
-    return JDBCCRADDao.save(connection, saveQuery, author.getFirstName(), author.getLastName(),
+    return JDBCCRUDDao.save(connection, saveQuery, author.getFirstName(), author.getLastName(),
             author.getBornDate(), author.getDeathDate());
   }
 
   @Override
   public Integer update(Author element) throws SQLException {
     String updateQuery = "UPDATE author set name = ?, surname = ?, born_date = ?, death_date = ? WHERE id = ?";
-    return JDBCCRADDao.update(connection, updateQuery, element.getFirstName(), element.getLastName(),
+    return JDBCCRUDDao.update(connection, updateQuery, element.getFirstName(), element.getLastName(),
             element.getBornDate(), element.getDeathDate(), element.getId());
   }
 
   @Override
   public Integer delete(Author element) throws SQLException {
     String deleteQuery = "DELETE FROM author where author.id = ?";
-    return JDBCCRADDao.update(connection, deleteQuery, element.getId());
+    return JDBCCRUDDao.update(connection, deleteQuery, element.getId());
   }
 
   @Override
   public Optional<Author> getOneById(Long elementId) throws SQLException {
     String getByIdQuery = "select * from author where author.id = ?";
-    return JDBCCRADDao.getOne(connection, getByIdQuery, new AuthorMapper(),  elementId);
+    return JDBCCRUDDao.getOne(connection, getByIdQuery, new AuthorMapper(),  elementId);
   }
 
   @Override
   public List<Author> getAll() throws SQLException {
     String getAllQuery = "select * from author";
-    return JDBCCRADDao.getAll(connection, getAllQuery, new AuthorMapper());
+    return JDBCCRUDDao.getAll(connection, getAllQuery, new AuthorMapper());
   }
 }

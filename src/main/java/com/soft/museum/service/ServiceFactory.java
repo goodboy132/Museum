@@ -1,5 +1,6 @@
 package com.soft.museum.service;
 
+import com.soft.museum.entity.Worker;
 import com.soft.museum.service.impl.ServiceFactoryImpl;
 
 public abstract class ServiceFactory {
@@ -11,6 +12,7 @@ public abstract class ServiceFactory {
   public abstract MaterialService getMaterialService();
   public abstract WorkerService getWorkerService();
   public abstract  ExcursionService getExcursionService();
+  public abstract WorkerPositionService getWorkerPositionService();
 
   public static ServiceFactory getInstance(){
     if (serviceFactory == null){
