@@ -15,12 +15,20 @@ import java.util.Optional;
 public class HallStyleServiceImpl implements HallStyleService {
   private HallStyleDAO hallStyleDAO;
 
+  /**
+   * Default constructor
+   */
   HallStyleServiceImpl() {
     hallStyleDAO = JDBCHallStyleDAO.getInstance(Database.getConnection());
   }
 
 
   @Override
+  /**
+   * Method for saving object HallStyle in database
+   *
+   * @return 1 if the save was successful
+   */
   public int save(HallStyle hallStyle) throws NotSavedException {
     try {
       Integer save = hallStyleDAO.save(hallStyle);
@@ -34,6 +42,11 @@ public class HallStyleServiceImpl implements HallStyleService {
     }
   }
 
+  /**
+   * Method, that returns object HallStyle wrapped in Optional by id
+   *
+   * @return Object HallStyle wrapped in Optional
+   */
   @Override
   public Optional<HallStyle> getById(Long id) throws NotFoundException {
     try {
@@ -48,6 +61,11 @@ public class HallStyleServiceImpl implements HallStyleService {
     }
   }
 
+  /**
+   * Method, that updates given object HallStyle
+   *
+   * @return 1 if the update was successful
+   */
   @Override
   public int update(HallStyle hallStyle) throws NotUpdatedException {
     try {
@@ -62,6 +80,11 @@ public class HallStyleServiceImpl implements HallStyleService {
     }
   }
 
+  /**
+   * Method, that deletes given object HallStyle
+   *
+   * @return 1 if the delete was successful
+   */
   @Override
   public int delete(HallStyle hallStyle) throws NotDeletedException {
     try {
@@ -76,6 +99,11 @@ public class HallStyleServiceImpl implements HallStyleService {
     }
   }
 
+  /**
+   * Method, that returns all objects of HallStyle
+   *
+   * @return list of HallStyle
+   */
   @Override
   public List<HallStyle> getAll() throws NotFoundException {
     try {

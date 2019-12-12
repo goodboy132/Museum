@@ -11,5 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WorkerPositionService {
+
+  /**
+   * Method, that returns all objects of WorkerPosition
+   *
+   * @return list of WorkerPositions
+   */
   List<WorkerPosition> getAll() throws NotFoundException;
 }

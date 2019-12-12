@@ -8,55 +8,89 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class that contains CRUD methods.
+ */
 public class JDBCCRUDDao {
 
-
+  /**
+   * Method for saving objects in database.
+   *
+   * @param connection Connection to data base.
+   * @param query      Query for data base.
+   * @param parameters additional parameters.
+   * @return 1 if the object save successfully.
+   */
   public static Integer save(Connection connection, String query, Object... parameters) throws SQLException {
     PreparedStatement preparedStatement = connection.prepareStatement(query);
     addParametersToPreparedStatement(preparedStatement, parameters);
     return preparedStatement.executeUpdate();
-}
+  }
 
+  /**
+   * Method for updating objects in database.
+   *
+   * @param connection Connection to data base.
+   * @param query      Query for data base.
+   * @param parameters additional parameters.
+   * @return 1 if the object update successfully.
+   */
   public static Integer update(Connection connection, String query, Object... parameters) throws SQLException {
     PreparedStatement statement = connection.prepareStatement(query);
     addParametersToPreparedStatement(statement, parameters);
     return statement.executeUpdate();
   }
 
-  public static<T> Optional<T> getOne(Connection connection, String query,  ObjectMapper<T> mapper,
-                                      Object... parameters) throws SQLException {
-      PreparedStatement preparedStatement = connection.prepareStatement(query);
-      if (parameters.length < 1) {
-        ResultSet resultSet = preparedStatement.executeQuery();
+  /**
+   * Method for getting one object from database by id.
+   *
+   * @param connection Connection to data base.
+   * @param query      Query for data base.
+   * @param parameters additional parameters.
+   * @return object wrapped in Optional.
+   * If there is no object with such id value
+   * it returns Optional.empty.
+   */
+  public static <T> Optional<T> getOne(Connection connection, String query, ObjectMapper<T> mapper,
+                                       Object... parameters) throws SQLException {
+    PreparedStatement preparedStatement = connection.prepareStatement(query);
+    if (parameters.length < 1) {
+      ResultSet resultSet = preparedStatement.executeQuery();
+      return Optional.of(mapper.extractFromResultSet(resultSet));
+    } else {
+      addParametersToPreparedStatement(preparedStatement, parameters);
+      ResultSet resultSet = preparedStatement.executeQuery();
+      if (resultSet.next()) {
         return Optional.of(mapper.extractFromResultSet(resultSet));
-      }
-      else {
-        addParametersToPreparedStatement(preparedStatement, parameters);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-          return Optional.of(mapper.extractFromResultSet(resultSet));
-        }
-        else {
-          return Optional.empty();
-        }
+      } else {
+        return Optional.empty();
       }
     }
+  }
 
+  /**
+   * Method, that returns all objects of T type from database
+   *
+   * @return list of objects of T type from database
+   */
   public static <T> List<T> getAll(Connection connection, String query, ObjectMapper<T> mapper, Object... parameters)
           throws SQLException {
     ArrayList<T> list = new ArrayList<>();
-      PreparedStatement preparedStatement = connection.prepareStatement(query);
-      if (parameters.length > 0) {
-        addParametersToPreparedStatement(preparedStatement, parameters);
-      }
-      ResultSet resultSet = preparedStatement.executeQuery();
-      while (resultSet.next()) {
-        list.add(mapper.extractFromResultSet(resultSet));
-      }
+    PreparedStatement preparedStatement = connection.prepareStatement(query);
+    if (parameters.length > 0) {
+      addParametersToPreparedStatement(preparedStatement, parameters);
+    }
+    ResultSet resultSet = preparedStatement.executeQuery();
+    while (resultSet.next()) {
+      list.add(mapper.extractFromResultSet(resultSet));
+    }
     return list;
   }
 
-
+  /**
+   * Method, that add different parameters to prepared statement
+   *
+   */
   static void addParametersToPreparedStatement(PreparedStatement preparedStatement, Object... parameters) {
     try {
       for (int i = 0; i < parameters.length; i++) {

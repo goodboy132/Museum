@@ -29,7 +29,7 @@
             </c:forEach>
         </div>
         <div class="exhibit-about"><b>Receipt Date:</b>
-            ${item.receiptDate}
+            ${item.receiptDate.getYear()}/${item.receiptDate.getMonthValue()}/${item.receiptDate.getDayOfMonth()} ${item.receiptDate.getHour()}:${item.receiptDate.getMinute()}
         </div>
     </div>
 </div>

@@ -18,10 +18,18 @@ public class WorkerServiceImpl implements WorkerService {
 
   private WorkerDAO workerDAO;
 
+  /**
+   * Default constructor
+   */
   public WorkerServiceImpl() {
     workerDAO = JDBCWorkerDAO.getInstance(Database.getConnection());
   }
 
+  /**
+   * Method for saving object Worker in database
+   *
+   * @return true if the save was successful
+   */
   @Override
   public int save(Worker worker) throws NotSavedException {
     try {
@@ -36,6 +44,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
   }
 
+  /**
+   * Method, that updates given object Worker
+   *
+   * @return 1 if the update was successful
+   */
   @Override
   public int update(Worker worker) throws NotUpdatedException {
     try {
@@ -50,6 +63,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
   }
 
+  /**
+   * Method, that deletes given object Worker
+   *
+   * @return 1 if the delete was successful
+   */
   @Override
   public int delete(Worker worker) throws NotDeletedException {
     try {
@@ -64,6 +82,12 @@ public class WorkerServiceImpl implements WorkerService {
     }
   }
 
+  /**
+   * Method, that returns object Worker wrapped in Optional by id
+   *
+   * @param id Worker id
+   * @return Object Worker wrapped in Optional
+   */
   @Override
   public Optional<Worker> getOneById(Long id) throws NotFoundException {
     try {
@@ -78,6 +102,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
   }
 
+  /**
+   * Method, that returns all objects of Workers
+   *
+   * @return list of Workers
+   */
   @Override
   public List<Worker> getAll() throws NotFoundException {
     try {
@@ -92,6 +121,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
   }
 
+  /**
+   * Method, that returns all objects of Workers by there position
+   *
+   * @return list of Exhibits by worker
+   */
   @Override
   public List<Worker> getAllByPosition(String position) throws NotFoundException {
     try {
@@ -106,6 +140,14 @@ public class WorkerServiceImpl implements WorkerService {
     }
   }
 
+  /**
+   * Method, that returns count of Workers, which don't have excursions in period
+   * from startTime to endTime
+   *
+   * @param startTime start time of period
+   * @param endTime   end time of period
+   * @return list of Workers in this period
+   */
   @Override
   public List<Worker> getFreeGuidesForPeriod(LocalDateTime startTime, LocalDateTime endTime) throws NotFoundException {
     try {
@@ -120,6 +162,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
   }
 
+  /**
+   * Method, that returns statistic about count of excursions
+   *
+   * @return map where key is name of Worker, value is there count
+   */
   @Override
   public Map<String, Integer> getStatisticByExcursions() throws NotFoundException {
     try {
@@ -134,6 +181,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
   }
 
+  /**
+   * Method, that returns statistic about worked hours
+   *
+   * @return map where key is name of Worker, value is  count of his worked hours
+   */
   @Override
   public Map<String, LocalDateTime> getStatisticAboutWorkedHours() throws NotFoundException {
     try {

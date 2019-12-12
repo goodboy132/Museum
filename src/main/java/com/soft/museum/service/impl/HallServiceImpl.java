@@ -15,10 +15,18 @@ import java.util.Optional;
 public class HallServiceImpl implements HallService {
   private HallDAO hallDAO;
 
+  /**
+   * Default constructor
+   */
   public HallServiceImpl() {
     hallDAO = JDBCHallDAO.getInstance(Database.getConnection());
   }
 
+  /**
+   * Method for saving object Hall in database
+   *
+   * @return 1 if the save was successful
+   */
   @Override
   public int save(Hall hall) throws NotSavedException {
     try {
@@ -31,6 +39,11 @@ public class HallServiceImpl implements HallService {
     }
   }
 
+  /**
+   * Method, that updates given object Hall
+   *
+   * @return 1 if the update was successful
+   */
   @Override
   public int update(Hall hall) throws NotUpdatedException {
     try {
@@ -45,6 +58,11 @@ public class HallServiceImpl implements HallService {
     }
   }
 
+  /**
+   * Method, that deletes given object Hall
+   *
+   * @return 1 if the delete was successful
+   */
   @Override
   public int delete(Hall hall) throws NotDeletedException {
     try {
@@ -59,6 +77,12 @@ public class HallServiceImpl implements HallService {
     }
   }
 
+  /**
+   * Method, that returns object Hall wrapped in Optional by id
+   *
+   * @param id Hall id
+   * @return Object Hall wrapped in Optional
+   */
   @Override
   public Optional<Hall> getById(Long id) throws NotFoundException {
     try {
@@ -73,6 +97,11 @@ public class HallServiceImpl implements HallService {
     }
   }
 
+  /**
+   * Method, that returns all objects of Hall
+   *
+   * @return list of Hall
+   */
   @Override
   public List<Hall> getAll() throws NotFoundException {
     try {

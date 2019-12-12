@@ -16,12 +16,19 @@ import java.util.Optional;
 public class ExhibitServiceImpl implements ExhibitService {
   private ExhibitDAO exhibitDAO;
 
+  /**
+   * Default constructor
+   */
   ExhibitServiceImpl() {
     exhibitDAO = JDBCExhibitDAO.getInstance(Database.getConnection());
   }
 
-
-  @Override //problem
+  /**
+   * Method for saving object Exhibit in database
+   *
+   * @return true if the save was successful
+   */
+  @Override
   public int save(Exhibit exhibit) throws NotSavedException {
     try {
       Integer save = exhibitDAO.save(exhibit);
@@ -35,6 +42,11 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
+  /**
+   * Method, that updates given object Exhibit
+   *
+   * @return 1 if the update was successful
+   */
   @Override
   public int update(Exhibit exhibit) throws NotUpdatedException {
     try {
@@ -49,6 +61,11 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
+  /**
+   * Method, that deletes given object Exhibit
+   *
+   * @return 1 if the delete was successful
+   */
   @Override
   public int delete(Exhibit exhibit) throws NotDeletedException {
     try {
@@ -63,6 +80,11 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
+  /**
+   * Method, that returns object Exhibit wrapped in Optional by id
+   *
+   * @return Object Exhibit wrapped in Optional
+   */
   @Override
   public Exhibit getById(Long id) throws NotFoundException {
     try {
@@ -77,14 +99,18 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
+  /**
+   * Method, that returns all objects of Exhibits
+   *
+   * @return list of Exhibits
+   */
   @Override
   public List<Exhibit> getAll() throws NotFoundException {
     try {
       List<Exhibit> all = exhibitDAO.getAll();
-      if (!all.isEmpty()){
+      if (!all.isEmpty()) {
         return all;
-      }
-      else {
+      } else {
         throw new NotFoundException(ErrorMessage.EXHIBITS_NOT_FOUND);
       }
     } catch (SQLException e) {
@@ -92,6 +118,12 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
+  /**
+   * Method, that returns all objects of Exhibits by author
+   *
+   * @param authorId Author id
+   * @return list of Exhibits by author
+   */
   @Override
   public List<Exhibit> getAllByAuthor(Long authorId) throws NotFoundException {
     try {
@@ -99,13 +131,19 @@ public class ExhibitServiceImpl implements ExhibitService {
       if (!allByAuthor.isEmpty()) {
         return allByAuthor;
       } else {
-        throw new NotFoundException(ErrorMessage.EXHIBITS_WITH_AUTHOR_NOT_FOUND +authorId);
+        throw new NotFoundException(ErrorMessage.EXHIBITS_WITH_AUTHOR_NOT_FOUND + authorId);
       }
     } catch (SQLException e) {
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
+  /**
+   * Method, that returns all objects of Exhibits by worker
+   *
+   * @param workerId Worker id
+   * @return list of Exhibits by worker
+   */
   @Override
   public List<Exhibit> getAllByWorker(Long workerId) throws NotFoundException {
     try {
@@ -120,6 +158,12 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
+  /**
+   * Method, that returns all objects of Exhibits by hall
+   *
+   * @param hallId Hall id
+   * @return list of Exhibits by hall
+   */
   @Override
   public List<Exhibit> getAllByHall(Long hallId) throws NotFoundException {
     try {
@@ -134,6 +178,11 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
+  /**
+   * Method, that returns statistic by exhibit's material
+   *
+   * @return map where key is name of Exhibit, value is there count
+   */
   @Override
   public Map<String, Integer> getStatisticByMaterial() throws NotFoundException {
     try {
@@ -148,6 +197,11 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
+  /**
+   * Method, that returns statistic by exhibit's technique
+   *
+   * @return map where key is name of Exhibit, value is there count
+   */
   @Override
   public Map<String, Integer> getStatisticByTechnique() throws NotFoundException {
     try {
@@ -162,6 +216,11 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
+  /**
+   * Method, that returns statistic by exhibit's author
+   *
+   * @return map where key is name of Exhibit, value is there count
+   */
   @Override
   public Map<String, Integer> getStatisticByAuthor() throws NotFoundException {
     try {
@@ -176,6 +235,11 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
   }
 
+  /**
+   * Method, that returns statistic by exhibit's hall
+   *
+   * @return map where key is name of Exhibit, value is there count
+   */
   @Override
   public Map<String, Integer> getStatisticByHall() throws NotFoundException {
     try {

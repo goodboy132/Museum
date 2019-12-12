@@ -15,10 +15,19 @@ import java.util.Optional;
 
 public class WorkerPositionServiceImpl implements WorkerPositionService {
   private WorkerPositionDAO workerPositionDAO;
+
+  /**
+   * Default constructor
+   */
   public WorkerPositionServiceImpl() {
     workerPositionDAO = JDBCWorkerPositionDao.getInstance(Database.getConnection());
   }
 
+  /**
+   * Method, that returns all objects of WorkerPosition
+   *
+   * @return list of WorkerPositions
+   */
   @Override
   public List<WorkerPosition> getAll() throws NotFoundException {
     try {

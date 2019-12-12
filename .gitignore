@@ -22,7 +22,8 @@
 hs_err_pid*
 
 # IntellijIdea files
-!.idea/
+.idea/
 .target/
 Exceptions.txt
 
+/.idea/

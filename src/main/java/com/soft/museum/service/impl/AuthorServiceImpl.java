@@ -16,10 +16,18 @@ import java.util.Optional;
 public class AuthorServiceImpl implements AuthorService {
   private AuthorDAO authorDAO;
 
+  /**
+   * Default constructor
+   */
   AuthorServiceImpl() {
     authorDAO = JDBCAuthorDao.getInstance(Database.getConnection());
   }
 
+  /**
+   * Method for saving object Author in database
+   *
+   * @return true if the save was successful
+   */
   @Override
   public boolean save(Author author) throws NotSavedException {
     try {
@@ -34,6 +42,11 @@ public class AuthorServiceImpl implements AuthorService {
     }
   }
 
+  /**
+   * Method, that returns object Author wrapped in Optional by id
+   *
+   * @return Object Author wrapped in Optional
+   */
   @Override
   public Optional<Author> getById(Long id) throws NotFoundException {
     try {
@@ -48,11 +61,16 @@ public class AuthorServiceImpl implements AuthorService {
     }
   }
 
+  /**
+   * Method, that updates given object Author
+   *
+   * @return 1 if the update was successful
+   */
   @Override
   public int update(Author author) throws NotUpdatedException {
     try {
       Integer update = authorDAO.update(author);
-      if (update > 0 ) {
+      if (update > 0) {
         return update;
       } else {
         throw new NotUpdatedException(ErrorMessage.AUTHOR_NOT_UPDATED);
@@ -62,6 +80,11 @@ public class AuthorServiceImpl implements AuthorService {
     }
   }
 
+  /**
+   * Method, that deletes given object Author
+   *
+   * @return 1 if the delete was successful
+   */
   @Override
   public int delete(Author author) throws NotDeletedException {
     try {
@@ -76,6 +99,11 @@ public class AuthorServiceImpl implements AuthorService {
     }
   }
 
+  /**
+   * Method, that returns all objects of Author
+   *
+   * @return list of Author
+   */
   @Override
   public List<Author> getAll() throws NotFoundException {
     try {

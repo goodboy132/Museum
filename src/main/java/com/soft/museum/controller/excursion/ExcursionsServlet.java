@@ -25,15 +25,30 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class processes requests for /excursions url.
+ */
 @WebServlet("/excursions")
 public class ExcursionsServlet extends HttpServlet {
   private ExcursionService excursionService;
 
+  /**
+   * Method initializes required resources
+   */
   @Override
   public void init() {
     excursionService = ServiceFactory.getInstance().getExcursionService();
   }
 
+  /**
+   * Method processes GET request for /excursions url.
+   * and returns /excursions.jsp with list of excursions
+   *
+   * @param req HTTP request object
+   * @param resp HTTP response object
+   * @throws ServletException
+   * @throws IOException
+   */
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try {
@@ -47,7 +62,17 @@ public class ExcursionsServlet extends HttpServlet {
     req.getRequestDispatcher("excursions.jsp").include(req, resp);
   }
 
+<<<<<<< HEAD
 
+=======
+  /**
+   * Method processes GET for filtering Excursions by different parameters.
+
+   * @param req HTTP request object
+   * @throws ServletException
+   * @throws IOException
+   */
+>>>>>>> c5b1599d411692d909d7632e55a5bab304607618
   private List<Excursion> filterExcursions(HttpServletRequest req) throws NotFoundException, ParseException {
     List<Excursion> excursions;
     if (req.getParameter("from") != null && req.getParameter("to") != null) {

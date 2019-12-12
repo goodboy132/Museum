@@ -15,10 +15,18 @@ import java.util.Optional;
 public class MaterialServiceImpl implements MaterialService {
   private MaterialDAO materialDAO;
 
+  /**
+   * Default constructor
+   */
   public MaterialServiceImpl() {
     materialDAO = JDBCMaterialDAO.getInstance(Database.getConnection());
   }
 
+  /**
+   * Method for saving object Material in database
+   *
+   * @return 1 if the save was successful
+   */
   @Override
   public int save(Material material) throws NotSavedException {
     try {
@@ -33,6 +41,11 @@ public class MaterialServiceImpl implements MaterialService {
     }
   }
 
+  /**
+   * Method, that updates given object Material
+   *
+   * @return 1 if the update was successful
+   */
   @Override
   public int update(Material material) throws NotUpdatedException {
     try {
@@ -47,6 +60,11 @@ public class MaterialServiceImpl implements MaterialService {
     }
   }
 
+  /**
+   * Method, that deletes given object Material
+   *
+   * @return 1 if the delete was successful
+   */
   @Override
   public int delete(Material material) throws NotDeletedException {
     try {
@@ -61,6 +79,12 @@ public class MaterialServiceImpl implements MaterialService {
     }
   }
 
+  /**
+   * Method, that returns object Material wrapped in Optional by id
+   *
+   * @param id Material id
+   * @return Object Material wrapped in Optional
+   */
   @Override
   public Optional<Material> getById(Long id) throws NotFoundException {
     try {
@@ -75,6 +99,11 @@ public class MaterialServiceImpl implements MaterialService {
     }
   }
 
+  /**
+   * Method, that returns all objects of Material
+   *
+   * @return list of Materials
+   */
   @Override
   public List<Material> getAll() throws NotFoundException {
     try {
