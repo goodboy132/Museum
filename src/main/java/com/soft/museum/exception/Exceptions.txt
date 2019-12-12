@@ -1,1 +1,0 @@
-2019-12-11T18:23:48.082 Table 'museum.worjker_position' doesn't exist

@@ -20,26 +20,6 @@ public class WorkerPositionServiceImpl implements WorkerPositionService {
   }
 
   @Override
-  public int save(WorkerPosition workerPosition) throws NotSavedException {
-    return 0;
-  }
-
-  @Override
-  public int update(WorkerPosition workerPosition) throws NotUpdatedException {
-    return 0;
-  }
-
-  @Override
-  public int delete(WorkerPosition workerPosition) throws NotDeletedException {
-    return 0;
-  }
-
-  @Override
-  public Optional<WorkerPosition> getOneById(Long id) throws NotFoundException {
-    return Optional.empty();
-  }
-
-  @Override
   public List<WorkerPosition> getAll() throws NotFoundException {
     try {
       List<WorkerPosition> positions = workerPositionDAO.getAll();
@@ -49,7 +29,6 @@ public class WorkerPositionServiceImpl implements WorkerPositionService {
         throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }

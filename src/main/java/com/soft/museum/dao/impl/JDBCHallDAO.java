@@ -43,7 +43,7 @@ public class JDBCHallDAO implements HallDAO {
     return JDBCCRUDDao.update(connection, deleteHallQuery, element.getId());
   }
 
-  @Override //show without hall_style
+  @Override
   public Optional<Hall> getOneById(Long elementId) throws SQLException {
     String getOneHallByIdQuery = "select * from hall " +
             "join hall_style " +

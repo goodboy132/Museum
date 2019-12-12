@@ -30,7 +30,6 @@ public class ExcursionServiceImpl implements ExcursionService {
         throw new NotSavedException(ErrorMessage.EXCURSION_NOT_SAVED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -45,7 +44,6 @@ public class ExcursionServiceImpl implements ExcursionService {
         throw new NotDeletedException(ErrorMessage.EXCURSION_NOT_DELETED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -60,7 +58,6 @@ public class ExcursionServiceImpl implements ExcursionService {
         throw new NotUpdatedException(ErrorMessage.EXCURSION_NOT_UPDATED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -75,7 +72,6 @@ public class ExcursionServiceImpl implements ExcursionService {
         throw new NotFoundException(ErrorMessage.EXCURSION_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -90,7 +86,6 @@ public class ExcursionServiceImpl implements ExcursionService {
         throw new NotFoundException(ErrorMessage.EXCURSIONS_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -106,7 +101,6 @@ public class ExcursionServiceImpl implements ExcursionService {
         throw new NotFoundException(ErrorMessage.NO_AVAILABLE_EXCURSIONS_IN_THIS_PERIOD);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -122,7 +116,6 @@ public class ExcursionServiceImpl implements ExcursionService {
         throw new NotFoundException(ErrorMessage.NO_AVAILABLE_EXCURSIONS_IN_THIS_PERIOD);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }

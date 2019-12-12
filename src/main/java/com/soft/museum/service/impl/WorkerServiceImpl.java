@@ -32,7 +32,6 @@ public class WorkerServiceImpl implements WorkerService {
         throw new NotSavedException(ErrorMessage.WORKER_NOT_SAVED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -47,7 +46,6 @@ public class WorkerServiceImpl implements WorkerService {
         throw new NotUpdatedException(ErrorMessage.WORKER_NOT_UPDATED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -62,7 +60,6 @@ public class WorkerServiceImpl implements WorkerService {
         throw new NotDeletedException(ErrorMessage.WORKER_NOT_DELETED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -77,7 +74,6 @@ public class WorkerServiceImpl implements WorkerService {
         throw new NotFoundException(ErrorMessage.WORKER_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -92,7 +88,6 @@ public class WorkerServiceImpl implements WorkerService {
         throw new NotFoundException(ErrorMessage.WORKERS_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -107,7 +102,6 @@ public class WorkerServiceImpl implements WorkerService {
         throw new NotFoundException(ErrorMessage.WORKERS_WITH_WORKER_POSITION_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -122,7 +116,6 @@ public class WorkerServiceImpl implements WorkerService {
         throw new NotFoundException(ErrorMessage.NO_FREE_TOUR_GUIDE_IN_THIS_PERIOD);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -137,7 +130,6 @@ public class WorkerServiceImpl implements WorkerService {
         throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_WORKER_EXCURSION);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -152,7 +144,6 @@ public class WorkerServiceImpl implements WorkerService {
         throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_WORKED_HOURS);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }

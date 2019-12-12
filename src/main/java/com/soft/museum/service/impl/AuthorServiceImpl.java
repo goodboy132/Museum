@@ -30,7 +30,6 @@ public class AuthorServiceImpl implements AuthorService {
         throw new NotSavedException(ErrorMessage.AUTHOR_NOT_SAVED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -45,7 +44,6 @@ public class AuthorServiceImpl implements AuthorService {
         throw new NotFoundException(ErrorMessage.AUTHOR_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -60,7 +58,6 @@ public class AuthorServiceImpl implements AuthorService {
         throw new NotUpdatedException(ErrorMessage.AUTHOR_NOT_UPDATED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -75,12 +72,11 @@ public class AuthorServiceImpl implements AuthorService {
         throw new NotDeletedException(ErrorMessage.AUTHOR_NOT_DELETED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
-  @Override //need test
+  @Override
   public List<Author> getAll() throws NotFoundException {
     try {
       List<Author> allAuthors = authorDAO.getAll();
@@ -90,7 +86,6 @@ public class AuthorServiceImpl implements AuthorService {
         throw new NotFoundException(ErrorMessage.AUTHORS_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }

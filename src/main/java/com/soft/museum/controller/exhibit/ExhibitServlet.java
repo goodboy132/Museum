@@ -1,5 +1,6 @@
 package com.soft.museum.controller.exhibit;
 
+import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.entity.Exhibit;
 import com.soft.museum.exception.NotFoundException;
 import com.soft.museum.service.ExhibitService;
@@ -17,7 +18,7 @@ public class ExhibitServlet extends HttpServlet {
   private ExhibitService exhibitService;
 
   @Override
-  public void init() throws ServletException {
+  public void init() {
     exhibitService = ServiceFactory.getInstance().getExhibitService();
   }
 
@@ -29,7 +30,7 @@ public class ExhibitServlet extends HttpServlet {
       req.setAttribute("item",exhibit);
       req.getRequestDispatcher("exhibit.jsp").forward(req,resp);
     } catch (NotFoundException e) {
-      e.printStackTrace();
+      resp.sendRedirect(req.getContextPath() + "error?massage=" + e.getMessage());
     }
 
   }

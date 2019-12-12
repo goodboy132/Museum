@@ -29,7 +29,6 @@ public class MaterialServiceImpl implements MaterialService {
         throw new NotSavedException(ErrorMessage.MATERIAL_NOT_SAVED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -44,7 +43,6 @@ public class MaterialServiceImpl implements MaterialService {
         throw new NotUpdatedException(ErrorMessage.MATERIAL_NOT_UPDATED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -59,7 +57,6 @@ public class MaterialServiceImpl implements MaterialService {
         throw new NotDeletedException(ErrorMessage.MATERIAL_NOT_DELETED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -74,7 +71,6 @@ public class MaterialServiceImpl implements MaterialService {
         throw new NotFoundException(ErrorMessage.MATERIAL_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -89,7 +85,6 @@ public class MaterialServiceImpl implements MaterialService {
         throw new NotFoundException(ErrorMessage.MATERIALS_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(e.getMessage());
     }
   }

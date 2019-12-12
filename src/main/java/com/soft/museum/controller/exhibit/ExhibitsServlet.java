@@ -1,5 +1,6 @@
 package com.soft.museum.controller.exhibit;
 
+import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.entity.Exhibit;
 import com.soft.museum.entity.Hall;
 import com.soft.museum.entity.Worker;
@@ -50,7 +51,7 @@ public class ExhibitsServlet extends HttpServlet {
       req.setAttribute("guides", guides);
       req.setAttribute("exhibits", exhibitsDto);
     } catch (NotFoundException e) {
-      resp.sendRedirect(req.getContextPath() + "error");
+      resp.sendRedirect(req.getContextPath() + "error?massage=" + e.getMessage());
     }
     req.getRequestDispatcher("exhibits.jsp").include(req, resp);
   }

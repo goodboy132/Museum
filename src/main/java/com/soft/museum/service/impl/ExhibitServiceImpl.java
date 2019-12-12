@@ -31,12 +31,11 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotSavedException(ErrorMessage.EXHIBIT_NOT_SAVED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
-  @Override //problem
+  @Override
   public int update(Exhibit exhibit) throws NotUpdatedException {
     try {
       Integer update = exhibitDAO.update(exhibit);
@@ -46,7 +45,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotUpdatedException(ErrorMessage.EXHIBIT_NOT_UPDATED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -61,7 +59,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotDeletedException(ErrorMessage.EXHIBIT_NOT_DELETED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -76,7 +73,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotFoundException(ErrorMessage.EXHIBIT_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -92,7 +88,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotFoundException(ErrorMessage.EXHIBITS_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -107,7 +102,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotFoundException(ErrorMessage.EXHIBITS_WITH_AUTHOR_NOT_FOUND +authorId);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -122,7 +116,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotFoundException(ErrorMessage.EXHIBITS_BY_WORKER_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -137,7 +130,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotFoundException(ErrorMessage.EXHIBITS_IN_HALL_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -152,7 +144,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_EXHIBIT_MATERIAL);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -167,7 +158,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_EXHIBIT_TECHNIQUE);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -182,7 +172,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_EXHIBIT_AUTHOR);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -197,7 +186,6 @@ public class ExhibitServiceImpl implements ExhibitService {
         throw new NotFoundException(ErrorMessage.NO_STATISTIC_ABOUT_EXHIBIT_HALL);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }

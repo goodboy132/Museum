@@ -27,7 +27,6 @@ public class HallServiceImpl implements HallService {
         return save;
       } throw new NotSavedException(ErrorMessage.HALL_NOT_SAVED);
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -42,7 +41,6 @@ public class HallServiceImpl implements HallService {
         throw new NotUpdatedException(ErrorMessage.HALL_NOT_UPDATED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -57,7 +55,6 @@ public class HallServiceImpl implements HallService {
         throw new NotDeletedException(ErrorMessage.HALL_NOT_DELETED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -72,7 +69,6 @@ public class HallServiceImpl implements HallService {
         throw new NotFoundException(ErrorMessage.HALL_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
@@ -87,7 +83,6 @@ public class HallServiceImpl implements HallService {
         throw new NotFoundException(ErrorMessage.HALLS_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }

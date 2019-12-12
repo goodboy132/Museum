@@ -28,7 +28,6 @@ public class ErrorMessage {
   public static final String NO_STATISTIC_ABOUT_EXHIBIT_HALL = "There is no statistic about exhibit's hall";
   public static final String NO_STATISTIC_ABOUT_WORKER_EXCURSION = "There is no statistic about worker's excursion";
   public static final String NO_STATISTIC_ABOUT_WORKED_HOURS = "There is no statistic about worked hours";
-
   public static final String AUTHOR_NOT_DELETED = "Can't delete this author";
   public static final String EXCURSION_NOT_DELETED = "Can't delete this excursion";
   public static final String EXHIBIT_NOT_DELETED = "Can't delete this exhibit";
@@ -36,7 +35,6 @@ public class ErrorMessage {
   public static final String HALL_STYLE_NOT_DELETED = "Can't delete this hall style";
   public static final String MATERIAL_NOT_DELETED = "Can't delete this material";
   public static final String WORKER_NOT_DELETED = "Can't delete this worker";
-
   public static final String AUTHOR_NOT_SAVED = "Can't save this author";
   public static final String EXCURSION_NOT_SAVED = "Can't save this excursion";
   public static final String EXHIBIT_NOT_SAVED = "Can't save this exhibit";
