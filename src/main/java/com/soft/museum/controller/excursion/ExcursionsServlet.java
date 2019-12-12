@@ -1,7 +1,10 @@
 package com.soft.museum.controller.excursion;
 
+import com.soft.museum.constant.DateParser;
+import com.soft.museum.constant.ErrorMessage;
 import com.soft.museum.entity.Excursion;
 import com.soft.museum.entity.TimeTable;
+import com.soft.museum.entity.Worker;
 import com.soft.museum.exception.NotFoundException;
 import com.soft.museum.service.ExcursionService;
 import com.soft.museum.service.ServiceFactory;
@@ -13,27 +16,67 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class processes requests for /excursions url.
+ */
 @WebServlet("/excursions")
 public class ExcursionsServlet extends HttpServlet {
   private ExcursionService excursionService;
 
+  /**
+   * Method initializes required resources
+   */
   @Override
   public void init() {
     excursionService = ServiceFactory.getInstance().getExcursionService();
   }
 
+  /**
+   * Method processes GET request for /excursions url.
+   * and returns /excursions.jsp with list of excursions
+   *
+   * @param req HTTP request object
+   * @param resp HTTP response object
+   * @throws ServletException
+   * @throws IOException
+   */
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try {
-      List<Excursion> excursions = excursionService.getAll();
-      System.out.println(excursions);
+      List<Excursion> excursions = filterExcursions(req);
       req.setAttribute("excursions", excursions);
     } catch (NotFoundException e) {
-      resp.sendError(1,e.getLocalizedMessage());
+      resp.sendRedirect(req.getContextPath() + "error?massage=" + e.getMessage());
+    } catch (ParseException e) {
+      resp.sendRedirect(req.getContextPath() + "error?massage=" + ErrorMessage.INCORRECT_DATE);
     }
     req.getRequestDispatcher("excursions.jsp").include(req, resp);
+  }
+
+  /**
+   * Method processes GET for filtering Excursions by different parameters.
+
+   * @param req HTTP request object
+   * @throws ServletException
+   * @throws IOException
+   */
+  private List<Excursion> filterExcursions(HttpServletRequest req) throws NotFoundException, ParseException {
+    List<Excursion> excursions;
+    if (req.getParameter("from") != null && req.getParameter("to") != null) {
+      List<LocalDateTime> parsed = DateParser.parse(req.getParameter("from"), req.getParameter("to"));
+      excursions = excursionService.getAvailableExcursionsForPeriod(parsed.get(0), parsed.get(1));
+    } else {
+      excursions = excursionService.getAll();
+    }
+    return excursions;
   }
 }

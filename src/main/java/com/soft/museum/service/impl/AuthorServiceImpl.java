@@ -16,10 +16,18 @@ import java.util.Optional;
 public class AuthorServiceImpl implements AuthorService {
   private AuthorDAO authorDAO;
 
+  /**
+   * Default constructor
+   */
   AuthorServiceImpl() {
     authorDAO = JDBCAuthorDao.getInstance(Database.getConnection());
   }
 
+  /**
+   * Method for saving object Author in database
+   *
+   * @return true if the save was successful
+   */
   @Override
   public boolean save(Author author) throws NotSavedException {
     try {
@@ -30,11 +38,15 @@ public class AuthorServiceImpl implements AuthorService {
         throw new NotSavedException(ErrorMessage.AUTHOR_NOT_SAVED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotSavedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
+  /**
+   * Method, that returns object Author wrapped in Optional by id
+   *
+   * @return Object Author wrapped in Optional
+   */
   @Override
   public Optional<Author> getById(Long id) throws NotFoundException {
     try {
@@ -45,26 +57,34 @@ public class AuthorServiceImpl implements AuthorService {
         throw new NotFoundException(ErrorMessage.AUTHOR_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
+  /**
+   * Method, that updates given object Author
+   *
+   * @return 1 if the update was successful
+   */
   @Override
   public int update(Author author) throws NotUpdatedException {
     try {
       Integer update = authorDAO.update(author);
-      if (update > 0 ) {
+      if (update > 0) {
         return update;
       } else {
         throw new NotUpdatedException(ErrorMessage.AUTHOR_NOT_UPDATED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotUpdatedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
+  /**
+   * Method, that deletes given object Author
+   *
+   * @return 1 if the delete was successful
+   */
   @Override
   public int delete(Author author) throws NotDeletedException {
     try {
@@ -75,12 +95,16 @@ public class AuthorServiceImpl implements AuthorService {
         throw new NotDeletedException(ErrorMessage.AUTHOR_NOT_DELETED);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotDeletedException(ErrorMessage.SQL_EXCEPTION);
     }
   }
 
-  @Override //need test
+  /**
+   * Method, that returns all objects of Author
+   *
+   * @return list of Author
+   */
+  @Override
   public List<Author> getAll() throws NotFoundException {
     try {
       List<Author> allAuthors = authorDAO.getAll();
@@ -90,7 +114,6 @@ public class AuthorServiceImpl implements AuthorService {
         throw new NotFoundException(ErrorMessage.AUTHORS_NOT_FOUND);
       }
     } catch (SQLException e) {
-      ExceptionLogger.getInstance().log(e.getLocalizedMessage());
       throw new NotFoundException(ErrorMessage.SQL_EXCEPTION);
     }
   }

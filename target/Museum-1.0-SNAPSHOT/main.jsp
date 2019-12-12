@@ -15,7 +15,7 @@
         }
     </style>
 </head>
-<body>
+<body style="position: relative">
 <jsp:include page="fragment/header.jsp"/>
     <div class="promo" style="position:relative;height: 522px; background: url(http://themes.diafan.ru/museum/userfiles/bs/14_3.jpg) no-repeat scroll 0 0 / cover  rgba(0, 0, 0, 0)">
         <div style=" text-transform: uppercase; top: 43%; left: 8%; position: absolute;">
@@ -27,5 +27,6 @@
 
         </div>
     </div>
+<jsp:include page="fragment/footer.jsp"/>
 </body>
 </html>

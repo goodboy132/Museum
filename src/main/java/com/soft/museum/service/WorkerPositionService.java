@@ -11,9 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WorkerPositionService {
-  int save(WorkerPosition workerPosition) throws NotSavedException;
-  int update(WorkerPosition workerPosition) throws NotUpdatedException;
-  int delete(WorkerPosition workerPosition) throws NotDeletedException;
-  Optional<WorkerPosition> getOneById(Long id) throws NotFoundException;
+
+  /**
+   * Method, that returns all objects of WorkerPosition
+   *
+   * @return list of WorkerPositions
+   */
   List<WorkerPosition> getAll() throws NotFoundException;
 }

@@ -1,6 +1,6 @@
 table {
     margin-left: 5%;
-    margin-top: 5%;
+    margin-top: 20px;
     width: 80%;
     border: 2px solid #eaeaea;
     border-collapse: collapse;
@@ -25,28 +25,21 @@ td {
     cursor: pointer;
     height: 22px;
 }
-.container-employee{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-}
-.selection-employee{
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-    width: 20%;
-    height: 100%;
-}
+
 .hover:hover{
     background-color: #F8F6F7;;
 }
-.selection-employee form{
+ form{
     margin-top: 20px;
 
 }
 .filter-position{
+    box-sizing: border-box;
+    width: 20%;
     display: flex;
     flex-direction: column;
+    margin-top: 5%;
+    margin-right: 5%;
 }
 button{
     width: 100%;
@@ -58,4 +51,19 @@ button{
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
+}
+.selection{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.main{
+    width: 80%;
+}
+.header_table {
+    margin-top: 50px;
+    margin-left: 60px;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: sans-serif;
 }
